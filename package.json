@@ -3,8 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "change-case": "^3.0.2",
+    "d3": "^5.7.0",
+    "d3-request": "^1.0.6",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "moment-range": "^4.0.1",
+    "node-sass": "^4.9.3",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "to-title-case": "^1.0.0"
   },
   "devDependencies": {
     "react-scripts": "2.0.3"

@@ -1,0 +1,725 @@
+// fonts
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:300,400,500');
+
+// animation
+$animation-rate: 0.75s;
+$animation-rate-fast: 0.2s;
+
+// dark palette
+$page-background-color: #111;
+$dark-ui-base: #111;
+$dark-highlight-base: #111;
+$media-list-item: $dark-highlight-base;
+$media-list-item-bg: #E8E3E0;
+$media-list-movie-bg: $media-list-item-bg;
+$book-play-titles: media-list-movie-bg;
+$media-title-hover: media-list-movie-bg;
+$media-list-highlight: #474642;
+$media-list-detail-highlight: $dark-ui-base;
+$media-item-title: #3a3a3a;
+$year-label: #fff;
+$year-plot-item: #ccc;
+$year-plot-item-highlight: #666;
+$year-plot-item-bg-highlight: #E8E3E0;
+$heading-title: #fff;
+
+// setup
+* {
+  box-sizing: border-box;
+}
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 0;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  background-color: $page-background-color;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+// loading
+.loader {
+  position: absolute;
+  top: calc(50% - 60px);
+  left: calc(50% - 80px);
+  text-align: center;
+  // padding: 1em;
+  display: block;
+  // vertical-align: top;
+  // margin: -40px 0px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 60px;
+  border-radius: 40px;
+  opacity: 0.7;
+  background-color: #1f1f1f;
+  color: #999;
+  width: 80px;
+  height:80px;
+  animation: pulse1 2s infinite ease-in-out;
+  span.one {
+    position: absolute;
+    display: block;
+    background-color: #333;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    width: 50px;
+    height:50px;
+    border-radius: 40px;
+    z-index: 100;
+    animation: pulse2 2s infinite ease-in-out;
+  }
+  span.two {
+    position: absolute;
+    display: block;
+    background-color: goldenrod;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    width: 20px;
+    height:20px;
+    border-radius: 40px;
+    z-index: 100;
+    animation: pulse3 2s infinite ease-in-out;
+  }
+}
+
+// page layout
+.main {
+  display: grid;
+	grid-template-rows: 80px auto;
+	grid-template-columns: 485px 1fr;
+	height: 100vh;
+  transition:all $animation-rate ease;
+  &.expand-year-plots {
+    grid-template-columns: 1010px 1fr;
+    transition: all 3s ease 3s;
+  }
+}
+.year-plot-group {
+  padding-left: 80px;
+}
+.expand-year-plots .most-seen-read {
+  display: block;
+  opacity: 1;
+  transition:all 3s ease 3s;
+}
+.media-list-panel {
+  overflow: auto;
+  transition:all $animation-rate ease;
+  opacity: 1;
+  .expand-year-plots & {
+    display: none;
+    opacity: 0;
+    transition:all $animation-rate ease;
+  }
+}
+
+// header
+header {
+  grid-column-start: 1;
+	grid-column-end: 3;
+  .title {
+    float: left;
+    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-weight: 300;
+    font-size: 24px;
+    color: #F6F5F1;
+    padding: 20px 0 0 30px;
+  }
+  .options {
+    float: right;
+  }
+}
+h1 {
+  margin: 0 auto;
+  color: #F6F5F1;
+  font-size: 24px;
+  font-family: 'IBM Plex Serif', Georgia, serif;
+  font-weight: 500px;
+}
+
+// radial progress
+.progress-circle-container {
+  display: block;
+  position: fixed;
+  top: 60px;
+  left: 1230px;
+  padding: 20px;
+  background-color: rgba(17,17,17,0.6);
+  z-index: 800;
+}
+.progress-circle {
+  width:60px;
+  height:60px;
+  display: block;
+  // z-index: 100;
+  transform: rotate(-90deg);
+  transition: all 0.3s ease;
+  circle.progress-disk {
+    transition: all 0.5s ease;
+    opacity: 0.8;
+    stroke: #fff;
+    fill: rgba(57, 61, 60, 0.8);
+  }
+  .progress-year {
+    transform: rotate(90deg);
+    font-size: 10px;
+    font-family: "IBM Plex Mono", monospace;
+    fill: #fff;
+  }
+}
+
+// scrollable media list
+// offset for types of list items
+$bookOffset: 10px;
+$playOffset: 15px;
+$movieOffset: 5px;
+$tvOffset: 8px;
+.media-list {
+  position: relative;
+  // margin-top: 40px;
+  .media-list-year {
+    position: sticky;
+    overflow: hidden;
+    background: #111;
+    z-index: 100;
+    // height: 40px;
+    width: 100%;
+    top: 0;
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(246,245,241, 0.7);
+    padding: 0 0 10px 10px;
+    cursor: pointer;
+    & .selected {
+      display: inline-block;
+      color: #F6F5F1;
+      opacity: 1;
+      border-bottom: 1px solid #F6F5F1;
+    }
+  }
+  // base media list item appearance
+  .item {
+    position: relative;
+    align-items: center;
+    margin: 2px 15px 0 15px;
+    padding: 17px 30px;
+    background-color: $media-list-item-bg;
+    .title {
+      flex-grow: 1;
+      font-family: 'IBM Plex Serif', Georgia, serif;
+      font-weight: 500;
+      color: $media-item-title;
+    }
+    .credit,
+    .year {
+      font-family: 'IBM Plex Serif', Georgia, serif;
+      color: $media-item-title;
+      opacity: 0.6;
+      font-weight: 400;
+    }
+    .year {
+      display: inline-block;
+      float: right;
+      margin-left: 10px; // buffer between title and year
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  // READ: books and plays
+  .play,
+  .book {
+    max-width: 720px;
+    font-size: 23px;
+    font-family: 'IBM Plex Serif', Georgia, serif;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    border-radius: 2px;
+    .title,
+    .credit {
+      display: block;
+      color: $media-item-title;
+      flex-grow: 1;
+      text-align: left;
+    }
+    .title {
+      width: 100%;
+    }
+    .credit {
+      // display: inline-block;
+      // text-align: right;
+      width: 100%;
+      font-weight: 400;
+      // opacity: 0.7;
+      clear: left;
+    }
+  }
+  .book {
+    margin-left: $bookOffset;
+  }
+  .play {
+    margin-left: $playOffset;
+  }
+  // SEEN: TV, movies, shorts
+  .tv,
+  .movie,
+  .short {
+    max-width: 720px;
+    border-radius: 8px;
+    background-color: #F6F5F1;
+    font-size: 23px;
+    .title,
+    .year {
+      font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+    }
+    .title {
+      font-weight: 500;
+    }
+  }
+  .tv {
+    text-align: center;
+    margin-left: $tvOffset;
+    // font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+    // font-weight: 300;
+  }
+  .movie {
+    margin-left: $movieOffset;
+  }
+  .short {
+    margin-left: $movieOffset;
+  }
+  // special items - usually filming starts on a Soderbergh project
+  .special {
+    max-width: 720px;
+    font-size: 18px;
+    text-align: center;
+    background: transparent;
+    .title {
+      color: #F6F5F1;
+
+    }
+    // display: table;
+    // & .title {
+    //   display: table-cell;
+    //   vertical-align: middle;
+    // }
+  }
+  $notesOffset: 760px;
+  .notes {
+    position: absolute;
+    width: 300px;
+    border-left: 2px solid #E8E3E0;
+    color: #E8E3E0;
+    padding: 10px 15px;
+    top: 0px;
+    // left: 760px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    font-family: "IBM Plex Serif", Georgia, sans-serif;
+    .notes-date {
+      font-weight: 300;
+      opacity: 0.7;
+    }
+  }
+  .tv .notes {
+      left: ($notesOffset - $tvOffset);
+  }
+  .movie .notes,
+  .short .notes {
+    left: ($notesOffset - $movieOffset);
+  }
+  .book .notes {
+    left: ($notesOffset - $bookOffset);
+  }
+  .play .notes {
+    left: ($notesOffset - $playOffset);
+  }
+
+
+  // list item highlight
+  .tv,
+  .movie,
+  .book,
+  .short,
+  .play,
+  .special {
+    &.highlight {
+      background-color: $media-list-highlight;
+      font-weight: bold;
+      .title,
+      .year,
+      .credit {
+        color: $media-list-detail-highlight;
+      }
+      .year,
+      .credit {
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+// year plots
+.year-plot-group {
+  transition: width 0.3s ease;
+}
+.year-plot {
+  display: inline-block;
+  width: 100px;
+  vertical-align: top;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  transition:all $animation-rate ease;
+  &.selected-year {
+    // background-color: rgba(60,60,60, 0.4);
+  }
+  .expand-year-plots &.selected-year {
+    background-color: transparent ;
+  }
+  &:nth-of-type(1) {
+    // place month labels
+    .daily-items::before {
+      font-family: "IBM Plex Mono", monospace;
+      position: absolute;
+      top: 3px;
+      left: -25px;
+      color: #F6F5F1;
+      font-size: 10px;
+      opacity: 0.4;
+    }
+    .daily-items:nth-of-type(1)::before {
+      content: 'JAN';
+    }
+    .daily-items:nth-of-type(32)::before {
+      content: 'FEB';
+    }
+    .daily-items:nth-of-type(60)::before {
+      content: 'MAR';
+    }
+    .daily-items:nth-of-type(91)::before {
+      content: 'APR';
+    }
+    .daily-items:nth-of-type(121)::before {
+      content: 'MAY';
+    }
+    .daily-items:nth-of-type(152)::before {
+      content: 'JUN';
+    }
+    .daily-items:nth-of-type(182)::before {
+      content: 'JUL';
+    }
+    .daily-items:nth-of-type(213)::before {
+      content: 'AUG';
+    }
+    .daily-items:nth-of-type(244)::before {
+      content: 'SEP';
+    }
+    .daily-items:nth-of-type(274)::before {
+      content: 'OCT';
+    }
+    .daily-items:nth-of-type(305)::before {
+      content: 'NOV';
+    }
+    .daily-items:nth-of-type(335)::before {
+      content: 'DEC';
+    }
+  }
+}
+.plot-year-label {
+  display: block;
+  overflow: hidden;
+  font-family: 'IMB Plex Mono', sans-serif;
+  font-size: 10px;
+  margin: 0 0 8px 7px;
+  color: #F6F5F1;
+  width: 12px;
+  text-indent: -12px;
+  text-align: right;
+  opacity: 0.5;
+  cursor: pointer;
+  .selected-year & {
+    opacity: 1;
+  }
+  .expand-year-plots &,
+  .expand-year-plots .selected-year &,
+  .selected-year & {
+    width: 24px;
+    text-indent: 0;
+    opacity: 1;
+  }
+}
+
+// year plot, highlighted title label
+.highlighted-title-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  .highlighted-title-inner {
+    display: none;
+    width: auto;
+    margin-top: 20px;
+    background-color: #211F1E;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 3px;
+    .clear-highlight {
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 16px;
+      font-weight: 300;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+    .title-highlight & {
+      display: table-cell;
+    }
+  }
+}
+// row of items per day in a year plot
+.daily-items {
+  list-style: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1px;
+  line-height: 1px;
+  margin: 0;
+  padding-left: 8px;
+  position: relative;
+  transition: background-color 0.3s ease;
+  &.odd-month,
+  .expand-year-plots .selected-year &.odd-month {
+    background-color: lighten($page-background-color, 2%);
+  }
+  .selected-year &.odd-month {
+    // background-color: transparent;
+  }
+  &.on-screen.odd-month,
+  &.on-screen {
+    background-color: rgba(232,227, 224, 0.25);
+    transition: background-color 0.3s ease;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0px 1px 1px 0;
+    height: 1px;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    background-color: #888;
+    border-radius: 0px;
+    text-indent: -99999px;
+    transition: width 0.3s ease 4s;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+    .expand-year-plots &,
+    .selected-year & {
+      background-color: #F6F5F1;
+    }
+    .title-highlight & {
+      background-color: $year-plot-item-highlight;
+    }
+    &:hover,
+    &.highlight:hover {
+      background-color: $year-plot-item-bg-highlight;
+      cursor: pointer;
+    }
+    &.short-title,
+    &.medium-title,
+    &.long-title {
+      transition: width 0.3s ease 0.4s;
+    }
+    &.short-title {
+      width: 5px;
+    }
+    &.medium-title {
+      width: 7px;
+    }
+    &.long-title {
+      width: 9px;
+    }
+    &.highlight {
+      background-color: $year-plot-item-bg-highlight;
+      height: 1px;
+      z-index: 1;
+    }
+    &.highlight::before {
+      content: "";
+      position: absolute;
+      background-color: gold;
+      opacity: 0.4;
+      top: -8px;
+      width: 17px;
+      height: 17px;
+      border-radius: 20px;
+      z-index: -1;
+      transition:all $animation-rate-fast ease;
+    }
+    &.short-title.highlight::before {
+      left: -6px;
+    }
+    &.medium-title.highlight::before {
+      left: -5px;
+    }
+    &.long-title.highlight::before {
+      left: -4px;
+    }
+    // days with no entry
+    &.empty-date {
+      background-color: #bbb;
+      width: 0px;
+      height: 2px;
+      margin-bottom: 0;
+      margin-left: 1px;
+    }
+  }
+}
+
+// collapsed year plots (default)
+.compact-years.year-plot-group {
+  transition: all 0.3 ease;
+  .year-plot {
+    width: 40px;
+    transition: all 0.3s ease;
+  }
+  .plot-year-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    transition: all $animation-rate ease;
+  }
+  .daily-items {
+    position: relative;
+  }
+  .daily-items li {
+    transition: width 0.3s ease 0.8s;
+    &.short-title,
+    &.medium-title,
+    &.long-title {
+      width: 2px;
+      height: 1px;
+      margin-right: 1px;
+      transition: width 0.5s ease;
+    }
+    // circle highlight
+    &.highlight {
+      background-color: #F6F5F1;
+    }
+    &.highlight::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      width: 14px;
+      height: 14px;
+      opacity: 0.2;
+      border-radius: 20px;
+      transition: all $animation-rate-fast ease;
+      z-index: 2;
+    }
+  }
+}
+// display the title in a hover box of a year plot item
+.selected-title-hover {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  opacity: 0;
+  padding: 10px 15px;
+  background: #F6F5F1;
+  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  z-index: 1000;
+  border-radius: 3px;
+  // border: 2px solid rgba(0,0,0,0.1);
+}
+
+// the most-seen-read
+.most-seen-read {
+  text-align: left;
+  display: none;
+  opacity: 0;
+  margin: -10px 0 20px 0;
+  padding: 0 20px;
+  list-style: none;
+  overflow: auto;
+  transition: all 3s ease;
+  ul{
+    margin-bottom: 20px;
+  }
+  li {
+    display: inline-block;
+    margin: 0;
+    font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+    color: #F6F5F1;
+    font-size: 11px;
+    text-decoration: none;
+    padding: 3px 5px;
+    // padding: none;
+    // margin-right: 3px;
+    // margin-bottom: 2px;
+    border-radius: 2px;
+    // background-color: darken(#96A8B0,48%);
+    // background-color: #232221;
+    &::after {
+      // content: ",";
+    }
+    // &.clear-highlight {
+    //   background: none;
+    //   border: 1px solid #232221;
+    // }
+    &.highlight,
+    &.highlight:hover {
+      // background-color: #F6F5F1;
+      background-color: gold;
+      color: #000;
+    }
+    &:hover {
+      background: lighten(#232221, 5%);
+      cursor: pointer;
+    }
+  }
+  .top-title-type {
+    display: inline-block;
+    font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  // &.show-buttons {
+  //   transform: translateY(10px);
+  //   // text-align: center;
+  //   display: block;
+  //   opacity: 1;
+  //   transition: all $animation-rate ease 0.7;
+  // }
+}
+
+// control button
+.option-button {
+  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid darken(#DBDCD7, 30%);
+  font-size: 12px;
+  margin: 10px 10px 0 0;
+  padding: 5px 6px;
+  width: 45px;
+  border-radius: 2px;
+  color: #DBDCD7;
+  outline: none;
+  cursor: pointer;
+}
