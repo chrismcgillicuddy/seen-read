@@ -59,8 +59,6 @@ export default class App extends Component {
     // ESC key clears title highlight
     document.addEventListener("keydown", this.escKey, false);
 
-    const special = nest()
-          .key() 
   }
 
   componentWillUnmount(){
@@ -229,6 +227,9 @@ export default class App extends Component {
             />
             <MediaList
               data={mediaLists['list'+displayYear]}
+              yearsAvailable={yearsAvailable}
+              displayYear={displayYear}
+              setDisplayYear={this.setDisplayYear}
               highlighted={highlighted}
               highlightedItem={highlightedItem}
               setHighlight={this.setHighlight}

@@ -25,6 +25,9 @@ $year-plot-item-highlight: #666;
 $year-plot-item-bg-highlight: #E8E3E0;
 $heading-title: #fff;
 
+$base-dark: #111;
+$base-light: #F6F5F1;
+
 // setup
 * {
   box-sizing: border-box;
@@ -37,7 +40,7 @@ body {
   padding: 0;
   margin: 0;
   text-rendering: optimizeLegibility;
-  background-color: $page-background-color;
+  background-color: $base-dark;
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
@@ -126,7 +129,7 @@ header {
     font-family: 'IBM Plex Serif', Georgia, serif;
     font-weight: 300;
     font-size: 24px;
-    color: #F6F5F1;
+    color: $base-light;
     padding: 20px 0 0 30px;
   }
   .options {
@@ -135,7 +138,7 @@ header {
 }
 h1 {
   margin: 0 auto;
-  color: #F6F5F1;
+  color: $base-light;
   font-size: 24px;
   font-family: 'IBM Plex Serif', Georgia, serif;
   font-weight: 500px;
@@ -145,7 +148,7 @@ h1 {
 .progress-circle-container {
   display: block;
   position: fixed;
-  top: 60px;
+  top: 90px;
   left: 1230px;
   padding: 20px;
   background-color: rgba(17,17,17,0.6);
@@ -181,26 +184,29 @@ $tvOffset: 8px;
 .media-list {
   position: relative;
   // margin-top: 40px;
-  .media-list-year {
+  .year-nav {
     position: sticky;
     overflow: hidden;
     background: #111;
     z-index: 100;
-    // height: 40px;
     width: 100%;
     top: 0;
     display: block;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(246,245,241, 0.7);
     padding: 0 0 10px 10px;
-    cursor: pointer;
+    .year {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
+      font-weight: 300;
+      cursor: pointer;
+      margin-right: 15px;
+      color: rgba(246,245,241, 0.7);
+
+    }
     & .selected {
       display: inline-block;
-      color: #F6F5F1;
+      color: $base-light;
       opacity: 1;
-      border-bottom: 1px solid #F6F5F1;
+      border-bottom: 1px solid $base-light;
     }
   }
   // base media list item appearance
@@ -274,7 +280,7 @@ $tvOffset: 8px;
   .short {
     max-width: 720px;
     border-radius: 8px;
-    background-color: #F6F5F1;
+    background-color: $base-light;
     font-size: 23px;
     .title,
     .year {
@@ -303,7 +309,7 @@ $tvOffset: 8px;
     text-align: center;
     background: transparent;
     .title {
-      color: #F6F5F1;
+      color: $base-light;
 
     }
     // display: table;
@@ -392,7 +398,7 @@ $tvOffset: 8px;
       position: absolute;
       top: 3px;
       left: -25px;
-      color: #F6F5F1;
+      color: $base-light;
       font-size: 10px;
       opacity: 0.4;
     }
@@ -440,7 +446,7 @@ $tvOffset: 8px;
   font-family: 'IMB Plex Mono', sans-serif;
   font-size: 10px;
   margin: 0 0 8px 7px;
-  color: #F6F5F1;
+  color: $base-light;
   width: 12px;
   text-indent: -12px;
   text-align: right;
@@ -526,7 +532,7 @@ $tvOffset: 8px;
     z-index: 10;
     .expand-year-plots &,
     .selected-year & {
-      background-color: #F6F5F1;
+      background-color: $base-light;
     }
     .title-highlight & {
       background-color: $year-plot-item-highlight;
@@ -614,7 +620,7 @@ $tvOffset: 8px;
     }
     // circle highlight
     &.highlight {
-      background-color: #F6F5F1;
+      background-color: $base-light;
     }
     &.highlight::before {
       content: "";
@@ -637,7 +643,7 @@ $tvOffset: 8px;
   left: 20px;
   opacity: 0;
   padding: 10px 15px;
-  background: #F6F5F1;
+  background: $base-light;
   font-family: 'IBM Plex Sans', Helvetica, sans-serif;
   font-size: 16px;
   z-index: 1000;
@@ -662,7 +668,7 @@ $tvOffset: 8px;
     display: inline-block;
     margin: 0;
     font-family: 'IBM Plex Sans', Helvetica, sans-serif;
-    color: #F6F5F1;
+    color: $base-light;
     font-size: 11px;
     text-decoration: none;
     padding: 3px 5px;
@@ -681,7 +687,7 @@ $tvOffset: 8px;
     // }
     &.highlight,
     &.highlight:hover {
-      // background-color: #F6F5F1;
+      // background-color: $base-light;
       background-color: gold;
       color: #000;
     }

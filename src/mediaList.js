@@ -51,6 +51,9 @@ export default class MediaList extends React.Component {
 
   render() {
     const {data,
+      yearsAvailable,
+      displayYear,
+      setDisplayYear,
       highlighted,
       highlightDate,
       setHighlight,
@@ -77,6 +80,18 @@ export default class MediaList extends React.Component {
       // console.log("highlighted element:",element);
       element.scrollIntoView({behavior: "smooth", block: "center"});
     }
+
+    const yearNavItems = yearsAvailable.map((year) => {
+      let yearEntry = "";
+      let selectedClass ="";
+      (year == this.props.displayYear)
+        ? selectedClass = " selected"
+        : selectedClass = "";
+      yearEntry = <span className={"year"+selectedClass} onClick={() => this.props.setDisplayYear(year)}>{year}</span>
+      return yearEntry;
+    }, this);
+
+    const yearNav = <div className="year-nav">{yearNavItems}</div>;
 
     const listItems = data.map((item, i) => {
       if (item.values){
@@ -131,7 +146,7 @@ export default class MediaList extends React.Component {
     }, this)
     return (
       <div className="media-list">
-        <span className="media-list-year">2009 2010 2011 2012 2013 2014 2015 2016 <span className="selected">2017</span></span>
+        {yearNav}
         {listItems}
       </div>
     );
