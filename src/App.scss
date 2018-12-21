@@ -1,5 +1,5 @@
 // fonts
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,500');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:300,400,500');
 
@@ -7,25 +7,8 @@
 $animation-rate: 0.75s;
 $animation-rate-fast: 0.2s;
 
-// dark palette
-$page-background-color: #111;
-$dark-ui-base: #111;
-$dark-highlight-base: #111;
-$media-list-item: $dark-highlight-base;
-$media-list-item-bg: #E8E3E0;
-$media-list-movie-bg: $media-list-item-bg;
-$book-play-titles: media-list-movie-bg;
-$media-title-hover: media-list-movie-bg;
-$media-list-highlight: #474642;
-$media-list-detail-highlight: $dark-ui-base;
-$media-item-title: #3a3a3a;
-$year-label: #fff;
-$year-plot-item: #ccc;
-$year-plot-item-highlight: #666;
-$year-plot-item-bg-highlight: #E8E3E0;
-$heading-title: #fff;
-
-$base-dark: #111;
+// color
+$base-dark: #111010;
 $base-light: #F6F5F1;
 
 // setup
@@ -89,20 +72,41 @@ body {
   }
 }
 
+// TESTING SCROLLAMA
+.step {
+  display: block;
+  width: 100%;
+  height: 700px;
+  text-align: center;
+  margin: 900px 0;
+}
+.intro {
+  width: 100%;
+  height: 1200px;
+  background: pink;
+  color: blue;
+  font-size: 60px;
+  padding: 200px 0;
+  text-align: center;
+}
+
 // page layout
 .main {
-  display: grid;
-	grid-template-rows: 80px auto;
-	grid-template-columns: 485px 1fr;
-	height: 100vh;
+  // display: grid;
+	// grid-template-rows: 80px auto;
+	// grid-template-columns: 485px 1fr;
+	// height: 100vh;
+  display: flex;
+  height: 1280px;
   transition:all $animation-rate ease;
   &.expand-year-plots {
-    grid-template-columns: 1010px 1fr;
+    // grid-template-columns: 1010px 1fr;
     transition: all 3s ease 3s;
   }
 }
 .year-plot-group {
   padding-left: 80px;
+  flex-basis: 45%;
 }
 .expand-year-plots .most-seen-read {
   display: block;
@@ -110,6 +114,10 @@ body {
   transition:all 3s ease 3s;
 }
 .media-list-panel {
+  flex-basis: 55%;
+  align-self: flex-start;
+  height: 1280px;
+  background: #444;
   overflow: auto;
   transition:all $animation-rate ease;
   opacity: 1;
@@ -187,7 +195,7 @@ $tvOffset: 8px;
   .year-nav {
     position: sticky;
     overflow: hidden;
-    background: #111;
+    background: $base-dark;
     z-index: 100;
     width: 100%;
     top: 0;
@@ -210,22 +218,23 @@ $tvOffset: 8px;
     }
   }
   // base media list item appearance
+  $title-color: #3a3a3a;
   .item {
     position: relative;
     align-items: center;
     margin: 2px 15px 0 15px;
     padding: 17px 30px;
-    background-color: $media-list-item-bg;
+    background-color: #E8E3E0;
     .title {
       flex-grow: 1;
       font-family: 'IBM Plex Serif', Georgia, serif;
       font-weight: 500;
-      color: $media-item-title;
+      color: $title-color;
     }
     .credit,
     .year {
       font-family: 'IBM Plex Serif', Georgia, serif;
-      color: $media-item-title;
+      color: $title-color;
       opacity: 0.6;
       font-weight: 400;
     }
@@ -252,7 +261,7 @@ $tvOffset: 8px;
     .title,
     .credit {
       display: block;
-      color: $media-item-title;
+      color: $title-color;
       flex-grow: 1;
       text-align: left;
     }
@@ -359,12 +368,12 @@ $tvOffset: 8px;
   .play,
   .special {
     &.highlight {
-      background-color: $media-list-highlight;
+      background-color: #474642;
       font-weight: bold;
       .title,
       .year,
       .credit {
-        color: $media-list-detail-highlight;
+        color: $base-dark;
       }
       .year,
       .credit {
@@ -445,6 +454,7 @@ $tvOffset: 8px;
   overflow: hidden;
   font-family: 'IMB Plex Mono', sans-serif;
   font-size: 10px;
+  font-weight: 500;
   margin: 0 0 8px 7px;
   color: $base-light;
   width: 12px;
@@ -503,7 +513,7 @@ $tvOffset: 8px;
   transition: background-color 0.3s ease;
   &.odd-month,
   .expand-year-plots .selected-year &.odd-month {
-    background-color: lighten($page-background-color, 2%);
+    background-color: lighten($base-dark, 2%);
   }
   .selected-year &.odd-month {
     // background-color: transparent;
@@ -535,11 +545,11 @@ $tvOffset: 8px;
       background-color: $base-light;
     }
     .title-highlight & {
-      background-color: $year-plot-item-highlight;
+      background-color: #666;
     }
     &:hover,
     &.highlight:hover {
-      background-color: $year-plot-item-bg-highlight;
+      background-color: #E8E3E0;
       cursor: pointer;
     }
     &.short-title,
@@ -557,7 +567,7 @@ $tvOffset: 8px;
       width: 9px;
     }
     &.highlight {
-      background-color: $year-plot-item-bg-highlight;
+      background-color: #E8E3E0;
       height: 1px;
       z-index: 1;
     }

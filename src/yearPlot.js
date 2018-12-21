@@ -41,7 +41,8 @@ export default class YearPlot extends React.Component {
           highlightedItem,
           highlightedType,
           setDisplayYear,
-          mediaListItemsOnScreen} = this.props;
+          mediaListItemsOnScreen,
+          scrollState} = this.props;
     let previousDate = '';
     let currentDate = '';
     let dateMatch = false;
@@ -60,7 +61,6 @@ export default class YearPlot extends React.Component {
     // const year = (isSelectedYear) ? date.getFullYear() : date.getFullYear().toString().substr(2,2);
     const year = date.getFullYear();
     const selectedYearClass = (isSelectedYear) ? "selected-year" : "";
-
     const listItems = data.map((item, i) => {
       // get date object from date string
       currentDate = new Date(item.key);

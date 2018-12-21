@@ -10,6 +10,7 @@ import { extendMoment } from 'moment-range';
 import ButtonList from './buttonList';
 import ProgressCircle from './progressCircle';
 import * as toTitleCase from 'to-title-case';
+import { Scrollama, Step } from 'react-scrollama';
 
 const moment = extendMoment(Moment); // add moment-range
 const progressRadius = 30;
@@ -27,7 +28,8 @@ export default class App extends Component {
       compactYears: true,
       displayYear: '2017',
       radialProgress: 0,
-      mediaListItemsOnScreen: []
+      mediaListItemsOnScreen: [],
+      scrollState: 0
     }
   }
 
@@ -58,8 +60,24 @@ export default class App extends Component {
 
     // ESC key clears title highlight
     document.addEventListener("keydown", this.escKey, false);
-
   }
+
+  // scrollama
+  // onStepEnter = (element, scrollState) => this.setState({ scrollState });
+  onStepEnter = ({ element, data, direction }) => {
+    console.log("onStepEnter element:", element);
+    console.log("onStepEnter direction:", direction);
+    console.log("onStepEnter data:", data);
+    element.style.backgroundColor = 'lightgoldenrodyellow';
+    this.setState({ displayYear: data });
+  };
+
+  onStepExit = ({ element, data, direction }) => {
+    console.log("onStepExit element:", element);
+    console.log("onStepExit direction:", direction);
+    console.log("onStepExit data:", data);
+    element.style.backgroundColor = 'white';
+  };
 
   componentWillUnmount(){
     const mediaListElement = document.getElementsByClassName("media-list");
@@ -149,6 +167,7 @@ export default class App extends Component {
   render() {
     const {mediaLists,
           error,
+          scrollState,
           highlighted,
           highlightedItem,
           highlightedType,
@@ -168,82 +187,133 @@ export default class App extends Component {
       let rowClasses = "main";
       if (highlightedItem) {
         rowClasses+=' title-highlight';
-
-
       }
       if (!compactYears) {
         rowClasses+=' expand-year-plots';
       }
 
       return (
-        <section className={rowClasses}>
-          <header>
-            <span className="title">Seen,Read</span>
-            <div className="options">
-              <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
-            </div>
-          </header>
-          <section className={compactYears ? 'compact-years year-plot-group' : 'year-plot-group'} id="grid">
-            <div className="year-container">
-            {
-              yearsAvailable.map((year) => {
-                const isSelectedYear = (year == displayYear) ? true : false;
-                return <YearPlot
-                  data={mediaLists['list'+year]}
-                  isSelectedYear={isSelectedYear}
-                  highlighted={highlighted}
-                  highlightedItem={highlightedItem}
-                  highlightedType={highlightedType}
-                  setHighlight={this.setHighlight}
-                  setDisplayYear={this.setDisplayYear}
-                  mediaListItemsOnScreen={mediaListItemsOnScreen}
-                  mediaListVisibility={this.mediaListVisibility}
-
-                />
-              })
-            }
-            <div className="highlighted-title-outer">
-              <div className="highlighted-title-inner">
-                <span id="selected-title"></span>
-                <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title")}>✕</span>
+        <div>
+          {/* <section className="intro">Seen, Read</section> */}
+            <section className={rowClasses}>
+            {/* <header>
+              <span className="title">Seen,Read</span>
+              <div className="options">
+                <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
               </div>
+            </header> */}
+            <section className={compactYears ? 'compact-years year-plot-group' : 'year-plot-group'} id="grid">
+              <div className="year-container">
+                {
+                  yearsAvailable.map((year) => {
+                    const isSelectedYear = (year == displayYear) ? true : false;
+                    return <YearPlot
+                      scrollState={scrollState}
+                      data={mediaLists['list'+year]}
+                      isSelectedYear={isSelectedYear}
+                      highlighted={highlighted}
+                      highlightedItem={highlightedItem}
+                      highlightedType={highlightedType}
+                      setHighlight={this.setHighlight}
+                      setDisplayYear={this.setDisplayYear}
+                      mediaListItemsOnScreen={mediaListItemsOnScreen}
+                      mediaListVisibility={this.mediaListVisibility}
+                    />
+                  })
+                }
+              <div className="highlighted-title-outer">
+                <div className="highlighted-title-inner">
+                  <span id="selected-title"></span>
+                  <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title")}>✕</span>
+                </div>
+              </div>
+              <div className="selected-title-hover"></div>
             </div>
-            <div className="selected-title-hover"></div>
-
-          </div>
-          </section>
-          <ButtonList
-            compactMode={compactYears}
-            highlightedItem={highlightedItem}
-            setHighlight={this.setHighlight}
-          />
-          <section className="media-list-panel" id="list-panel">
-
-            <ProgressCircle
-              className={'progress-circle'}
-              radius={progressRadius}
-              radialProgress={radialProgress}
-              displayYear={displayYear}
-            />
-            <MediaList
-              data={mediaLists['list'+displayYear]}
-              yearsAvailable={yearsAvailable}
-              displayYear={displayYear}
-              setDisplayYear={this.setDisplayYear}
-              highlighted={highlighted}
+            </section>
+            {/* <ButtonList
+              compactMode={compactYears}
               highlightedItem={highlightedItem}
               setHighlight={this.setHighlight}
-              mediaListVisibility={this.mediaListVisibility}
-              updateOnScreenItems={this.updateOnScreenItems}
-              setRadialProgress={this.setRadialProgress}
-            />
+            /> */}
+            <section className="media-list-panel" id="list-panel">
+              {/* <ProgressCircle
+                className={'progress-circle'}
+                radius={progressRadius}
+                radialProgress={radialProgress}
+                displayYear={displayYear}
+              /> */}
+              {/* <MediaList
+                data={mediaLists['list'+displayYear]}
+                yearsAvailable={yearsAvailable}
+                displayYear={displayYear}
+                setDisplayYear={this.setDisplayYear}
+                highlighted={highlighted}
+                highlightedItem={highlightedItem}
+                setHighlight={this.setHighlight}
+                mediaListVisibility={this.mediaListVisibility}
+                updateOnScreenItems={this.updateOnScreenItems}
+                setRadialProgress={this.setRadialProgress}
+              /> */}
+              <Scrollama
+                offset={0.5}
+                onStepEnter={this.onStepEnter}
+                onStepExit={this.onStepExit}
+                debug
+              >
+                <Step data={2009} >
+                  <div className="step step-1">
+                    <div>2009</div>
+                  </div>
+                </Step>
+                {/* <Step data={2010} >
+                  <div className="step step-2">
+                    <div>2010</div>
+                  </div>
+                </Step>
+                <Step data={2011} >
+                  <div className="step step-3">
+                    <div>2011</div>
+                  </div>
+                </Step>
+                <Step data={2012}>
+                  <div className="step step-4">
+                    <div>2012</div>
+                  </div>
+                </Step>
+                <Step data={2013}>
+                  <div className="step step-5">
+                    <div>2013</div>
+                  </div>
+                </Step>
+                <Step data={2014}>
+                  <div className="step step-6">
+                    <div>2014</div>
+                  </div>
+                </Step>
+                <Step data={2015}>
+                  <div className="step step-7">
+                    <div>2015</div>
+                  </div>
+                </Step>
+                <Step data={2016}>
+                  <div className="step step-8">
+                    <div>2016</div>
+                  </div>
+                </Step>
+                <Step data={2017}>
+                  <div className="step step-9">
+                    <div>2017</div>
+                  </div>
+                </Step> */}
+              </Scrollama>
+
+            </section>
           </section>
-        </section>
+      </div>
       );
     }
     return (
       <Loader />
     )
   }
-
 }
