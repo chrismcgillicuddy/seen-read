@@ -10,7 +10,9 @@ import { extendMoment } from 'moment-range';
 import ButtonList from './buttonList';
 import ProgressCircle from './progressCircle';
 import * as toTitleCase from 'to-title-case';
-import { Scrollama, Step } from 'react-scrollama';
+// import { Scrollama, Step } from 'react-scrollama';
+import 'intersection-observer';
+import scrollama from 'scrollama';
 
 const moment = extendMoment(Moment); // add moment-range
 const progressRadius = 30;
@@ -60,24 +62,44 @@ export default class App extends Component {
 
     // ESC key clears title highlight
     document.addEventListener("keydown", this.escKey, false);
+
+    // instantiate the scrollama
+    const scroller = scrollama();
+
+    // setup the instance, pass callback functions
+    scroller.setup({
+        step: '.media-list-panel .step',
+        debug: true
+      })
+      .onStepEnter(this.handleStepEnter)
+      .onStepExit(this.handleStepExit);
+  }
+
+  // scrollma test 2
+  handleStepEnter = (response) => {
+    console.log("scrollama handleStepEnter", response);
+  }
+
+  handleStepExit = (response) => {
+    console.log("scrollama handleStepExit", response);
   }
 
   // scrollama
   // onStepEnter = (element, scrollState) => this.setState({ scrollState });
-  onStepEnter = ({ element, data, direction }) => {
-    console.log("onStepEnter element:", element);
-    console.log("onStepEnter direction:", direction);
-    console.log("onStepEnter data:", data);
-    element.style.backgroundColor = 'lightgoldenrodyellow';
-    this.setState({ displayYear: data });
-  };
-
-  onStepExit = ({ element, data, direction }) => {
-    console.log("onStepExit element:", element);
-    console.log("onStepExit direction:", direction);
-    console.log("onStepExit data:", data);
-    element.style.backgroundColor = 'white';
-  };
+  // onStepEnter = ({ element, data, direction }) => {
+  //   console.log("onStepEnter element:", element);
+  //   console.log("onStepEnter direction:", direction);
+  //   console.log("onStepEnter data:", data);
+  //   element.style.backgroundColor = 'lightgoldenrodyellow';
+  //   this.setState({ displayYear: data });
+  // };
+  //
+  // onStepExit = ({ element, data, direction }) => {
+  //   console.log("onStepExit element:", element);
+  //   console.log("onStepExit direction:", direction);
+  //   console.log("onStepExit data:", data);
+  //   element.style.backgroundColor = 'white';
+  // };
 
   componentWillUnmount(){
     const mediaListElement = document.getElementsByClassName("media-list");
@@ -254,58 +276,41 @@ export default class App extends Component {
                 updateOnScreenItems={this.updateOnScreenItems}
                 setRadialProgress={this.setRadialProgress}
               /> */}
-              <Scrollama
-                offset={0.5}
-                onStepEnter={this.onStepEnter}
-                onStepExit={this.onStepExit}
-                debug
-              >
-                <Step data={2009} >
-                  <div className="step step-1">
-                    <div>2009</div>
-                  </div>
-                </Step>
-                {/* <Step data={2010} >
-                  <div className="step step-2">
-                    <div>2010</div>
-                  </div>
-                </Step>
-                <Step data={2011} >
-                  <div className="step step-3">
-                    <div>2011</div>
-                  </div>
-                </Step>
-                <Step data={2012}>
-                  <div className="step step-4">
-                    <div>2012</div>
-                  </div>
-                </Step>
-                <Step data={2013}>
-                  <div className="step step-5">
-                    <div>2013</div>
-                  </div>
-                </Step>
-                <Step data={2014}>
-                  <div className="step step-6">
-                    <div>2014</div>
-                  </div>
-                </Step>
-                <Step data={2015}>
-                  <div className="step step-7">
-                    <div>2015</div>
-                  </div>
-                </Step>
-                <Step data={2016}>
-                  <div className="step step-8">
-                    <div>2016</div>
-                  </div>
-                </Step>
-                <Step data={2017}>
-                  <div className="step step-9">
-                    <div>2017</div>
-                  </div>
-                </Step> */}
-              </Scrollama>
+
+              <div className="step step-1">
+                <div>2009</div>
+              </div>
+
+              <div className="step step-2">
+                <div>2010</div>
+              </div>
+
+              <div className="step step-3">
+                <div>2011</div>
+              </div>
+
+              <div className="step step-4">
+                <div>2012</div>
+              </div>
+
+              <div className="step step-5">
+                <div>2013</div>
+              </div>
+
+              <div className="step step-6">
+                <div>2014</div>
+              </div>
+
+              <div className="step step-7">
+                <div>2015</div>
+              </div>
+
+              <div className="step step-8">
+                <div>2016</div>
+              </div>
+              <div className="step step-9">
+                <div>2017</div>
+              </div>
 
             </section>
           </section>
