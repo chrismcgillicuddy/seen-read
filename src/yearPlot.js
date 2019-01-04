@@ -9,10 +9,11 @@ export default class YearPlot extends React.Component {
     super(props);
   }
 
-  showTitle = (title) => (e) => {
+  showTitle = (title, type) => (e) => {
     title = toTitleCase (title);
+    d3.select(".selected-title-hover .title").text(title);
+    d3.select(".selected-title-hover .type").text(type);
     d3.select(".selected-title-hover")
-      .text(title)
       .style('top', (e.clientY-20)+"px")
       .style('left', (e.clientX+20)+"px")
       .style('opacity', 1);
@@ -40,6 +41,7 @@ export default class YearPlot extends React.Component {
           setHighlight,
           highlightedItem,
           highlightedType,
+          highlightMediaType,
           setDisplayYear,
           mediaListItemsOnScreen,
           scrollState} = this.props;
@@ -97,6 +99,7 @@ export default class YearPlot extends React.Component {
               let highlightTitleLower = "";
 
               let title = d.title.toString().toLowerCase();
+              let type = d.type.toString().toLowerCase();
               let credit = d.credit.toString().toLowerCase();
 
               if (highlightedType==="title"){
@@ -124,10 +127,10 @@ export default class YearPlot extends React.Component {
               let key, id = year+"_"+mediaIndex;
               let element = <li key={key}
                                 id={id}
-                                className={itemClass+" item-"+d.type}
-                                onMouseOver={this.showTitle(d.title)}
+                                className={itemClass+" item-"+type}
+                                onMouseOver={this.showTitle(d.title, type)}
                                 onMouseOut={this.hideTitle}
-                                onClick={() => this.props.setHighlight(d.title, "title")}>{d.title}</li>;
+                                onClick={() => this.props.setHighlight(d.title, "title", type)}>{d.title}</li>;
               mediaIndex++;
               return element;
             })}

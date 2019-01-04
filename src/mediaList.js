@@ -12,11 +12,63 @@ export default class MediaList extends React.Component {
 
   componentDidMount() {
     const mediaListPanel = document.getElementById("list-panel");
+    console.log("mediaListPanel",mediaListPanel);
     mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
+    // mediaListPanel.addEventListener('scroll', () => { console.log("scrolling"); });
+
+    // mediaListPanel.addEventListener('scroll', () =>{// lodash debounce method.
+    //   // let supportPageOffset = window.pageXOffset !== undefined;
+    //   // let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
+    //   // let scroll = {
+    //   //    x: supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft,
+    //   //    y: supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop
+    //   // };
+    //   //
+    //   // if(scroll.y > 100){ // 3000px (arbitrary - put whatever point you need there.)
+    //   //   console.log("test scroll.y",scroll.y);
+    //   //     // element.setAttribute('class', "insertNewClass");//change the attribute.
+    //   // }
+    //   console.log("SCROLL LISTENER");
+    //   console.log("document.body.scrollTop", document.body.scrollTop);
+    //   let clientHeight = document.documentElement.clientHeight;
+    //   console.log("clientHeight", clientHeight);
+    //
+    //   // check to see what's in the view port
+    //   const mediaListContainer = document.getElementById("list-panel");
+    //   const mediaListElement = document.getElementsByClassName("media-list");
+    //   const listItems = mediaListElement[0].childNodes;
+    //   console.log("listItems.length", listItems.length);
+    //   let start = 0;
+    //   let end = listItems.length;
+    //   let count = 0;
+    //
+    //   while(start !== end) {
+    //     console.log("mediaListContainer.scrollTop",mediaListContainer.scrollTop);
+    //     count++;
+    //     let mid = start + Math.floor((end - start) / 2);
+    //     let item = listItems[mid];
+    //     if(item.offsetTop < mediaListContainer.scrollTop)
+    //       start = mid + 1;
+    //     else
+    //       end = mid;
+    //   }
+    //   console.log('dailyItems start',start);
+    //
+    //
+    // });
+
+    // const mediaListPanel = document.getElementById("list-panel");
+    // const testElement = document.getElementById("test-element");
+    // console.log("mediaListPanel",mediaListPanel);
+    // window.addEventListener('scroll', this.props.mediaListVisibility);
+    // console.log("testElement",mediaListPanel);
+    // console.log("testElement offsetHeight",mediaListPanel.offsetHeight);
+
     mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
+
     // mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 50));
     // mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 50));
-    this.props.mediaListVisibility();
+    // this.props.mediaListVisibility(); // initial
   }
 
   componentDidUpdate() {
@@ -76,9 +128,9 @@ export default class MediaList extends React.Component {
     if (highlighted){
       // console.log("render() highlighted:",highlighted);
       // scrollToElement('#'+highlighted);
-      var element = document.getElementById(highlighted);
+      // var element = document.getElementById(highlighted);
       // console.log("highlighted element:",element);
-      element.scrollIntoView({behavior: "smooth", block: "center"});
+      // element.scrollIntoView({behavior: "smooth", block: "center"});
     }
 
     const yearNavItems = yearsAvailable.map((year) => {
@@ -116,9 +168,11 @@ export default class MediaList extends React.Component {
             rowClass = newDateClass;
             newDate = true;
           }
-
-          const movieYear = (d.type === 'movie' && d.year) ? <span className="year">{d.year}</span> : null;
+          // remove upper case from type
+          const type = d.type.toString().toLowerCase();
+          const movieYear = (type === 'movie' && d.year) ? <span className="year">{d.year}</span> : null;
           const bookCredit = d.credit ? <span className="credit">{d.credit}</span> : null;
+          // create notes element if there are any
           const notes = d.notes
             ? <span className="notes">
                 <span className="notes-date">{Moment(item.key).format("MMMM, D")}</span>
@@ -130,8 +184,8 @@ export default class MediaList extends React.Component {
           let element = <div
                           id={i+"_"+j}
                           data-date={currentDate}
-                          className={'item ' + d.type + " " + rowClass}
-                          onClick={() => setHighlight(d.title, "title")}
+                          className={'item ' + type + " " + rowClass}
+                          onClick={() => setHighlight(d.title, "title", type)}
                         >
                           <span className="title">{d.title}</span>
                           {movieYear}
@@ -145,8 +199,7 @@ export default class MediaList extends React.Component {
       }
     }, this)
     return (
-      <div className="media-list">
-        {yearNav}
+      <div className="media-list" id="test-element">
         {listItems}
       </div>
     );

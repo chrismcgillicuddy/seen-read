@@ -43,7 +43,7 @@ export default class ButtonList extends React.Component {
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "credit")}>{toTitleCase(item)}</li>;
+                          onClick={() => setHighlight(title, "credit", "Author")}>{toTitleCase(item)}</li>;
         return element;
       }, this);
 
@@ -59,7 +59,7 @@ export default class ButtonList extends React.Component {
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "title")}>{toTitleCase(item)}</li>;
+                          onClick={() => setHighlight(title, "title", "book")}>{toTitleCase(item)}</li>;
         return element;
       }, this);
 
@@ -76,7 +76,7 @@ export default class ButtonList extends React.Component {
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "title")}>{item}</li>;
+                          onClick={() => setHighlight(title, "title", "movie")}>{item}</li>;
         return element;
       }, this);
 
@@ -92,7 +92,7 @@ export default class ButtonList extends React.Component {
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "title")}>{item}</li>;
+                          onClick={() => setHighlight(title, "title", "movie")}>{item}</li>;
         return element;
       }, this);
 
@@ -109,7 +109,7 @@ export default class ButtonList extends React.Component {
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "title")}>{item}</li>;
+                          onClick={() => setHighlight(title, "title", "tv")}>{item}</li>;
         return element;
       }, this);
 

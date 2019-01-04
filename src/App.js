@@ -11,12 +11,17 @@ import ButtonList from './buttonList';
 import ProgressCircle from './progressCircle';
 import * as toTitleCase from 'to-title-case';
 // import { Scrollama, Step } from 'react-scrollama';
-import 'intersection-observer';
-import scrollama from 'scrollama';
+// import 'intersection-observer';
+// import scrollama from 'scrollama';
+// import { useInView } from 'react-intersection-observer'
+// import ScrollPercentage from 'react-scroll-percentage'
+import { InView } from 'react-intersection-observer';
+
+var classNames = require('classnames');
 
 const moment = extendMoment(Moment); // add moment-range
 const progressRadius = 30;
-const yearsAvailable = [2009,2010,2011,2012,2013,2014,2015,2016,2017];
+const yearsAvailable = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
 
 export default class App extends Component {
   constructor(props) {
@@ -24,10 +29,12 @@ export default class App extends Component {
     this.state = {
       highlighted: null,
       highlightedItem: "",
-      highlightedType: "title",
+      highlightedType: "title", // is the highlightedItem a titles or credit
+      highlightMedia: "", // what is the highlightedItem? A book, film...
+      highlightMediaType: "", // highlight all books, movies...
       loading: true,
       mediaLists: {},
-      compactYears: true,
+      compactYears: false,
       displayYear: '2017',
       radialProgress: 0,
       mediaListItemsOnScreen: [],
@@ -62,44 +69,18 @@ export default class App extends Component {
 
     // ESC key clears title highlight
     document.addEventListener("keydown", this.escKey, false);
-
-    // instantiate the scrollama
-    const scroller = scrollama();
-
-    // setup the instance, pass callback functions
-    scroller.setup({
-        step: '.media-list-panel .step',
-        debug: true
-      })
-      .onStepEnter(this.handleStepEnter)
-      .onStepExit(this.handleStepExit);
   }
 
-  // scrollma test 2
-  handleStepEnter = (response) => {
-    console.log("scrollama handleStepEnter", response);
+  onViewChange = (inView, highlight) => {
+    console.log(inView, highlight);
+    if (inView){
+      this.setMediaHighlightType(""); // reset here for now, in case a year needs focus
+      var newState = {};
+      newState[highlight.highlight] = highlight.value;
+      console.log(newState);
+      this.setState(newState);
+    }
   }
-
-  handleStepExit = (response) => {
-    console.log("scrollama handleStepExit", response);
-  }
-
-  // scrollama
-  // onStepEnter = (element, scrollState) => this.setState({ scrollState });
-  // onStepEnter = ({ element, data, direction }) => {
-  //   console.log("onStepEnter element:", element);
-  //   console.log("onStepEnter direction:", direction);
-  //   console.log("onStepEnter data:", data);
-  //   element.style.backgroundColor = 'lightgoldenrodyellow';
-  //   this.setState({ displayYear: data });
-  // };
-  //
-  // onStepExit = ({ element, data, direction }) => {
-  //   console.log("onStepExit element:", element);
-  //   console.log("onStepExit direction:", direction);
-  //   console.log("onStepExit data:", data);
-  //   element.style.backgroundColor = 'white';
-  // };
 
   componentWillUnmount(){
     const mediaListElement = document.getElementsByClassName("media-list");
@@ -108,16 +89,25 @@ export default class App extends Component {
   }
 
   mediaListVisibility = () => {
+    console.log("mediaListVisibility called");
+
     // check visible elements in MediaList
     const mediaListContainer = document.getElementById("list-panel");
     const mediaListElement = document.getElementsByClassName("media-list");
+    console.log("mediaListContainer scrollHeight",mediaListContainer.scrollHeight);
+    console.log("mediaListElement scrollHeight",mediaListElement[0].scrollHeight);
+    // console.log("mediaListElement",mediaListElement[0]);
+    // console.log("mediaListElement offsetTop",mediaListElement[0].offsetTop);
     let clientHeight = document.documentElement.clientHeight;
 
     if (_.isElement(mediaListElement[0])){
+      // console.log("isElement(mediaListElement[0]):",_.isElement(mediaListElement[0]));
+      // console.log("isElement(mediaListElement[0]):",mediaListElement[0]);
       const dailyItems = mediaListElement[0].childNodes;
       let start = 0;
       let end = dailyItems.length;
       let count = 0;
+      // console.log('dailyItems length',end);
 
       while(start !== end) {
         count++;
@@ -128,26 +118,37 @@ export default class App extends Component {
         else
           end = mid;
       }
+      console.log('dailyItems start',start);
+
 
       let isOnScreen = true;
       let onScreenItems = [];
       let onScreenItemCount = start;
 
       while(isOnScreen) {
+
         let item = dailyItems[onScreenItemCount];
+        console.log("item",item);
+        console.log("item.offsetTop",item.offsetTop);
+        console.log("mediaListContainer.scrollTop",mediaListContainer.scrollTop);
+
         if ((item.offsetTop - mediaListContainer.scrollTop) < (clientHeight))
           onScreenItems.push(item.dataset.date);
         else
           isOnScreen = false;
         onScreenItemCount++;
       }
+      console.log("------");
+      console.log("onScreenItems", onScreenItems);
+      console.log("clientHeight", clientHeight);
+
       this.updateOnScreenItems(onScreenItems);
     }
   }
 
   escKey = (event) => {
     if(event.keyCode === 27) {
-      this.setHighlight("", "title");
+      this.setHighlight("", "title", "");
     }
   }
 
@@ -161,19 +162,30 @@ export default class App extends Component {
   }
 
   updateOnScreenItems = (mediaListItemsOnScreen) => {
+    console.log("updateOnScreenItems");
     this.setState({mediaListItemsOnScreen});
   }
 
-  setHighlight = (highlightedItem, highlightedType) => {
-    const el = document.getElementById("selected-title");
-    el.textContent = toTitleCase(highlightedItem);
-    highlightedItem = highlightedItem.toString().toLowerCase();
+  setHighlight = (highlightedItem, highlightedType, highlightedMedia) => {
+    const titleElement = document.getElementById("selected-title");
+    // titleElement.textContent = toTitleCase(highlightedItem);
+    const typeElement = document.getElementById("selected-title-type");
+    // typeElement.textContent = toTitleCase(highlightedMedia);
+
+    if (highlightedItem.length > 0) highlightedItem = highlightedItem.toString().toLowerCase();
     this.setState({highlightedItem});
     this.setState({highlightedType});
+    this.setState({highlightedMedia});
   }
 
   setDisplayYear = (displayYear) => {
+    this.setState({highlightMediaType: ''}); // reset mediaType highlight
     this.setState({displayYear});
+  }
+
+  setMediaHighlightType = (highlightMediaType) => {
+    this.setState({'displayYear': ''});// reset selected year
+    this.setState({highlightMediaType}); // reset mediaType highlight
   }
 
   setRadialProgress = (radialProgress) => {
@@ -193,6 +205,7 @@ export default class App extends Component {
           highlighted,
           highlightedItem,
           highlightedType,
+          highlightMediaType,
           compactYears,
           displayYear,
           radialProgress,
@@ -206,114 +219,130 @@ export default class App extends Component {
       );
     }
     if (!this.state.loading){
-      let rowClasses = "main";
-      if (highlightedItem) {
-        rowClasses+=' title-highlight';
-      }
-      if (!compactYears) {
-        rowClasses+=' expand-year-plots';
-      }
+
+      const exploreClasses= classNames({
+        explore: true,
+        'title-highlight': highlightedItem,
+        'expand-year-plots': !compactYears
+      });
+
+      const highlightMediaTypeOn = highlightMediaType.length > 0;
+
+      const yearPlotClasses = classNames({
+        'chart': true,
+        'compact-years': compactYears,
+        'mediaTypeHighlighting': highlightMediaTypeOn,
+        'highlight-tv': highlightMediaType==='tv',
+        'highlight-movies': highlightMediaType==='movie',
+        'highlight-books': highlightMediaType==='book',
+        'highlight-plays': highlightMediaType==='play',
+        'highlight-special': highlightMediaType==='special'
+      });
 
       return (
         <div>
-          {/* <section className="intro">Seen, Read</section> */}
-            <section className={rowClasses}>
-            {/* <header>
-              <span className="title">Seen,Read</span>
-              <div className="options">
-                <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
-              </div>
-            </header> */}
-            <section className={compactYears ? 'compact-years year-plot-group' : 'year-plot-group'} id="grid">
-              <div className="year-container">
-                {
-                  yearsAvailable.map((year) => {
-                    const isSelectedYear = (year == displayYear) ? true : false;
-                    return <YearPlot
-                      scrollState={scrollState}
-                      data={mediaLists['list'+year]}
-                      isSelectedYear={isSelectedYear}
-                      highlighted={highlighted}
-                      highlightedItem={highlightedItem}
-                      highlightedType={highlightedType}
-                      setHighlight={this.setHighlight}
-                      setDisplayYear={this.setDisplayYear}
-                      mediaListItemsOnScreen={mediaListItemsOnScreen}
-                      mediaListVisibility={this.mediaListVisibility}
-                    />
-                  })
-                }
-              <div className="highlighted-title-outer">
-                <div className="highlighted-title-inner">
-                  <span id="selected-title"></span>
-                  <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title")}>✕</span>
-                </div>
-              </div>
-              <div className="selected-title-hover"></div>
+          <section className="cover">
+            <span>Seen,Read</span>
+          </section>
+          <section className={exploreClasses} id="test-container">
+          {/* <header>
+            <span className="title">Seen,Read</span>
+            <div className="options">
+              <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
             </div>
-            </section>
-            {/* <ButtonList
-              compactMode={compactYears}
+          </header> */}
+            {/* <div className={yearPlotClasses} id="grid">
+              {
+                yearsAvailable.map((year) => {
+                  const isSelectedYear = (year == displayYear) ? true : false;
+                  return <YearPlot
+                    scrollState={scrollState}
+                    data={mediaLists['list'+year]}
+                    isSelectedYear={isSelectedYear}
+                    highlighted={highlighted}
+                    highlightedItem={highlightedItem}
+                    highlightedType={highlightedType}
+                    highlightMediaType={highlightMediaType}
+                    setHighlight={this.setHighlight}
+                    setDisplayYear={this.setDisplayYear}
+                    mediaListItemsOnScreen={mediaListItemsOnScreen}
+                    mediaListVisibility={this.mediaListVisibility}
+                  />
+                })
+              }
+            <div className="highlighted-title-outer">
+              <div className="highlighted-title-inner">
+                <span id="selected-title-type" className="type"></span>
+                <span id="selected-title" className="title"></span>
+                <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
+              </div>
+            </div>
+          </div> */}
+
+          <article className="controls" id="list-panel">
+            <ProgressCircle
+              className={'progress-circle'}
+              radius={progressRadius}
+              radialProgress={radialProgress}
+              displayYear={displayYear}
+            />
+            <MediaList
+              data={mediaLists['list'+displayYear]}
+              yearsAvailable={yearsAvailable}
+              displayYear={displayYear}
+              setDisplayYear={this.setDisplayYear}
+              highlighted={highlighted}
               highlightedItem={highlightedItem}
               setHighlight={this.setHighlight}
-            /> */}
-            <section className="media-list-panel" id="list-panel">
-              {/* <ProgressCircle
-                className={'progress-circle'}
-                radius={progressRadius}
-                radialProgress={radialProgress}
-                displayYear={displayYear}
-              /> */}
-              {/* <MediaList
-                data={mediaLists['list'+displayYear]}
-                yearsAvailable={yearsAvailable}
-                displayYear={displayYear}
-                setDisplayYear={this.setDisplayYear}
-                highlighted={highlighted}
-                highlightedItem={highlightedItem}
-                setHighlight={this.setHighlight}
-                mediaListVisibility={this.mediaListVisibility}
-                updateOnScreenItems={this.updateOnScreenItems}
-                setRadialProgress={this.setRadialProgress}
-              /> */}
+              mediaListVisibility={this.mediaListVisibility}
+              updateOnScreenItems={this.updateOnScreenItems}
+              setRadialProgress={this.setRadialProgress}
+            />
 
-              <div className="step step-1">
-                <div>2009</div>
-              </div>
+            {/*
+            <ScrollPercentage>
+              {(percentage, inView) => (
+                <h2>{`Percentage scrolled: ${calcPercentage(percentage)}%.`}</h2>
+              )}
+            </ScrollPercentage> */}
 
-              <div className="step step-2">
-                <div>2010</div>
-              </div>
 
-              <div className="step step-3">
-                <div>2011</div>
-              </div>
+            {/* <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "movie"} )}>
+              <div className="step">Movies</div>
+            </InView>
 
-              <div className="step step-4">
-                <div>2012</div>
-              </div>
+            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
+              <div className="step">TV</div>
+            </InView>
 
-              <div className="step step-5">
-                <div>2013</div>
-              </div>
+            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "book"} )}>
+              <div className="step">Books</div>
+            </InView>
 
-              <div className="step step-6">
-                <div>2014</div>
-              </div>
+            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "play"} )}>
+              <div className="step">Plays</div>
+            </InView>
 
-              <div className="step step-7">
-                <div>2015</div>
-              </div>
+            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "special"} )}>
+              <div className="step">Special!</div>
+            </InView>
 
-              <div className="step step-8">
-                <div>2016</div>
+            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: ""} )}>
+              <div className="step">
+                <ButtonList
+                  compactMode={compactYears}
+                  highlightedItem={highlightedItem}
+                  setHighlight={this.setHighlight}
+                />
               </div>
-              <div className="step step-9">
-                <div>2017</div>
-              </div>
+            </InView> */}
 
-            </section>
-          </section>
+          </article>
+
+        {/* </section> */}
+        {/* <section className="media-list-panel" id="list-panel"> */}
+
+        </section>
       </div>
       );
     }

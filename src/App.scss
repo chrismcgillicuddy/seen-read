@@ -1,5 +1,5 @@
 // fonts
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:300,400,500');
 
@@ -7,8 +7,25 @@
 $animation-rate: 0.75s;
 $animation-rate-fast: 0.2s;
 
-// color
-$base-dark: #111010;
+// dark palette
+$page-background-color: #111;
+$dark-ui-base: #111;
+$dark-highlight-base: #111;
+$media-list-item: $dark-highlight-base;
+$media-list-item-bg: #E8E3E0;
+$media-list-movie-bg: $media-list-item-bg;
+$book-play-titles: media-list-movie-bg;
+$media-title-hover: media-list-movie-bg;
+$media-list-highlight: #474642;
+$media-list-detail-highlight: $dark-ui-base;
+$media-item-title: #3a3a3a;
+$year-label: #fff;
+$year-plot-item: #ccc;
+$year-plot-item-highlight: #666;
+$year-plot-item-bg-highlight: #E8E3E0;
+$heading-title: #fff;
+
+$base-dark: #111;
 $base-light: #F6F5F1;
 
 // setup
@@ -32,81 +49,60 @@ body {
   position: absolute;
   top: calc(50% - 60px);
   left: calc(50% - 80px);
-  text-align: center;
-  // padding: 1em;
-  display: block;
-  // vertical-align: top;
-  // margin: -40px 0px;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 60px;
-  border-radius: 40px;
-  opacity: 0.7;
-  background-color: #1f1f1f;
-  color: #999;
-  width: 80px;
-  height:80px;
-  animation: pulse1 2s infinite ease-in-out;
-  span.one {
-    position: absolute;
+    text-align: center;
+    // padding: 1em;
     display: block;
-    background-color: #333;
-    top: calc(50% - 25px);
-    left: calc(50% - 25px);
-    width: 50px;
-    height:50px;
+    // vertical-align: top;
+    // margin: -40px 0px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 60px;
     border-radius: 40px;
-    z-index: 100;
-    animation: pulse2 2s infinite ease-in-out;
-  }
-  span.two {
-    position: absolute;
-    display: block;
-    background-color: goldenrod;
-    top: calc(50% - 10px);
-    left: calc(50% - 10px);
-    width: 20px;
-    height:20px;
-    border-radius: 40px;
-    z-index: 100;
-    animation: pulse3 2s infinite ease-in-out;
-  }
-}
-
-// TESTING SCROLLAMA
-.step {
-  display: block;
-  width: 100%;
-  height: 700px;
-  text-align: center;
-  margin: 900px 0;
-}
-.intro {
-  width: 100%;
-  height: 1200px;
-  background: pink;
-  color: blue;
-  font-size: 60px;
-  padding: 200px 0;
-  text-align: center;
+    opacity: 0.7;
+    background-color: #1f1f1f;
+    color: #999;
+    width: 80px;
+    height:80px;
+    animation: pulse1 2s infinite ease-in-out;
+    span.one {
+      position: absolute;
+      display: block;
+      background-color: #333;
+      top: calc(50% - 25px);
+      left: calc(50% - 25px);
+      width: 50px;
+      height:50px;
+      border-radius: 40px;
+      z-index: 100;
+      animation: pulse2 2s infinite ease-in-out;
+    }
+    span.two {
+      position: absolute;
+      display: block;
+      background-color: goldenrod;
+      top: calc(50% - 10px);
+      left: calc(50% - 10px);
+      width: 20px;
+      height:20px;
+      border-radius: 40px;
+      z-index: 100;
+      animation: pulse3 2s infinite ease-in-out;
+    }
 }
 
 // page layout
 .main {
-  // display: grid;
-	// grid-template-rows: 80px auto;
-	// grid-template-columns: 485px 1fr;
-	// height: 100vh;
-  display: flex;
-  height: 1280px;
+  display: grid;
+	grid-template-rows: 80px auto;
+	grid-template-columns: 485px 1fr;
+	height: 100vh;
   transition:all $animation-rate ease;
   &.expand-year-plots {
-    // grid-template-columns: 1010px 1fr;
+    grid-template-columns: 1010px 1fr;
     transition: all 3s ease 3s;
   }
 }
 .year-plot-group {
   padding-left: 80px;
-  flex-basis: 45%;
 }
 .expand-year-plots .most-seen-read {
   display: block;
@@ -114,10 +110,6 @@ body {
   transition:all 3s ease 3s;
 }
 .media-list-panel {
-  flex-basis: 55%;
-  align-self: flex-start;
-  height: 1280px;
-  background: #444;
   overflow: auto;
   transition:all $animation-rate ease;
   opacity: 1;
@@ -127,6 +119,10 @@ body {
     transition:all $animation-rate ease;
   }
 }
+
+// grid layout
+
+
 
 // header
 header {
@@ -195,7 +191,7 @@ $tvOffset: 8px;
   .year-nav {
     position: sticky;
     overflow: hidden;
-    background: $base-dark;
+    background: #111;
     z-index: 100;
     width: 100%;
     top: 0;
@@ -218,23 +214,22 @@ $tvOffset: 8px;
     }
   }
   // base media list item appearance
-  $title-color: #3a3a3a;
   .item {
     position: relative;
     align-items: center;
     margin: 2px 15px 0 15px;
     padding: 17px 30px;
-    background-color: #E8E3E0;
+    background-color: $media-list-item-bg;
     .title {
       flex-grow: 1;
       font-family: 'IBM Plex Serif', Georgia, serif;
       font-weight: 500;
-      color: $title-color;
+      color: $media-item-title;
     }
     .credit,
     .year {
       font-family: 'IBM Plex Serif', Georgia, serif;
-      color: $title-color;
+      color: $media-item-title;
       opacity: 0.6;
       font-weight: 400;
     }
@@ -261,7 +256,7 @@ $tvOffset: 8px;
     .title,
     .credit {
       display: block;
-      color: $title-color;
+      color: $media-item-title;
       flex-grow: 1;
       text-align: left;
     }
@@ -368,12 +363,12 @@ $tvOffset: 8px;
   .play,
   .special {
     &.highlight {
-      background-color: #474642;
+      background-color: $media-list-highlight;
       font-weight: bold;
       .title,
       .year,
       .credit {
-        color: $base-dark;
+        color: $media-list-detail-highlight;
       }
       .year,
       .credit {
@@ -454,7 +449,6 @@ $tvOffset: 8px;
   overflow: hidden;
   font-family: 'IMB Plex Mono', sans-serif;
   font-size: 10px;
-  font-weight: 500;
   margin: 0 0 8px 7px;
   color: $base-light;
   width: 12px;
@@ -513,7 +507,7 @@ $tvOffset: 8px;
   transition: background-color 0.3s ease;
   &.odd-month,
   .expand-year-plots .selected-year &.odd-month {
-    background-color: lighten($base-dark, 2%);
+    background-color: lighten($page-background-color, 2%);
   }
   .selected-year &.odd-month {
     // background-color: transparent;
@@ -545,11 +539,11 @@ $tvOffset: 8px;
       background-color: $base-light;
     }
     .title-highlight & {
-      background-color: #666;
+      background-color: $year-plot-item-highlight;
     }
     &:hover,
     &.highlight:hover {
-      background-color: #E8E3E0;
+      background-color: $year-plot-item-bg-highlight;
       cursor: pointer;
     }
     &.short-title,
@@ -567,7 +561,7 @@ $tvOffset: 8px;
       width: 9px;
     }
     &.highlight {
-      background-color: #E8E3E0;
+      background-color: $year-plot-item-bg-highlight;
       height: 1px;
       z-index: 1;
     }
