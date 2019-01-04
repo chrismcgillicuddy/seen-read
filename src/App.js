@@ -221,7 +221,8 @@ export default class App extends Component {
     if (!this.state.loading){
 
       const exploreClasses= classNames({
-        explore: true,
+        'explore': true,
+        'media-list-view': true,
         'title-highlight': highlightedItem,
         'expand-year-plots': !compactYears
       });
@@ -251,7 +252,7 @@ export default class App extends Component {
               <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
             </div>
           </header> */}
-            {/* <div className={yearPlotClasses} id="grid">
+            <div className={yearPlotClasses} id="grid">
               {
                 yearsAvailable.map((year) => {
                   const isSelectedYear = (year == displayYear) ? true : false;
@@ -277,9 +278,9 @@ export default class App extends Component {
                 <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
               </div>
             </div>
-          </div> */}
+          </div>
 
-          <article className="controls" id="list-panel">
+          <article className="controls " id="list-panel">
             <ProgressCircle
               className={'progress-circle'}
               radius={progressRadius}
