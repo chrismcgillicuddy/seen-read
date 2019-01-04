@@ -34,7 +34,7 @@ export default class App extends Component {
       highlightMediaType: "", // highlight all books, movies...
       loading: true,
       mediaLists: {},
-      compactYears: false,
+      compactYears: true,
       displayYear: '2017',
       radialProgress: 0,
       mediaListItemsOnScreen: [],
@@ -222,7 +222,7 @@ export default class App extends Component {
 
       const exploreClasses= classNames({
         'explore': true,
-        'media-list-view': true,
+        'media-list-view': compactYears,
         'title-highlight': highlightedItem,
         'expand-year-plots': !compactYears
       });
