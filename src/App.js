@@ -280,7 +280,7 @@ export default class App extends Component {
             </div>
           </div>
 
-          <article className="controls " id="list-panel">
+          <div className="controls" id="list-panel">
             <ProgressCircle
               className={'progress-circle'}
               radius={progressRadius}
@@ -338,7 +338,7 @@ export default class App extends Component {
               </div>
             </InView> */}
 
-          </article>
+          </div>
 
         {/* </section> */}
         {/* <section className="media-list-panel" id="list-panel"> */}

@@ -11,6 +11,10 @@ $animation-rate-fast: 0.2s;
 $base-dark: #111010;
 $base-light: #F6F5F1;
 
+// RESPONSIVE
+$break-small: 900px;
+
+
 // setup
 * {
   box-sizing: border-box;
@@ -168,15 +172,21 @@ body {
   grid-auto-columns: minmax(60px, 90px);
   .media-list-view & {
     grid-auto-columns: minmax(30px, 40px);
+  }
+  @media screen and (max-width: $break-small) {
+    grid-auto-columns: 10% 90%;
 
+    .year-plot:not(.selected-year) {
+      display: none;
+    }
   }
 }
 .controls {
   // max-width: 800px;
   overflow: auto;
   height: 100vh;
-  // background: #ccc;
-  // position: relative;
+  position: relative;
+
   // span {
   //   display: inline-block;
   //   height: 1000px;
@@ -211,10 +221,12 @@ h1 {
 
 // radial progress
 .progress-circle-container {
-  display: block;
-  position: fixed;
-  top: 90px;
-  left: 1230px;
+  // display: block;
+  position: sticky;
+  top: 40px;
+  // left: 730px;
+  width: 100px;
+  margin-left: 740px;
   padding: 20px;
   background-color: rgba(17,17,17,0.6);
   z-index: 800;
@@ -387,7 +399,7 @@ $tvOffset: 8px;
   $notesOffset: 760px;
   .notes {
     position: absolute;
-    width: 300px;
+    width: 100%;
     border-left: 2px solid #E8E3E0;
     color: #E8E3E0;
     padding: 10px 15px;
@@ -440,10 +452,12 @@ $tvOffset: 8px;
   }
 }
 
+
 // year plots
 .year-plot-group {
   transition: width 0.3s ease;
 }
+
 .year-plot {
   display: inline-block;
   width: 100px;
@@ -457,6 +471,7 @@ $tvOffset: 8px;
   .expand-year-plots &.selected-year {
     background-color: transparent ;
   }
+
   &:nth-of-type(1) {
     // place month labels
     .daily-items::before {
