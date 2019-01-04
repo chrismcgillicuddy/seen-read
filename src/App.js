@@ -16,6 +16,7 @@ import * as toTitleCase from 'to-title-case';
 // import { useInView } from 'react-intersection-observer'
 // import ScrollPercentage from 'react-scroll-percentage'
 import { InView } from 'react-intersection-observer';
+import DateSlider from './dateSlider';
 
 var classNames = require('classnames');
 
@@ -242,9 +243,9 @@ export default class App extends Component {
 
       return (
         <div>
-          <section className="cover">
+          {/* <section className="cover">
             <span>Seen,Read</span>
-          </section>
+          </section> */}
           <section className={exploreClasses} id="test-container">
           {/* <header>
             <span className="title">Seen,Read</span>
@@ -253,7 +254,7 @@ export default class App extends Component {
             </div>
           </header> */}
             <div className={yearPlotClasses} id="grid">
-              {
+              {/* {
                 yearsAvailable.map((year) => {
                   const isSelectedYear = (year == displayYear) ? true : false;
                   return <YearPlot
@@ -277,16 +278,20 @@ export default class App extends Component {
                 <span id="selected-title" className="title"></span>
                 <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
               </div>
-            </div>
+            </div> */}
+            <DateSlider
+              displayYear={displayYear}
+
+            />
           </div>
 
           <div className="controls" id="list-panel">
-            <ProgressCircle
+            {/* <ProgressCircle
               className={'progress-circle'}
               radius={progressRadius}
               radialProgress={radialProgress}
               displayYear={displayYear}
-            />
+            /> */}
             <MediaList
               data={mediaLists['list'+displayYear]}
               yearsAvailable={yearsAvailable}

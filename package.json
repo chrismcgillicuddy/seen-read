@@ -15,6 +15,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-intersection-observer": "^6.3.1",
+    "react-rangeslider": "^2.2.0",
     "react-scroll-percentage": "^3.0.0",
     "react-scrollama": "^0.5.0",
     "scrollama": "^1.4.4",
