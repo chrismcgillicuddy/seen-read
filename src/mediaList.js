@@ -1,6 +1,8 @@
 import React from 'react';
 import * as _ from 'lodash';
 import Moment from 'moment';
+import scrollIntoView from 'scroll-into-view';
+import * as classNames from 'classnames'
 
 const progressRadius = 30;
 
@@ -14,70 +16,10 @@ export default class MediaList extends React.Component {
     const mediaListPanel = document.getElementById("list-panel");
     console.log("mediaListPanel",mediaListPanel);
     mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
-    // mediaListPanel.addEventListener('scroll', () => { console.log("scrolling"); });
-
-    // mediaListPanel.addEventListener('scroll', () =>{// lodash debounce method.
-    //   // let supportPageOffset = window.pageXOffset !== undefined;
-    //   // let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
-    //   // let scroll = {
-    //   //    x: supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft,
-    //   //    y: supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop
-    //   // };
-    //   //
-    //   // if(scroll.y > 100){ // 3000px (arbitrary - put whatever point you need there.)
-    //   //   console.log("test scroll.y",scroll.y);
-    //   //     // element.setAttribute('class', "insertNewClass");//change the attribute.
-    //   // }
-    //   console.log("SCROLL LISTENER");
-    //   console.log("document.body.scrollTop", document.body.scrollTop);
-    //   let clientHeight = document.documentElement.clientHeight;
-    //   console.log("clientHeight", clientHeight);
-    //
-    //   // check to see what's in the view port
-    //   const mediaListContainer = document.getElementById("list-panel");
-    //   const mediaListElement = document.getElementsByClassName("media-list");
-    //   const listItems = mediaListElement[0].childNodes;
-    //   console.log("listItems.length", listItems.length);
-    //   let start = 0;
-    //   let end = listItems.length;
-    //   let count = 0;
-    //
-    //   while(start !== end) {
-    //     console.log("mediaListContainer.scrollTop",mediaListContainer.scrollTop);
-    //     count++;
-    //     let mid = start + Math.floor((end - start) / 2);
-    //     let item = listItems[mid];
-    //     if(item.offsetTop < mediaListContainer.scrollTop)
-    //       start = mid + 1;
-    //     else
-    //       end = mid;
-    //   }
-    //   console.log('dailyItems start',start);
-    //
-    //
-    // });
-
-    // const mediaListPanel = document.getElementById("list-panel");
-    // const testElement = document.getElementById("test-element");
-    // console.log("mediaListPanel",mediaListPanel);
-    // window.addEventListener('scroll', this.props.mediaListVisibility);
-    // console.log("testElement",mediaListPanel);
-    // console.log("testElement offsetHeight",mediaListPanel.offsetHeight);
-
     mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
-
     // mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 50));
     // mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 50));
-    // this.props.mediaListVisibility(); // initial
-  }
-
-  componentDidUpdate() {
-    // this.props.mediaListVisibility();
-    // window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 200));
-    // window.addEventListener('scroll', this.updateRadialProgress);
-    // const mediaListContainer = document.getElementById("list-panel");
-    // mediaListContainer.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 100));
-    // mediaListContainer.addEventListener('scroll', this.props.mediaListVisibility, 100);
+    this.props.mediaListVisibility(); // initial
   }
 
   componentWillUnmount(){
@@ -111,7 +53,8 @@ export default class MediaList extends React.Component {
       setHighlight,
       mediaListVisibility,
       updateOnScreenItems,
-      setRadialProgress} = this.props;
+      setRadialProgress,
+      setMediaListHighlight} = this.props;
     let previousDate = '';
     let currentDate = '';
     let dateMatch = false;
@@ -123,15 +66,20 @@ export default class MediaList extends React.Component {
     let dateClass = '';
     let dailyItems = '';
 
-    // console.log("Media List", data);
-
-    if (highlighted){
-      // console.log("render() highlighted:",highlighted);
-      // scrollToElement('#'+highlighted);
-      // var element = document.getElementById(highlighted);
-      // console.log("highlighted element:",element);
-      // element.scrollIntoView({behavior: "smooth", block: "center"});
-    }
+    // scroll to highlighted element
+    // if (highlighted){
+    //   var element = document.getElementById(highlighted);
+    //   console.log("highlighted element:",element, highlighted);
+    //   if (element)
+    //   scrollIntoView(element, {
+    //       time: 300,
+    //       align:{
+    //           top: 0.5,
+    //           left: 0,
+    //           topOffset: 0
+    //       }
+    //   });
+    // }
 
     const yearNavItems = yearsAvailable.map((year) => {
       let yearEntry = "";
@@ -148,9 +96,9 @@ export default class MediaList extends React.Component {
     const listItems = data.map((item, i) => {
       if (item.values){
         let itemsPerDay = item.values;
-        if (i===highlighted) {
-          rowClass+=" highlight";
-        }
+        // if (i===highlighted) {
+        //   rowClass+=" highlight";
+        // }
         // previous
         const dailyItems = itemsPerDay.map((d, j) => {
           // new date check
@@ -160,37 +108,59 @@ export default class MediaList extends React.Component {
           // this same as previous date?
           if (sameDate) {
             itemDate = "";
-            rowClass = "";
+            // rowClass = "";
             newDate = false;
           } else {
             previousDate = currentDate;
             itemDate = item.date;
-            rowClass = newDateClass;
+            // rowClass = newDateClass;
             newDate = true;
           }
+
           // remove upper case from type
           const type = d.type.toString().toLowerCase();
-          const movieYear = (type === 'movie' && d.year) ? <span className="year">{d.year}</span> : null;
+          const movieYear = (( type === 'movie' || type === 'short') && d.year) ? <span className="year">{d.year}</span> : null;
           const bookCredit = d.credit ? <span className="credit">{d.credit}</span> : null;
-          // create notes element if there are any
-          const notes = d.notes
-            ? <span className="notes">
-                <span className="notes-date">{Moment(item.key).format("MMMM, D")}</span>
-                <br />
-                {d.notes}
+
+          // item classes
+          const itemClasses = classNames({
+            'item': true,
+            'highlighted': currentDate==highlighted,
+            'movie': type==="movie",
+            'tv': type==="tv",
+            'short': type==="short",
+            'book': type==="book",
+            'play': type==="play",
+            'special': type==="special",
+            'new-date': sameDate
+          });
+
+          const longDate = Moment(item.key).format("MMMM D"); // January 1
+          const shortDate = Moment(item.key).format("M/D"); // 1/1
+          const notes = d.notes ? <span className="note">{d.notes}</span> : null;
+
+          // create notes element if there are any notes or the date differs from the last entry
+          const notesNode = (newDate || d.notes)
+            ? <span className="details">
+              <span className="date long-date">{longDate}</span>
+              <span className="date short-date">{shortDate}</span>
+                {notes}
               </span>
             : null;
 
           let element = <div
-                          id={i+"_"+j}
+                          id={currentDate}
                           data-date={currentDate}
-                          className={'item ' + type + " " + rowClass}
-                          onClick={() => setHighlight(d.title, "title", type)}
+                          className={itemClasses}
+                          onClick={() => {
+                            setHighlight(d.title, "title", type);
+                            setMediaListHighlight(currentDate);
+                          }}
                         >
                           <span className="title">{d.title}</span>
                           {movieYear}
                           {bookCredit}
-                          {notes}
+                          {notesNode}
                         </div>;
           return element;
 

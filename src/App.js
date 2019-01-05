@@ -17,8 +17,9 @@ import * as toTitleCase from 'to-title-case';
 // import ScrollPercentage from 'react-scroll-percentage'
 import { InView } from 'react-intersection-observer';
 import DateSlider from './dateSlider';
+import * as classNames from 'classnames'
 
-var classNames = require('classnames');
+// var classNames = require('classnames');
 
 const moment = extendMoment(Moment); // add moment-range
 const progressRadius = 30;
@@ -78,7 +79,7 @@ export default class App extends Component {
       this.setMediaHighlightType(""); // reset here for now, in case a year needs focus
       var newState = {};
       newState[highlight.highlight] = highlight.value;
-      console.log(newState);
+      // console.log(newState);
       this.setState(newState);
     }
   }
@@ -119,7 +120,7 @@ export default class App extends Component {
         else
           end = mid;
       }
-      console.log('dailyItems start',start);
+      // console.log('dailyItems start',start);
 
 
       let isOnScreen = true;
@@ -129,19 +130,20 @@ export default class App extends Component {
       while(isOnScreen) {
 
         let item = dailyItems[onScreenItemCount];
-        console.log("item",item);
-        console.log("item.offsetTop",item.offsetTop);
-        console.log("mediaListContainer.scrollTop",mediaListContainer.scrollTop);
+        if (item){
+          console.log("item",item);
+          console.log("item.offsetTop",item.offsetTop);
 
-        if ((item.offsetTop - mediaListContainer.scrollTop) < (clientHeight))
-          onScreenItems.push(item.dataset.date);
-        else
-          isOnScreen = false;
+          if ((item.offsetTop - mediaListContainer.scrollTop) < (clientHeight))
+            onScreenItems.push(item.dataset.date);
+          else
+            isOnScreen = false;
+        }
         onScreenItemCount++;
       }
-      console.log("------");
-      console.log("onScreenItems", onScreenItems);
-      console.log("clientHeight", clientHeight);
+      // console.log("------");
+      // console.log("onScreenItems", onScreenItems);
+      // console.log("clientHeight", clientHeight);
 
       this.updateOnScreenItems(onScreenItems);
     }
@@ -163,8 +165,12 @@ export default class App extends Component {
   }
 
   updateOnScreenItems = (mediaListItemsOnScreen) => {
-    console.log("updateOnScreenItems");
+    // console.log("updateOnScreenItems");
     this.setState({mediaListItemsOnScreen});
+  }
+
+  setMediaListHighlight = (highlighted) => {
+    this.setState({highlighted});
   }
 
   setHighlight = (highlightedItem, highlightedType, highlightedMedia) => {
@@ -279,10 +285,10 @@ export default class App extends Component {
                 <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
               </div>
             </div> */}
-            <DateSlider
+            {/* <DateSlider
               displayYear={displayYear}
-
-            />
+              setMediaListHighlight={this.setMediaListHighlight}
+            /> */}
           </div>
 
           <div className="controls" id="list-panel">
@@ -303,6 +309,7 @@ export default class App extends Component {
               mediaListVisibility={this.mediaListVisibility}
               updateOnScreenItems={this.updateOnScreenItems}
               setRadialProgress={this.setRadialProgress}
+              setMediaListHighlight={this.setMediaListHighlight}
             />
 
             {/*

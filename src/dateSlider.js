@@ -22,16 +22,25 @@ export default class DateSlider extends React.Component {
     this.setState({maxValue});
   }
 
-
-  handleChange = (value) => {
+  handleChange = (dayNumber) => {
+    // convert the day number to a month and day 'Jan 01'
     const displayYear = this.props.displayYear;
-    const dateLabel = Moment([displayYear]).dayOfYear(value).format("MMM DD");
-    console.log("Slider date", dateLabel);
-    this.setState({value});
-    this.setState({dateLabel});
+    const dateLabel = Moment([displayYear]).dayOfYear(dayNumber).format("MMM DD");
+
+    // set highlight date for use in the media list
+    let highlightDate = Moment([displayYear]).dayOfYear(dayNumber).format("MM/DD/YYYY");
+    // console.log("highlightDate a:",highlightDate);
+    highlightDate = Date.parse(new Date(highlightDate));
+    // console.log("highlightDate b:", highlightDate);
+    this.props.setMediaListHighlight(highlightDate);
+
+    // set state
+    this.setState({ value: dayNumber, dateLabel });
+    // this.setState({dateLabel});
   }
 
   handleChangeReverse = (value) => {
+    console.log("handleChangeReverse");
     this.setState({
       reverseValue: value
     })
@@ -39,7 +48,6 @@ export default class DateSlider extends React.Component {
 
   render () {
     const { value, reverseValue, maxValue, dateLabel } = this.state;
-    console.log("maxValue",maxValue);
     return (
       <div className='slider orientation-reversed'>
           <div className='slider-vertical'>

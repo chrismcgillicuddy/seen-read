@@ -7,129 +7,47 @@
 $animation-rate: 0.75s;
 $animation-rate-fast: 0.2s;
 
-// color
+// core palette
 $base-dark: #111010;
 $base-light: #F6F5F1;
+$base-light-dimmed: #E8E3E0;
 
-// RESPONSIVE
-$break-small: 900px;
+// screen size break points
+$break-medium: 900px;
+$break-small: 400px;
 
-
-// setup
+// setup, resets
 * {
   box-sizing: border-box;
 }
-ul, li {
+body,
+ul,
+li {
   margin: 0;
   padding: 0;
 }
 body {
-  padding: 0;
-  margin: 0;
   text-rendering: optimizeLegibility;
+  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
   background-color: $base-dark;
-  font-family: 'IBM Plex Sans', sans-serif;
 }
-
-// loading
-// .loader {
-//   position: absolute;
-//   top: calc(50% - 60px);
-//   left: calc(50% - 80px);
-//   text-align: center;
-//   // padding: 1em;
-//   display: block;
-//   // vertical-align: top;
-//   // margin: -40px 0px;
-//   font-family: 'IBM Plex Sans', sans-serif;
-//   font-size: 60px;
-//   border-radius: 40px;
-//   opacity: 0.7;
-//   background-color: #1f1f1f;
-//   color: #999;
-//   width: 80px;
-//   height:80px;
-//   animation: pulse1 2s infinite ease-in-out;
-//   span.one {
-//     position: absolute;
-//     display: block;
-//     background-color: #333;
-//     top: calc(50% - 25px);
-//     left: calc(50% - 25px);
-//     width: 50px;
-//     height:50px;
-//     border-radius: 40px;
-//     z-index: 100;
-//     animation: pulse2 2s infinite ease-in-out;
-//   }
-//   span.two {
-//     position: absolute;
-//     display: block;
-//     background-color: goldenrod;
-//     top: calc(50% - 10px);
-//     left: calc(50% - 10px);
-//     width: 20px;
-//     height:20px;
-//     border-radius: 40px;
-//     z-index: 100;
-//     animation: pulse3 2s infinite ease-in-out;
-//   }
-// }
 
 // TESTING SCROLLAMA
-.step {
-  display: block;
-  width: 100%;
-  height: 700px;
-  text-align: center;
-  margin: 900px 0;
-}
-.intro {
-  width: 100%;
-  height: 1200px;
-  background: pink;
-  color: blue;
-  font-size: 60px;
-  padding: 200px 0;
-  text-align: center;
-}
-
-// page layout
-// .main {
-//   // display: grid;
-// 	// grid-template-rows: 80px auto;
-// 	// grid-template-columns: 485px 1fr;
-// 	// height: 100vh;
-//   display: flex;
-//   height: 1280px;
-//   transition:all $animation-rate ease;
-//   &.expand-year-plots {
-//     // grid-template-columns: 1010px 1fr;
-//     transition: all 3s ease 3s;
-//   }
-// }
-// .year-plot-group {
-//   padding-left: 80px;
-//   flex-basis: 45%;
-// }
-// .expand-year-plots .most-seen-read {
+// .step {
 //   display: block;
-//   opacity: 1;
-//   transition:all 3s ease 3s;
+//   width: 100%;
+//   height: 700px;
+//   text-align: center;
+//   margin: 900px 0;
 // }
-// .media-list-panel {
-//   flex-basis: 55%;
-//   align-self: flex-start;
-//   height: 1280px;
-//   background: #444;
-//   overflow: auto;
-//   transition:all $animation-rate ease;
-//   opacity: 1;
-//   .expand-year-plots & {
-//     display: none;
-//     opacity: 0;
-//     transition:all $animation-rate ease;
-//   }
+// .intro {
+//   width: 100%;
+//   height: 1200px;
+//   background: pink;
+//   color: blue;
+//   font-size: 60px;
+//   padding: 200px 0;
+//   text-align: center;
 // }
 
 // grid layout
@@ -152,9 +70,9 @@ body {
   padding: 10px;
   grid-template-areas: "a a";
   grid-gap: 10px;
-  // grid-auto-columns: minmax(90px, 700px);
+  // grid-auto-columns: minmax(90px, 700px); // KEEP for large view
   grid-auto-columns: 70% 30%;
-  // min-width: 1000px;
+  // min-width: 1000px; // // KEEP for large view
   position: relative;
   &.media-list-view {
     grid-auto-columns: 30% 70%;
@@ -164,9 +82,11 @@ body {
   @media screen and (max-width: 500px) {
     padding: 100px 0 0 10px;
     &.media-list-view {
-      grid-auto-columns: 60px auto;
+      grid-auto-columns: 0 auto;
+      grid-gap: 0px;
+
       .media-list {
-        // margin-right: -40px;
+
       }
     }
   }
@@ -176,23 +96,23 @@ body {
   position: sticky;
   justify-self: end;
   top: 10px;
-  // height: 700px;
+  // height: 700px; // Is this still needed for chart view?
   display: grid;
-  // grid-template-areas: "a a a a a a a a a";
+  // grid-template-areas: "a a a a a a a a a"; // KEEP for chart view
   grid-gap: 2px;
   grid-auto-columns: minmax(60px, 90px);
   .media-list-view & {
     grid-auto-columns: minmax(30px, 40px);
   }
-    @media screen and (max-width: $break-small) {
+    @media screen and (max-width: $break-medium) {
       grid-auto-columns: 10% 90%;
 
       .year-plot:not(.selected-year) {
         display: none;
       }
-      .media-list .item {
-        font-size: 18px;
-      }
+      // .media-list .item {
+      //   font-size: 18px;
+      // }
     }
 }
 .controls {
@@ -235,10 +155,9 @@ h1 {
 
 // radial progress
 .progress-circle-container {
-  // display: block;
   position: sticky;
   top: 40px;
-  // left: 730px;
+  // left: 730px; // TODO: improve positioning, makethis relative to the right edge of the media list
   width: 100px;
   margin-left: 740px;
   padding: 20px;
@@ -268,10 +187,13 @@ h1 {
 
 // scrollable media list
 // offset for types of list items
-$bookOffset: 10px;
-$playOffset: 15px;
-$movieOffset: 5px;
-$tvOffset: 8px;
+$bookOffset: 15;
+$playOffset: 10;
+$movieOffset: 0;
+$shortOffset: 5;
+$tvOffset: 5;
+$specialOffset: 0;
+$defaultOffset: 30;
 .media-list {
   position: relative;
   // margin-top: 40px;
@@ -283,7 +205,7 @@ $tvOffset: 8px;
     width: 100%;
     top: 0;
     display: block;
-    padding: 0 0 10px 10px;
+    padding: 0 0 10px 20px;
     .year {
       font-family: "IBM Plex Mono", monospace;
       font-size: 14px;
@@ -300,17 +222,22 @@ $tvOffset: 8px;
       border-bottom: 1px solid $base-light;
     }
   }
+
   // base media list item appearance
   $title-color: #3a3a3a;
+
   .item {
     position: relative;
+    x-justify-content: space-around;
+    x-align-items: stretch;
     align-items: center;
-    margin: 2px 15px 0 15px;
+    margin-top: 2px;
     padding: 17px 30px;
-    background-color: #E8E3E0;
+    background-color: $base-light-dimmed;
     font-size: 23px;
+    max-width: 720px;
     .title {
-      flex-grow: 1;
+      flex: 1;
       font-family: 'IBM Plex Serif', Georgia, serif;
       font-weight: 500;
       color: $title-color;
@@ -323,28 +250,33 @@ $tvOffset: 8px;
       font-weight: 400;
     }
     .year {
-      display: inline-block;
-      float: right;
+      width: 50px;
+      text-align: right;
       margin-left: 10px; // buffer between title and year
     }
     &:hover {
       cursor: pointer;
     }
-    @media screen and (max-width: $break-small) {
+    // shrink for smaller screens
+    @media screen and (max-width: $break-medium) {
       font-size: 18px;
+    }
+    @media screen and (max-width: $break-small) {
+      font-size: 14px;
+      margin-right: 70px;
+      padding: 10px 15px;
     }
   }
   // READ: books and plays
   .play,
   .book {
-    max-width: 720px;
-    // font-size: 23px;
+    padding: 22px 30px;
     font-family: 'IBM Plex Serif', Georgia, serif;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     align-content: center;
-    border-radius: 2px;
+    border-radius: 3px;
     .title,
     .credit {
       display: block;
@@ -356,28 +288,22 @@ $tvOffset: 8px;
       width: 100%;
     }
     .credit {
-      // display: inline-block;
-      // text-align: right;
       width: 100%;
       font-weight: 400;
-      // opacity: 0.7;
-      clear: left;
     }
   }
   .book {
-    margin-left: $bookOffset;
+    margin-left: $bookOffset+px;
   }
   .play {
-    margin-left: $playOffset;
+    margin-left: $playOffset+px;
   }
   // SEEN: TV, movies, shorts
   .tv,
   .movie,
   .short {
-    max-width: 720px;
     border-radius: 8px;
     background-color: $base-light;
-    // font-size: 23px;
     .title,
     .year {
       font-family: 'IBM Plex Sans', Helvetica, sans-serif;
@@ -388,64 +314,106 @@ $tvOffset: 8px;
   }
   .tv {
     text-align: center;
-    margin-left: $tvOffset;
-    // font-family: 'IBM Plex Sans', Helvetica, sans-serif;
-    // font-weight: 300;
+    margin-left: $tvOffset+px;
+  }
+  .movie,
+  .short {
+    display: flex;
+    .title {
+      flex: 1;
+    }
+    .year {
+      width: 75px;
+      @media screen and (max-width: $break-medium) {
+        width: 60px;
+      }
+      @media screen and (max-width: $break-small) {
+        width: 45px;
+      }
+    }
   }
   .movie {
-    margin-left: $movieOffset;
+    margin-left: $movieOffset+px;
   }
   .short {
-    margin-left: $movieOffset;
+    margin-left: $shortOffset+px;
   }
   // special items - usually filming starts on a Soderbergh project
   .special {
     max-width: 720px;
-    font-size: 18px;
     text-align: center;
-    background: transparent;
+    border-radius: 3px;
+    background-color: transparent;
+    background-color: darken($base-light-dimmed, 75%);
     .title {
       color: $base-light;
-
+      font-weight: 300;
     }
-    // display: table;
-    // & .title {
-    //   display: table-cell;
-    //   vertical-align: middle;
-    // }
   }
-  $notesOffset: 760px;
-  .notes {
+  // $notesOffset: 760px;
+  .details {
     position: absolute;
-    width: 100%;
-    border-left: 2px solid #E8E3E0;
-    color: #E8E3E0;
-    padding: 10px 15px;
+    display: block;
+    width: 33.33%;
+    height: 100%;
+    // border-left: 1px solid $base-light-dimmed;
+    color: $base-light-dimmed;
+    padding: 0px 15px 0 $defaultOffset+px;
     top: 0px;
-    // left: 760px;
+    left: 100%;
+    // right: -115px;
     font-size: 16px;
     font-weight: 500;
     text-align: left;
     font-family: "IBM Plex Serif", Georgia, sans-serif;
-    .notes-date {
+    .date {
       font-weight: 300;
       opacity: 0.7;
     }
+    .long-date {
+      display: block;
+    }
+    .short-date {
+      display: none;
+    }
+    .note {
+      display: block;
+      line-height: 1.2;
+    }
+    @media screen and (max-width: $break-small) {
+      right: -50px;
+      padding-top: 0px;
+      font-size: 14px;
+      .note {
+        display: none;
+      }
+      .long-date {
+        display: none;
+      }
+      .short-date {
+        display: block;
+      }
+    }
   }
-  .tv .notes {
-      left: ($notesOffset - $tvOffset);
+  // offset the item details column
+  .tv .details {
+    padding-left: ($defaultOffset - $tvOffset)+px;
   }
-  .movie .notes,
-  .short .notes {
-    left: ($notesOffset - $movieOffset);
+  .movie .details {
+    padding-left: ($defaultOffset - $movieOffset)+px;
   }
-  .book .notes {
-    left: ($notesOffset - $bookOffset);
+  .short .details {
+    padding-left: ($defaultOffset - $shortOffset)+px;
   }
-  .play .notes {
-    left: ($notesOffset - $playOffset);
+  .book .details {
+    padding-left: ($defaultOffset - $bookOffset)+px;
   }
-
+  .play .details {
+    padding-left: ($defaultOffset - $playOffset)+px;
+  }
+  .special .details {
+    padding-left: ($defaultOffset - $specialOffset)+px;
+  }
 
   // list item highlight
   .tv,
@@ -639,7 +607,7 @@ $tvOffset: 8px;
     }
     &:hover,
     &.highlight:hover {
-      background-color: #E8E3E0;
+      background-color: $base-light-dimmed;
       cursor: pointer;
     }
     &.short-title,
@@ -657,7 +625,7 @@ $tvOffset: 8px;
       width: 9px;
     }
     &.highlight {
-      background-color: #E8E3E0;
+      background-color: $base-light-dimmed;
       height: 1px;
       z-index: 1;
     }
@@ -892,7 +860,7 @@ $tvOffset: 8px;
   margin: 20px 10px;
   height: calc(100vh - 150px);
   max-width: 2px;
-  background-color: #555;
+  background-color: #444;
   .rangeslider__fill,
   .rangeslider__handle {
     position: absolute;
@@ -934,9 +902,10 @@ $tvOffset: 8px;
     font-weight: 500;
     color: $base-light;
     text-transform: uppercase;
+    user-select: none; // disallow text selection on the handle
   }
   .rangeslider__handle-tooltip {
-
+    // tootltip
   }
 }
 .slider-vertical .value {
