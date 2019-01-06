@@ -2,7 +2,6 @@
   "name": "seen-read",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://www.dpqb.net/seen-read",
   "dependencies": {
     "change-case": "^3.0.2",
     "classnames": "^2.2.6",

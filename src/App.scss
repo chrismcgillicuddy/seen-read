@@ -67,9 +67,9 @@ body {
 }
 .explore {
   display: grid;
-  padding: 10px;
+  padding: 0 10px;
   grid-template-areas: "a a";
-  grid-gap: 10px;
+  grid-gap: 40px;
   // grid-auto-columns: minmax(90px, 700px); // KEEP for large view
   grid-auto-columns: 70% 30%;
   // min-width: 1000px; // // KEEP for large view
@@ -95,11 +95,11 @@ body {
 .chart {
   position: sticky;
   justify-self: end;
-  top: 10px;
+  top: 40px;
   // height: 700px; // Is this still needed for chart view?
   display: grid;
-  // grid-template-areas: "a a a a a a a a a"; // KEEP for chart view
-  grid-gap: 2px;
+  grid-template-areas: "a a a a a a a a a"; // KEEP for chart view
+  // grid-gap: 2px;
   grid-auto-columns: minmax(60px, 90px);
   .media-list-view & {
     grid-auto-columns: minmax(30px, 40px);
@@ -156,13 +156,15 @@ h1 {
 // radial progress
 .progress-circle-container {
   position: sticky;
-  top: 40px;
-  // left: 730px; // TODO: improve positioning, makethis relative to the right edge of the media list
-  width: 100px;
-  margin-left: 740px;
-  padding: 20px;
+  top: calc( ((100vh - 768px) / 2) - 15px);
+  left: calc(100% - 280px);
+// left: 730px; // TODO: improve positioning, makethis relative to the right edge of the media list
+  width: 90px;
+  // margin-left: 740px;
+  padding: 15px 15px;
   background-color: rgba(17,17,17,0.6);
-  z-index: 800;
+  z-index: 200;
+  border-radius: 100%;
 }
 .progress-circle {
   width:60px;
@@ -175,7 +177,7 @@ h1 {
     transition: all 0.5s ease;
     opacity: 0.8;
     stroke: #fff;
-    fill: rgba(57, 61, 60, 0.8);
+    fill: rgba(80, 80, 80, 0.70);
   }
   .progress-year {
     transform: rotate(90deg);
@@ -187,13 +189,13 @@ h1 {
 
 // scrollable media list
 // offset for types of list items
-$bookOffset: 15;
-$playOffset: 10;
+$bookOffset: 20;
+$playOffset: 15;
 $movieOffset: 0;
-$shortOffset: 5;
+$shortOffset: 10;
 $tvOffset: 5;
 $specialOffset: 0;
-$defaultOffset: 30;
+$defaultOffset: 45;
 .media-list {
   position: relative;
   // margin-top: 40px;
@@ -318,6 +320,8 @@ $defaultOffset: 30;
   }
   .movie,
   .short {
+    padding-top: 25px;
+    padding-bottom: 25px;
     display: flex;
     .title {
       flex: 1;
@@ -342,9 +346,13 @@ $defaultOffset: 30;
   .special {
     max-width: 720px;
     text-align: center;
-    border-radius: 3px;
-    background-color: transparent;
-    background-color: darken($base-light-dimmed, 75%);
+    border-radius: 8px;
+    background-color: #333;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    // margin-top: 3px;
+    // margin-bottom: 3px;
+    // background-color: darken($base-light-dimmed, 75%);
     .title {
       color: $base-light;
       font-weight: 300;
@@ -448,7 +456,7 @@ $defaultOffset: 30;
   display: inline-block;
   width: 100px;
   vertical-align: top;
-  padding-top: 5px;
+  padding-top: calc( (100vh - 768px) / 2);
   padding-bottom: 8px;
   transition:all $animation-rate ease;
   &.selected-year {
@@ -571,7 +579,7 @@ $defaultOffset: 30;
   transition: background-color 0.3s ease;
   &.odd-month,
   .expand-year-plots .selected-year &.odd-month {
-    background-color: lighten($base-dark, 2%);
+    background-color: lighten($base-dark, 4%);
   }
   .selected-year &.odd-month {
     // background-color: transparent;

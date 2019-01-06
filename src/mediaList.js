@@ -15,11 +15,11 @@ export default class MediaList extends React.Component {
   componentDidMount() {
     const mediaListPanel = document.getElementById("list-panel");
     console.log("mediaListPanel",mediaListPanel);
-    mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
-    mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
-    // mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 50));
-    // mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 50));
-    this.props.mediaListVisibility(); // initial
+    // mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
+    // mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
+    mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 50));
+    mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 50));
+    this.props.mediaListVisibility();
   }
 
   componentWillUnmount(){

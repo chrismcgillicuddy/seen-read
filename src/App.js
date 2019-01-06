@@ -24,6 +24,7 @@ import * as classNames from 'classnames'
 const moment = extendMoment(Moment); // add moment-range
 const progressRadius = 30;
 const yearsAvailable = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
+const desktopSize = 800;
 
 export default class App extends Component {
   constructor(props) {
@@ -40,7 +41,8 @@ export default class App extends Component {
       displayYear: '2017',
       radialProgress: 0,
       mediaListItemsOnScreen: [],
-      scrollState: 0
+      scrollState: 0,
+      isDesktop: false
     }
   }
 
@@ -65,12 +67,16 @@ export default class App extends Component {
       const list2010 = this.getYear(list, 2010);
       const list2009 = this.getYear(list, 2009);
 
-      this.setState({mediaLists: {list2017, list2016, list2015, list2014, list2013, list2012, list2011, list2010, list2009}});
-      this.setState({loading: false});
+      this.setState({ mediaLists: {list2017, list2016, list2015, list2014, list2013, list2012, list2011, list2010, list2009} });
+      this.setState({ loading: false });
+      this.isUsingDesktop();
     });
 
     // ESC key clears title highlight
     document.addEventListener("keydown", this.escKey, false);
+
+    // check window size
+    window.addEventListener("resize", _.debounce(this.isUsingDesktop, 50));
   }
 
   onViewChange = (inView, highlight) => {
@@ -85,67 +91,64 @@ export default class App extends Component {
   }
 
   componentWillUnmount(){
-    const mediaListElement = document.getElementsByClassName("media-list");
     document.removeEventListener("keydown", this.escKey, false);
-    mediaListElement[0].removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("resize", this.isUsingDesktop);
   }
 
   mediaListVisibility = () => {
-    console.log("mediaListVisibility called");
+    // console.log("mediaListVisibility called");
+    if (this.state.isDesktop) {
+      // check visible elements in MediaList
+      const mediaListContainer = document.getElementById("list-panel");
+      const mediaListElement = document.getElementsByClassName("media-list");
+      console.log("mediaListContainer scrollHeight",mediaListContainer.scrollHeight);
+      console.log("mediaListElement scrollHeight",mediaListElement[0].scrollHeight);
+      let clientHeight = document.documentElement.clientHeight;
 
-    // check visible elements in MediaList
-    const mediaListContainer = document.getElementById("list-panel");
-    const mediaListElement = document.getElementsByClassName("media-list");
-    console.log("mediaListContainer scrollHeight",mediaListContainer.scrollHeight);
-    console.log("mediaListElement scrollHeight",mediaListElement[0].scrollHeight);
-    // console.log("mediaListElement",mediaListElement[0]);
-    // console.log("mediaListElement offsetTop",mediaListElement[0].offsetTop);
-    let clientHeight = document.documentElement.clientHeight;
+      if (_.isElement(mediaListElement[0])){
+        const dailyItems = mediaListElement[0].childNodes;
+        let start = 0;
+        let end = dailyItems.length;
+        let count = 0;
+        // console.log('dailyItems length',end);
 
-    if (_.isElement(mediaListElement[0])){
-      // console.log("isElement(mediaListElement[0]):",_.isElement(mediaListElement[0]));
-      // console.log("isElement(mediaListElement[0]):",mediaListElement[0]);
-      const dailyItems = mediaListElement[0].childNodes;
-      let start = 0;
-      let end = dailyItems.length;
-      let count = 0;
-      // console.log('dailyItems length',end);
-
-      while(start !== end) {
-        count++;
-        let mid = start + Math.floor((end - start) / 2);
-        let item = dailyItems[mid];
-        if(item.offsetTop < mediaListContainer.scrollTop)
-          start = mid + 1;
-        else
-          end = mid;
-      }
-      // console.log('dailyItems start',start);
-
-
-      let isOnScreen = true;
-      let onScreenItems = [];
-      let onScreenItemCount = start;
-
-      while(isOnScreen) {
-
-        let item = dailyItems[onScreenItemCount];
-        if (item){
-          console.log("item",item);
-          console.log("item.offsetTop",item.offsetTop);
-
-          if ((item.offsetTop - mediaListContainer.scrollTop) < (clientHeight))
-            onScreenItems.push(item.dataset.date);
+        while(start !== end) {
+          count++;
+          let mid = start + Math.floor((end - start) / 2);
+          let item = dailyItems[mid];
+          if(item.offsetTop < mediaListContainer.scrollTop)
+            start = mid + 1;
           else
-            isOnScreen = false;
+            end = mid;
         }
-        onScreenItemCount++;
-      }
-      // console.log("------");
-      // console.log("onScreenItems", onScreenItems);
-      // console.log("clientHeight", clientHeight);
+        // console.log('dailyItems start',start);
 
-      this.updateOnScreenItems(onScreenItems);
+        let isOnScreen = true;
+        let onScreenItems = [];
+        let onScreenItemCount = start;
+
+        while(isOnScreen) {
+
+          let item = dailyItems[onScreenItemCount];
+          if (item){
+            console.log("item",item);
+            console.log("item.offsetTop",item.offsetTop);
+
+            if ((item.offsetTop - mediaListContainer.scrollTop) < (clientHeight))
+              onScreenItems.push(item.dataset.date);
+            else
+              isOnScreen = false;
+          }
+          onScreenItemCount++;
+        }
+        // console.log("------");
+        // console.log("onScreenItems", onScreenItems);
+        // console.log("clientHeight", clientHeight);
+
+        this.updateOnScreenItems(onScreenItems);
+      }
+    } else { // isDesktop
+      console.log("SMALL SCREEN");
     }
   }
 
@@ -199,6 +202,11 @@ export default class App extends Component {
     this.setState({radialProgress});
   }
 
+  isUsingDesktop = () => {
+    console.log("window.innerWidth",window.innerWidth);
+    this.setState({ isDesktop: window.innerWidth > desktopSize });
+  }
+
   // toggle YearPlot size
   toggleExpanded() {
     const currentState = this.state.compactYears;
@@ -206,7 +214,7 @@ export default class App extends Component {
   }
 
   render() {
-    const {mediaLists,
+    const { mediaLists,
           error,
           scrollState,
           highlighted,
@@ -216,7 +224,8 @@ export default class App extends Component {
           compactYears,
           displayYear,
           radialProgress,
-          mediaListItemsOnScreen} = this.state;
+          mediaListItemsOnScreen,
+          isDesktop } = this.state;
 
     if (error) {
       return(
@@ -260,7 +269,7 @@ export default class App extends Component {
             </div>
           </header> */}
             <div className={yearPlotClasses} id="grid">
-              {/* {
+              {
                 yearsAvailable.map((year) => {
                   const isSelectedYear = (year == displayYear) ? true : false;
                   return <YearPlot
@@ -284,7 +293,7 @@ export default class App extends Component {
                 <span id="selected-title" className="title"></span>
                 <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
               </div>
-            </div> */}
+            </div>
             {/* <DateSlider
               displayYear={displayYear}
               setMediaListHighlight={this.setMediaListHighlight}
@@ -292,12 +301,12 @@ export default class App extends Component {
           </div>
 
           <div className="controls" id="list-panel">
-            {/* <ProgressCircle
+            <ProgressCircle
               className={'progress-circle'}
               radius={progressRadius}
               radialProgress={radialProgress}
               displayYear={displayYear}
-            /> */}
+            />
             <MediaList
               data={mediaLists['list'+displayYear]}
               yearsAvailable={yearsAvailable}
