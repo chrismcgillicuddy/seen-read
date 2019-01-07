@@ -13,19 +13,24 @@ $base-light: #F6F5F1;
 $base-light-dimmed: #E8E3E0;
 $base-highlight: #ECCC87;
 
+// font families
+$sans-fonts: "IBM Plex Sans", Helvetica, sans-serif;
+$serif-fonts: "IBM Plex Serif", Georgia, serif;
+$monospace-fonts: "IBM Plex Mono", monospace;
+
 // screen size break points
-$break-medium: 900px;
+$break-medium: 1000px;
 $break-small: 400px;
 
 // animation
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 35%, 0);
+    // transform: translate3d(0, 35%, 0);
  }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    // transform: translate3d(0, 0, 0);
   }
 }
 
@@ -52,11 +57,11 @@ $break-small: 400px;
 @keyframes fadeInRight {
    0% {
       opacity: 0;
-      transform: translateX(40px);
+      // transform: translateX(40px);
    }
    100% {
       opacity: 1;
-      transform: translateX(0);
+      // transform: translateX(0);
    }
 }
 
@@ -72,25 +77,25 @@ li {
 }
 body {
   text-rendering: optimizeLegibility;
-  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+  font-family: $sans-fonts;
   background-color: $base-dark;
 }
 
 // grid layout
-.cover {
-  height: 100vh;
-  width: 100vw;
-  background: beige;
-  text-align: center;
-  span {
-    display: inline-block;
-    padding-top: 45vh;
-    vertical-align: middle;
-    font-size: 48px;
-    font-weight: 900;
-    opacity: 0.8;
-  }
-}
+// .cover {
+//   height: 100vh;
+//   width: 100vw;
+//   background: beige;
+//   text-align: center;
+//   span {
+//     display: inline-block;
+//     padding-top: 45vh;
+//     vertical-align: middle;
+//     font-size: 48px;
+//     font-weight: 900;
+//     opacity: 0.8;
+//   }
+// }
 .explore {
   display: grid;
   padding: 0 10px;
@@ -100,17 +105,23 @@ body {
   grid-auto-columns: 70% 30%;
   // min-width: 1000px; // // KEEP for large view
   position: relative;
+
   &.media-list-view {
+    // default, for larger screens
     grid-auto-columns: 30% 70%;
     transition:all $animation-rate ease;
   }
-  // smallest screens
-  @media screen and (max-width: 500px) {
+  // medium screens
+  @media screen and (max-width: $break-medium) {
+    grid-auto-columns: 20% 80%;
+
+  }
+  // small screens
+  @media screen and (max-width: $break-small) {
     padding: 100px 0 0 10px;
     &.media-list-view {
       grid-auto-columns: 0 auto;
       grid-gap: 0px;
-
       .media-list {
 
       }
@@ -122,21 +133,23 @@ body {
   position: sticky;
   justify-self: end;
   top: 40px;
-  display: grid;
-  grid-template-areas: ". . . . . . . . ."
-  "footer footer footer footer footer footer footer footer footer";
-  grid-auto-columns: minmax(60px, 90px);
-  grid-template-rows: 790px auto;
-  transition: width 0.3s ease;
-  animation-name: fadeInLeft;
-  animation-duration: 0.6s;
-  animation-fill-mode: both;
-  animation-timing-function: ease;
-  animation-delay: 0.60s;
-  // opacity: 0;
-  .media-list-view & {
-    grid-auto-columns: minmax(30px, 40px);
-  }
+  .year-plots {
+    display: grid;
+    grid-template-areas: ". . . . . . . . ."
+    "footer footer footer footer footer footer footer footer footer";
+    grid-auto-columns: minmax(60px, 90px);
+    grid-template-rows: 790px auto;
+    transition: width 0.3s ease;
+    animation-name: fadeInLeft;
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+    animation-timing-function: ease;
+    animation-delay: 0.60s;
+    // opacity: 0;
+    .media-list-view & {
+      grid-auto-columns: minmax(30px, 40px);
+    }
+    // medium screens
     @media screen and (max-width: $break-medium) {
       grid-auto-columns: 10% 90%;
 
@@ -144,6 +157,7 @@ body {
         display: none;
       }
     }
+  }
 }
 .controls {
   // max-width: 800px;
@@ -165,7 +179,7 @@ header {
 	grid-column-end: 3;
   .title {
     float: left;
-    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-family: $serif-fonts;
     font-weight: 300;
     font-size: 24px;
     color: $base-light;
@@ -175,12 +189,40 @@ header {
     float: right;
   }
 }
-h1 {
-  margin: 0 auto;
-  color: $base-light;
-  font-size: 24px;
-  font-family: 'IBM Plex Serif', Georgia, serif;
-  font-weight: 500px;
+.intro {
+  margin: 40vh 20px 45vh 40px;
+  transition: width 0.3s ease;
+  animation-name: fadeInLeft;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  animation-delay: 0.60s;
+  h1 {
+    margin: 0 auto 10px;
+    color: $base-light-dimmed;
+    font-size: 48px;
+    font-family: $serif-fonts;
+    font-weight: 500;
+    .seen {
+      font-family: $sans-fonts;
+    }
+    .comma {
+
+    }
+  }
+  p {
+    font-family: $serif-fonts;
+    font-size: 18px;
+    color: $base-light;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  a {
+    text-decoration: none;
+    border-bottom: 2px solid rgba($base-light, 0.4);
+    color: $base-light;
+    font-weight: 500;
+  }
 }
 
 // radial progress
@@ -219,7 +261,7 @@ h1 {
   .progress-year {
     transform: rotate(90deg);
     font-size: 10px;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: $monospace-fonts;
     fill: #fff;
   }
 }
@@ -246,7 +288,7 @@ $defaultOffset: 45;
     display: block;
     padding: 0 0 10px 20px;
     .year {
-      font-family: "IBM Plex Mono", monospace;
+      font-family: $monospace-fonts;
       font-size: 14px;
       font-weight: 300;
       cursor: pointer;
@@ -274,23 +316,24 @@ $defaultOffset: 45;
     padding: 17px 30px;
     background-color: $base-light-dimmed;
     font-size: 23px;
-    max-width: 720px;
+    width: 50%;
+    // max-width: 720px;
     // animation
     // transform: translate3d(0, 0, 0);
-    // animation-name: fadeInUp;
-    // animation-duration: 0.6s;
-    // animation-fill-mode: both;
-    // animation-timing-function: ease;
-    // animation-delay: 1s; // default
+    animation-name: fadeInUp;
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+    animation-timing-function: ease;
+    animation-delay: 1s; // default
     .title {
       flex: 1;
-      font-family: 'IBM Plex Serif', Georgia, serif;
+      font-family: $serif-fonts;
       font-weight: 500;
       color: $title-color;
     }
     .credit,
     .year {
-      font-family: 'IBM Plex Serif', Georgia, serif;
+      font-family: $serif-fonts;
       color: $title-color;
       opacity: 0.6;
       font-weight: 400;
@@ -316,69 +359,70 @@ $defaultOffset: 45;
       padding: 10px 15px;
     }
     // animation
+    $animation-base-increment: 0.01;
     &:nth-child(1) {
-      animation-delay: 0.05s;
+      animation-delay: $animation-base-increment+s;
     }
     &:nth-child(2) {
-      animation-delay: 0.15s;
+      animation-delay: 0.10s+$animation-base-increment;
     }
     &:nth-child(3) {
-      animation-delay: 0.20s;
+      animation-delay: 0.15s+$animation-base-increment;
     }
     &:nth-child(4) {
-      animation-delay: 0.30s;
+      animation-delay: 0.25s+$animation-base-increment;
     }
     &:nth-child(5) {
-      animation-delay: 0.40s;
+      animation-delay: 0.35s+$animation-base-increment;
     }
     &:nth-child(6) {
-      animation-delay: 0.45s;
+      animation-delay: 0.40s+$animation-base-increment;
     }
     &:nth-child(7) {
-      animation-delay: 0.50s;
+      animation-delay: 0.45s+$animation-base-increment;
     }
     &:nth-child(8) {
-      animation-delay: 0.55s;
+      animation-delay: 0.50s+$animation-base-increment;
     }
     &:nth-child(9) {
-      animation-delay: 0.60s;
+      animation-delay: 0.55s+$animation-base-increment;
     }
     &:nth-child(10) {
-      animation-delay: 0.65s;
+      animation-delay: 0.60s+$animation-base-increment;
     }
     &:nth-child(11) {
-      animation-delay: 0.70s;
+      animation-delay: 0.65s+$animation-base-increment;
     }
     &:nth-child(12) {
-      animation-delay: 0.75s;
+      animation-delay: 0.70s+$animation-base-increment;
     }
     &:nth-child(13) {
-      animation-delay: 0.80s;
+      animation-delay: 0.75s+$animation-base-increment;
     }
     &:nth-child(14) {
-      animation-delay: 0.833s;
+      animation-delay: 0.788s+$animation-base-increment;
     }
     &:nth-child(15) {
-      animation-delay: 0.866s;
+      animation-delay: 0.811s+$animation-base-increment;
     }
     &:nth-child(16) {
-      animation-delay: 0.9s;
+      animation-delay: 0.85s+$animation-base-increment;
     }
     &:nth-child(17) {
-      animation-delay: 0.933s;
+      animation-delay: 0.888s+$animation-base-increment;
     }
     &:nth-child(18) {
-      animation-delay: 0.966s;
+      animation-delay: 0.911s+$animation-base-increment;
     }
     &:nth-child(19) {
-      animation-delay: 1s;
+      animation-delay: 0.95s+$animation-base-increment;
     }
   }
   // READ: books and plays
   .play,
   .book {
     padding: 22px 30px;
-    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-family: $serif-fonts;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -413,7 +457,7 @@ $defaultOffset: 45;
     background-color: $base-light;
     .title,
     .year {
-      font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+      font-family: $sans-fonts;
     }
     .title {
       font-weight: 500;
@@ -482,7 +526,7 @@ $defaultOffset: 45;
     font-size: 16px;
     font-weight: 500;
     text-align: left;
-    font-family: "IBM Plex Serif", Georgia, sans-serif;
+    font-family: $serif-fonts;
     .date {
       font-weight: 300;
       opacity: 0.7;
@@ -575,7 +619,7 @@ $defaultOffset: 45;
   &:nth-of-type(1) {
     // place month labels
     .daily-items::before {
-      font-family: "IBM Plex Mono", monospace;
+      font-family: $monospace-fonts;
       position: absolute;
       top: 3px;
       left: -25px;
@@ -726,7 +770,7 @@ $defaultOffset: 45;
 
 // display the title in a hover box of a year plot item
 .title-hightlight {
-  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+  font-family: $sans-fonts;
   font-size: 16px;
   border-radius: 3px;
   .left-col,
@@ -754,7 +798,7 @@ $defaultOffset: 45;
 // row of items per day in a year plot
 .daily-items {
   list-style: none;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: $monospace-fonts;
   font-size: 1px;
   line-height: 1px;
   margin: 0;
@@ -861,7 +905,7 @@ $defaultOffset: 45;
     transition: all 0.3s ease;
   }
   .plot-year-label {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: $monospace-fonts;
     font-size: 10px;
     transition: all $animation-rate ease;
   }
@@ -913,7 +957,7 @@ $defaultOffset: 45;
   li {
     display: inline-block;
     margin: 0;
-    font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+    font-family: $sans-fonts;
     color: $base-light;
     font-size: 11px;
     text-decoration: none;
@@ -944,7 +988,7 @@ $defaultOffset: 45;
   }
   .top-title-type {
     display: inline-block;
-    font-family: 'IBM Plex Sans', Helvetica, sans-serif;
+    font-family: $sans-fonts;
     font-weight: 500;
     font-size: 11px;
     color: #fff;
@@ -960,18 +1004,24 @@ $defaultOffset: 45;
   // }
 }
 
+.options {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 // control button
 .option-button {
-  font-family: 'IBM Plex Sans', Helvetica, sans-serif;
-  text-align: center;
-  background-color: transparent;
-  border: 1px solid darken(#DBDCD7, 30%);
-  font-size: 12px;
-  margin: 10px 10px 0 0;
-  padding: 5px 6px;
-  width: 45px;
-  border-radius: 2px;
-  color: #DBDCD7;
+  font-family: $sans-fonts;
+  text-align: left;
+  background-color: $base-highlight;
+  border: 0px solid $base-light;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 15px;
+  // width: 60px;
+  border-radius: 3px;
+  color: $base-dark;
   outline: none;
   cursor: pointer;
 }

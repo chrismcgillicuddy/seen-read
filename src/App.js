@@ -233,7 +233,7 @@ export default class App extends Component {
       const highlightMediaTypeOn = highlightMediaType.length > 0;
 
       const yearPlotClasses = classNames({
-        'chart': true,
+        'year-plots': true,
         'compact-years': compactYears,
         'mediaTypeHighlighting': highlightMediaTypeOn,
         'highlight-tv': highlightMediaType==='tv',
@@ -255,7 +255,13 @@ export default class App extends Component {
               <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
             </div>
           </header> */}
-            <div className={yearPlotClasses} id="grid">
+          <div className="chart">
+              <div className="intro">
+                <h1><span className="seen">Seen,</span> Read</h1>
+                <p>Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh">Steven Soderbergh</a> has maintained a daily account of every book,
+                  play, film and TV show he's seen or read for the past 9 years.</p>
+              </div>
+              <div className={yearPlotClasses}>
               {
                 yearsAvailable.map((year) => {
                   const isSelectedYear = (year == displayYear) ? true : false;
@@ -274,6 +280,7 @@ export default class App extends Component {
                   />
                 })
               }
+            </div>
               <div className="chart-selection-container">
                 <div className="title-hightlight chart-selection">
                   <div className="left-col">
@@ -289,12 +296,12 @@ export default class App extends Component {
           </div>
 
           <div className="controls" id="list-panel">
-            <ProgressCircle
+            {/* <ProgressCircle
               className={'progress-circle'}
               radius={progressRadius}
               radialProgress={radialProgress}
               displayYear={displayYear}
-            />
+            /> */}
             <MediaList
               data={mediaLists['list'+displayYear]}
               yearsAvailable={yearsAvailable}
@@ -353,6 +360,7 @@ export default class App extends Component {
         {/* <section className="media-list-panel" id="list-panel"> */}
 
         </section>
+
         {/* hover title */}
         <div className="title-hightlight selected-title-hover">
           <div className="left-col">
@@ -362,6 +370,12 @@ export default class App extends Component {
             <span className="title"></span>
           </div>
         </div>
+
+        {/* explore / browse list toggle */}
+        <div className="options">
+          <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
+        </div>
+
 
       </div>
       );
