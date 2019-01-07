@@ -1,7 +1,7 @@
 import React from 'react';
-// import * as _ from 'lodash';
 import Moment from 'moment';
-import * as classNames from 'classnames'
+import * as classNames from 'classnames';
+import * as toTitleCase from 'to-title-case';
 
 const progressRadius = 30;
 
@@ -27,7 +27,6 @@ export default class MediaList extends React.Component {
     let circumference = 2 * Math.PI * progressRadius;
     const mediaListContainer = document.getElementById("list-panel");;
 
-    // let lastScrollY = window.scrollY;
     let clientHeight = document.documentElement.clientHeight;
     let scrollHeight = mediaListContainer.scrollHeight;
     let contentHeight = scrollHeight - clientHeight;
@@ -94,7 +93,6 @@ export default class MediaList extends React.Component {
           const title = d.title.toString().toLowerCase();
           const movieYear = (( type === 'movie' || type === 'short') && d.year) ? <span className="year">{d.year}</span> : null;
           const bookCredit = d.credit ? <span className="credit">{d.credit}</span> : null;
-          console.log("highlightedItem",highlightedItem);
 
           // item classes
           const itemClasses = classNames({
@@ -132,7 +130,7 @@ export default class MediaList extends React.Component {
                             setMediaListHighlight(currentDate);
                           }}
                         >
-                          <span className="title">{d.title}</span>
+                          <span className="title">{toTitleCase(d.title)}</span>
                           {movieYear}
                           {bookCredit}
                           {notesNode}

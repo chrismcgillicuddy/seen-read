@@ -556,35 +556,35 @@ $defaultOffset: 45;
 }
 
 // year plot, highlighted title label
-.highlighted-title-outer {
-  // display: flex;
-  align-items: center;
-  justify-content: center;
-  // opacity: 0.8;
-  .highlighted-title-inner {
-    display: none;
-    width: auto;
-    margin-top: 20px;
-    background-color: #211F1E;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 3px;
-    .type {
-      background-color: #ddd;
-    }
-    .clear-highlight {
-      display: inline-block;
-      margin-left: 10px;
-      font-size: 16px;
-      font-weight: 300;
-      cursor: pointer;
-      opacity: 0.5;
-    }
-    .title-highlight & {
-      display: table-cell;
-    }
-  }
-}
+// .highlighted-title-outer {
+//   // display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   // opacity: 0.8;
+//   .highlighted-title-inner {
+//     display: none;
+//     width: auto;
+//     margin-top: 20px;
+//     background-color: #211F1E;
+//     color: #fff;
+//     padding: 10px 15px;
+//     border-radius: 3px;
+//     .type {
+//       background-color: #ddd;
+//     }
+//     .clear-highlight {
+//       display: inline-block;
+//       margin-left: 10px;
+//       font-size: 16px;
+//       font-weight: 300;
+//       cursor: pointer;
+//       opacity: 0.5;
+//     }
+//     .title-highlight & {
+//       display: table-cell;
+//     }
+//   }
+// }
 
 .selected-title-hover {
   position: absolute;
@@ -604,19 +604,23 @@ $defaultOffset: 45;
   grid-area: footer;
 }
 .chart-selection {
+  grid-template-columns: auto 1fr 45px;
+  grid-template-rows: 1fr;
+  grid-template-areas: ". . .";
   display: none;
   position: relative;
   border: 1px solid $base-highlight;
-  width: auto;
-  // background-color: #211F1E;
+  // width: auto;
   color: $base-light;
   .type {
     opacity: 0.5;
   }
   .right-col {
+    word-break: normal;
   }
   .clear-highlight {
     position: absolute;
+    top: 15px;
     right: 20px;
     margin-left: 10px;
     font-size: 16px;
@@ -625,7 +629,7 @@ $defaultOffset: 45;
     color: $base-highlight;
   }
   .title-highlight & { // show / hide based on parent state
-    display: block;
+    display: grid;
   }
 }
 

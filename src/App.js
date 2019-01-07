@@ -32,7 +32,7 @@ export default class App extends Component {
       radialProgress: 0,
       mediaListItemsOnScreen: [],
       scrollState: 0,
-      isDesktop: true 
+      isDesktop: true
     }
   }
 
@@ -281,8 +281,8 @@ export default class App extends Component {
                   </div>
                   <div className="right-col">
                     <span id="selected-title" className="title"></span>
-                    <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
                   </div>
+                  <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
                 </div>
               </div>
 
