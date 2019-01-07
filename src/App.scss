@@ -17,6 +17,49 @@ $base-highlight: #ECCC87;
 $break-medium: 900px;
 $break-small: 400px;
 
+// animation
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 35%, 0);
+ }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+ }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+   0% {
+      opacity: 0;
+      transform: translateX(-40px);
+   }
+   100% {
+      opacity: 1;
+      transform: translateX(0);
+   }
+}
+
+@keyframes fadeInRight {
+   0% {
+      opacity: 0;
+      transform: translateX(40px);
+   }
+   100% {
+      opacity: 1;
+      transform: translateX(0);
+   }
+}
+
 // setup, resets
 * {
   box-sizing: border-box;
@@ -32,24 +75,6 @@ body {
   font-family: 'IBM Plex Sans', Helvetica, sans-serif;
   background-color: $base-dark;
 }
-
-// TESTING SCROLLAMA
-// .step {
-//   display: block;
-//   width: 100%;
-//   height: 700px;
-//   text-align: center;
-//   margin: 900px 0;
-// }
-// .intro {
-//   width: 100%;
-//   height: 1200px;
-//   background: pink;
-//   color: blue;
-//   font-size: 60px;
-//   padding: 200px 0;
-//   text-align: center;
-// }
 
 // grid layout
 .cover {
@@ -97,16 +122,18 @@ body {
   position: sticky;
   justify-self: end;
   top: 40px;
-  // height: 700px; // Is this still needed for chart view?
   display: grid;
-  // grid-template-areas: "a a a a a a a a a" // KEEP for chart view
-                       // "b b b b b b b b b";
   grid-template-areas: ". . . . . . . . ."
   "footer footer footer footer footer footer footer footer footer";
-  // grid-gap: 2px;
   grid-auto-columns: minmax(60px, 90px);
   grid-template-rows: 790px auto;
-
+  transition: width 0.3s ease;
+  animation-name: fadeInLeft;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  animation-delay: 0.60s;
+  // opacity: 0;
   .media-list-view & {
     grid-auto-columns: minmax(30px, 40px);
   }
@@ -116,9 +143,6 @@ body {
       .year-plot:not(.selected-year) {
         display: none;
       }
-      // .media-list .item {
-      //   font-size: 18px;
-      // }
     }
 }
 .controls {
@@ -172,6 +196,12 @@ h1 {
   background-color: rgba(17,17,17,0.6);
   z-index: 200;
   border-radius: 100%;
+  // animation-name
+  animation-name: fadeInRight;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  animation-delay: 0.60s;
 }
 .progress-circle {
   width:60px;
@@ -245,6 +275,13 @@ $defaultOffset: 45;
     background-color: $base-light-dimmed;
     font-size: 23px;
     max-width: 720px;
+    // animation
+    // transform: translate3d(0, 0, 0);
+    // animation-name: fadeInUp;
+    // animation-duration: 0.6s;
+    // animation-fill-mode: both;
+    // animation-timing-function: ease;
+    // animation-delay: 1s; // default
     .title {
       flex: 1;
       font-family: 'IBM Plex Serif', Georgia, serif;
@@ -277,6 +314,64 @@ $defaultOffset: 45;
       font-size: 14px;
       margin-right: 70px;
       padding: 10px 15px;
+    }
+    // animation
+    &:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.20s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.30s;
+    }
+    &:nth-child(5) {
+      animation-delay: 0.40s;
+    }
+    &:nth-child(6) {
+      animation-delay: 0.45s;
+    }
+    &:nth-child(7) {
+      animation-delay: 0.50s;
+    }
+    &:nth-child(8) {
+      animation-delay: 0.55s;
+    }
+    &:nth-child(9) {
+      animation-delay: 0.60s;
+    }
+    &:nth-child(10) {
+      animation-delay: 0.65s;
+    }
+    &:nth-child(11) {
+      animation-delay: 0.70s;
+    }
+    &:nth-child(12) {
+      animation-delay: 0.75s;
+    }
+    &:nth-child(13) {
+      animation-delay: 0.80s;
+    }
+    &:nth-child(14) {
+      animation-delay: 0.833s;
+    }
+    &:nth-child(15) {
+      animation-delay: 0.866s;
+    }
+    &:nth-child(16) {
+      animation-delay: 0.9s;
+    }
+    &:nth-child(17) {
+      animation-delay: 0.933s;
+    }
+    &:nth-child(18) {
+      animation-delay: 0.966s;
+    }
+    &:nth-child(19) {
+      animation-delay: 1s;
     }
   }
   // READ: books and plays
@@ -462,10 +557,6 @@ $defaultOffset: 45;
 
 
 // year plots
-.year-plot-group {
-  transition: width 0.3s ease;
-}
-
 .year-plot {
   display: inline-block;
   // width: 100px;
@@ -883,116 +974,4 @@ $defaultOffset: 45;
   color: #DBDCD7;
   outline: none;
   cursor: pointer;
-}
-
-/**
-* Rangeslider
-*/
-.rangeslider {
-  margin: 20px 0;
-  position: relative;
-  background: #e6e6e6;
-  -ms-touch-action: none;
-  touch-action: none;
-  &,
-  .rangeslider__fill {
-    display: block;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
-  }
-  .rangeslider__handle {
-    background: $base-light;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    display: inline-block;
-    position: absolute;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 -1px 3px rgba(0, 0, 0, 0.4);
-    .rangeslider__active {
-      opacity: 1;
-    }
-  }
-
-  .rangeslider__handle-tooltip {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    position: absolute;
-    // background-color: rgba(0, 0, 0, 0.8);
-    background-color: $base-light;
-    font-weight: normal;
-    font-size: 14px;
-    transition: all 100ms ease-in;
-    border-radius: 4px;
-    display: inline-block;
-    color: #111;
-    right: 200;
-    transform: translate3d(-50%, 0, 0);
-    span {
-      margin-top: 12px;
-      display: inline-block;
-      line-height: 100%;
-    }
-    &:after {
-      content: ' ';
-      position: absolute;
-      width: 0;
-      height: 0;
-    }
-  }
-}
-
-// range slider-vertical
-.rangeslider-vertical {
-  margin: 20px 10px;
-  height: calc(100vh - 150px);
-  max-width: 2px;
-  background-color: #444;
-  .rangeslider__fill,
-  .rangeslider__handle {
-    position: absolute;
-  }
-  .rangeslider__fill {
-    width: 100%;
-    background-color: $base-light;
-    box-shadow: none;
-    top: 0;
-  }
-  .rangeslider__handle {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    left: -19px;
-    border: 2px solid $base-light;
-    box-shadow: none;
-    background-color: #111;;
-  }
-  .rangeslider__handle-tooltip {
-    left: -100%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    &:after {
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-left: 8px solid rgba(0, 0, 0, 0.8);
-      left: 100%;
-      top: 12px;
-    }
-  }
-  .rangeslider__handle-label {
-    font-family: "IBM Plex Mono", monospace;
-    text-align: center;
-    word-break: normal;
-    font-size: 12px;
-    line-height: 1.0;
-    padding-top: 7px;
-    font-weight: 500;
-    color: $base-light;
-    text-transform: uppercase;
-    user-select: none; // disallow text selection on the handle
-  }
-  .rangeslider__handle-tooltip {
-    // tootltip
-  }
-}
-.slider-vertical .value {
-  display: none;
 }
