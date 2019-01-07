@@ -10,6 +10,7 @@ export default class YearPlot extends React.Component {
   }
 
   showTitle = (title, type) => (e) => {
+    console.log("title",title);
     title = toTitleCase (title);
     d3.select(".selected-title-hover .title").text(title);
     d3.select(".selected-title-hover .type").text(type);

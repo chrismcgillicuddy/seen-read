@@ -15,10 +15,10 @@ export default class MediaList extends React.Component {
   componentDidMount() {
     const mediaListPanel = document.getElementById("list-panel");
     console.log("mediaListPanel",mediaListPanel);
-    // mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
-    // mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
-    mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 50));
-    mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 50));
+    mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
+    mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
+    // mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 50));
+    // mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 50));
     this.props.mediaListVisibility();
   }
 
@@ -50,6 +50,7 @@ export default class MediaList extends React.Component {
       setDisplayYear,
       highlighted,
       highlightDate,
+      highlightedItem,
       setHighlight,
       mediaListVisibility,
       updateOnScreenItems,
@@ -96,9 +97,7 @@ export default class MediaList extends React.Component {
     const listItems = data.map((item, i) => {
       if (item.values){
         let itemsPerDay = item.values;
-        // if (i===highlighted) {
-        //   rowClass+=" highlight";
-        // }
+
         // previous
         const dailyItems = itemsPerDay.map((d, j) => {
           // new date check
@@ -108,23 +107,24 @@ export default class MediaList extends React.Component {
           // this same as previous date?
           if (sameDate) {
             itemDate = "";
-            // rowClass = "";
             newDate = false;
           } else {
             previousDate = currentDate;
             itemDate = item.date;
-            // rowClass = newDateClass;
             newDate = true;
           }
 
           // remove upper case from type
           const type = d.type.toString().toLowerCase();
+          const title = d.title.toString().toLowerCase();
           const movieYear = (( type === 'movie' || type === 'short') && d.year) ? <span className="year">{d.year}</span> : null;
           const bookCredit = d.credit ? <span className="credit">{d.credit}</span> : null;
+          console.log("highlightedItem",highlightedItem);
 
           // item classes
           const itemClasses = classNames({
             'item': true,
+            'chart-selection-highlight': highlightedItem==title,
             'highlighted': currentDate==highlighted,
             'movie': type==="movie",
             'tv': type==="tv",

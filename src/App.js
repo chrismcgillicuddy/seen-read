@@ -16,7 +16,6 @@ import * as toTitleCase from 'to-title-case';
 // import { useInView } from 'react-intersection-observer'
 // import ScrollPercentage from 'react-scroll-percentage'
 import { InView } from 'react-intersection-observer';
-import DateSlider from './dateSlider';
 import * as classNames from 'classnames'
 
 // var classNames = require('classnames');
@@ -85,7 +84,6 @@ export default class App extends Component {
       this.setMediaHighlightType(""); // reset here for now, in case a year needs focus
       var newState = {};
       newState[highlight.highlight] = highlight.value;
-      // console.log(newState);
       this.setState(newState);
     }
   }
@@ -96,7 +94,6 @@ export default class App extends Component {
   }
 
   mediaListVisibility = () => {
-    // console.log("mediaListVisibility called");
     if (this.state.isDesktop) {
       // check visible elements in MediaList
       const mediaListContainer = document.getElementById("list-panel");
@@ -168,7 +165,6 @@ export default class App extends Component {
   }
 
   updateOnScreenItems = (mediaListItemsOnScreen) => {
-    // console.log("updateOnScreenItems");
     this.setState({mediaListItemsOnScreen});
   }
 
@@ -178,9 +174,9 @@ export default class App extends Component {
 
   setHighlight = (highlightedItem, highlightedType, highlightedMedia) => {
     const titleElement = document.getElementById("selected-title");
-    // titleElement.textContent = toTitleCase(highlightedItem);
+    titleElement.textContent = toTitleCase(highlightedItem);
     const typeElement = document.getElementById("selected-title-type");
-    // typeElement.textContent = toTitleCase(highlightedMedia);
+    typeElement.textContent = toTitleCase(highlightedMedia);
 
     if (highlightedItem.length > 0) highlightedItem = highlightedItem.toString().toLowerCase();
     this.setState({highlightedItem});
@@ -287,17 +283,18 @@ export default class App extends Component {
                   />
                 })
               }
-            <div className="highlighted-title-outer">
-              <div className="highlighted-title-inner">
-                <span id="selected-title-type" className="type"></span>
-                <span id="selected-title" className="title"></span>
-                <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
+              <div className="chart-selection-container">
+                <div className="title-hightlight chart-selection">
+                  <div className="left-col">
+                    <span id="selected-title-type" className="type"></span>
+                  </div>
+                  <div className="right-col">
+                    <span id="selected-title" className="title"></span>
+                    <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            {/* <DateSlider
-              displayYear={displayYear}
-              setMediaListHighlight={this.setMediaListHighlight}
-            /> */}
+
           </div>
 
           <div className="controls" id="list-panel">
@@ -365,6 +362,16 @@ export default class App extends Component {
         {/* <section className="media-list-panel" id="list-panel"> */}
 
         </section>
+        {/* hover title */}
+        <div className="title-hightlight selected-title-hover">
+          <div className="left-col">
+            <span className="type"></span>
+          </div>
+          <div className="right-col">
+            <span className="title"></span>
+          </div>
+        </div>
+
       </div>
       );
     }
