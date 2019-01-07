@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
 import './App.scss';
-import {nest} from 'd3-collection';
 import YearPlot from './yearPlot';
 import MediaList from './mediaList';
 import * as _ from 'lodash';
 import Loader from './loader';
-import Moment from 'moment';
-import { extendMoment } from 'moment-range';
 import ButtonList from './buttonList';
 import ProgressCircle from './progressCircle';
 import * as toTitleCase from 'to-title-case';
-// import { Scrollama, Step } from 'react-scrollama';
-// import 'intersection-observer';
-// import scrollama from 'scrollama';
-// import { useInView } from 'react-intersection-observer'
-// import ScrollPercentage from 'react-scroll-percentage'
 import { InView } from 'react-intersection-observer';
 import * as classNames from 'classnames'
 
 // var classNames = require('classnames');
 
-const moment = extendMoment(Moment); // add moment-range
 const progressRadius = 30;
 const yearsAvailable = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
 const desktopSize = 800;
@@ -41,7 +32,7 @@ export default class App extends Component {
       radialProgress: 0,
       mediaListItemsOnScreen: [],
       scrollState: 0,
-      isDesktop: false
+      isDesktop: true 
     }
   }
 
@@ -94,6 +85,9 @@ export default class App extends Component {
   }
 
   mediaListVisibility = () => {
+    // this.isUsingDesktop(); // check screen size;
+    // console.log("mediaListVisibility, isDesktop?", this.state.isDesktop);
+
     if (this.state.isDesktop) {
       // check visible elements in MediaList
       const mediaListContainer = document.getElementById("list-panel");
@@ -106,11 +100,8 @@ export default class App extends Component {
         const dailyItems = mediaListElement[0].childNodes;
         let start = 0;
         let end = dailyItems.length;
-        let count = 0;
-        // console.log('dailyItems length',end);
 
         while(start !== end) {
-          count++;
           let mid = start + Math.floor((end - start) / 2);
           let item = dailyItems[mid];
           if(item.offsetTop < mediaListContainer.scrollTop)

@@ -1,16 +1,11 @@
 import React from 'react';
-import * as _ from 'lodash';
+// import * as _ from 'lodash';
 import Moment from 'moment';
-import scrollIntoView from 'scroll-into-view';
 import * as classNames from 'classnames'
 
 const progressRadius = 30;
 
 export default class MediaList extends React.Component {
-
-  constructor(props){
-    super(props);
-  }
 
   componentDidMount() {
     const mediaListPanel = document.getElementById("list-panel");
@@ -49,7 +44,6 @@ export default class MediaList extends React.Component {
       displayYear,
       setDisplayYear,
       highlighted,
-      highlightDate,
       highlightedItem,
       setHighlight,
       mediaListVisibility,
@@ -61,34 +55,15 @@ export default class MediaList extends React.Component {
     let dateMatch = false;
     let itemDate = '';
     let newDate = true;
-    let newDateClass = "new-date";
-    let rowClass = '';
-    let itemCSS = '';
-    let dateClass = '';
     let dailyItems = '';
-
-    // scroll to highlighted element
-    // if (highlighted){
-    //   var element = document.getElementById(highlighted);
-    //   console.log("highlighted element:",element, highlighted);
-    //   if (element)
-    //   scrollIntoView(element, {
-    //       time: 300,
-    //       align:{
-    //           top: 0.5,
-    //           left: 0,
-    //           topOffset: 0
-    //       }
-    //   });
-    // }
 
     const yearNavItems = yearsAvailable.map((year) => {
       let yearEntry = "";
       let selectedClass ="";
-      (year == this.props.displayYear)
+      (year == displayYear)
         ? selectedClass = " selected"
         : selectedClass = "";
-      yearEntry = <span className={"year"+selectedClass} onClick={() => this.props.setDisplayYear(year)}>{year}</span>
+      yearEntry = <span className={"year"+selectedClass} onClick={() => setDisplayYear(year)}>{year}</span>
       return yearEntry;
     }, this);
 

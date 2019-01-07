@@ -5,10 +5,6 @@ import * as toTitleCase from 'to-title-case';
 
 export default class YearPlot extends React.Component {
 
-  constructor(props){
-    super(props);
-  }
-
   showTitle = (title, type) => (e) => {
     console.log("title",title);
     title = toTitleCase (title);
@@ -37,8 +33,6 @@ export default class YearPlot extends React.Component {
   render() {
     const {data,
           isSelectedYear,
-          highlighted,
-          highlightDate,
           setHighlight,
           highlightedItem,
           highlightedType,
@@ -61,7 +55,6 @@ export default class YearPlot extends React.Component {
     let mediaIndex = 0;
 
     const date = new Date(data[0].key);
-    // const year = (isSelectedYear) ? date.getFullYear() : date.getFullYear().toString().substr(2,2);
     const year = date.getFullYear();
     const selectedYearClass = (isSelectedYear) ? "selected-year" : "";
     const listItems = data.map((item, i) => {
@@ -84,7 +77,6 @@ export default class YearPlot extends React.Component {
       }
 
       rowClass += onScreenClass;
-
       let itemsPerDay = item.values;
 
       if (item.values && item.values.length > 0){
@@ -131,7 +123,7 @@ export default class YearPlot extends React.Component {
                                 className={itemClass+" item-"+type}
                                 onMouseOver={this.showTitle(d.title, type)}
                                 onMouseOut={this.hideTitle}
-                                onClick={() => this.props.setHighlight(d.title, "title", type)}>{d.title}</li>;
+                                onClick={() => setHighlight(d.title, "title", type)}>{d.title}</li>;
               mediaIndex++;
               return element;
             })}

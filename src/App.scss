@@ -11,6 +11,7 @@ $animation-rate-fast: 0.2s;
 $base-dark: #111010;
 $base-light: #F6F5F1;
 $base-light-dimmed: #E8E3E0;
+$base-highlight: #ECCC87;
 
 // screen size break points
 $break-medium: 900px;
@@ -266,7 +267,7 @@ $defaultOffset: 45;
       cursor: pointer;
     }
     &.chart-selection-highlight {
-      background-color: #FFDA09;
+      background-color: $base-highlight;
     }
     // shrink for smaller screens
     @media screen and (max-width: $break-medium) {
@@ -364,7 +365,11 @@ $defaultOffset: 45;
     // background-color: darken($base-light-dimmed, 75%);
     .title {
       color: $base-light;
-      font-weight: 300;
+      font-weight: 400;
+    }
+    &.chart-selection-highlight .title {
+      color: #3a3a3a;
+      font-weight: 500;
     }
   }
   // $notesOffset: 760px;
@@ -589,6 +594,7 @@ $defaultOffset: 45;
   z-index: 2000;
   background: $base-light;
   border: 1px solid rgba(#111, 0.3);
+  color: #3a3a3a;
   .left-col {
     // background: #E8E3E0;
   }
@@ -600,9 +606,9 @@ $defaultOffset: 45;
 .chart-selection {
   display: none;
   position: relative;
-  border: 1px solid gold;
+  border: 1px solid $base-highlight;
   width: auto;
-  background-color: #211F1E;
+  // background-color: #211F1E;
   color: $base-light;
   .type {
     opacity: 0.5;
@@ -616,7 +622,7 @@ $defaultOffset: 45;
     font-size: 16px;
     font-weight: 300;
     cursor: pointer;
-    color: gold;
+    color: $base-highlight;
   }
   .title-highlight & { // show / hide based on parent state
     display: block;
@@ -723,7 +729,7 @@ $defaultOffset: 45;
     &.highlight::before {
       content: "";
       position: absolute;
-      background-color: gold;
+      background-color: $base-highlight;
       opacity: 0.4;
       top: -8px;
       width: 17px;
@@ -833,7 +839,7 @@ $defaultOffset: 45;
     &.highlight,
     &.highlight:hover {
       // background-color: $base-light;
-      background-color: gold;
+      background-color: $base-highlight;
       color: #000;
     }
     &:hover {
