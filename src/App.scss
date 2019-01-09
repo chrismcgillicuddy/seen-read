@@ -288,7 +288,7 @@ header {
   }
 }
 .intro {
-  margin: 40vh 20px 46vh 40px;
+  margin: 35vh 20px 46vh 40px;
   transition: width 0.3s ease;
   animation-name: fadeInLeft;
   animation-duration: 0.6s;
@@ -393,9 +393,11 @@ $defaultOffset: 45;
     }
     & .selected {
       display: inline-block;
-      color: $base-light;
+      color: $base-dark;
       opacity: 1;
-      border-bottom: 1px solid $base-light;
+      border-radius: 3px;
+      background-color: $base-light-dimmed;
+      // border-bottom: 1px solid $base-light;
     }
   }
 
@@ -1113,37 +1115,49 @@ $defaultOffset: 45;
 }
 
 // control button
-.option-button {
-  font-family: $sans-fonts;
-  text-align: left;
-  background-color: $base-highlight;
-  border: 0px solid $base-light;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 10px 15px;
-  // width: 60px;
-  border-radius: 3px;
-  color: $base-dark;
-  outline: none;
-  cursor: pointer;
-}
+// .option-button {
+//   font-family: $sans-fonts;
+//   text-align: left;
+//   background-color: $base-highlight;
+//   border: 0px solid $base-light;
+//   font-size: 16px;
+//   font-weight: 500;
+//   padding: 10px 15px;
+//   // width: 60px;
+//   border-radius: 3px;
+//   color: $base-dark;
+//   outline: none;
+//   cursor: pointer;
+// }
 
 .option-button {
+  position: absolute;
+  top: 30px;
+  right: 20px;
   font-family: $sans-fonts;
   text-align: left;
   background-color: transparent;
-  border-bottom: 2px solid rgba($base-light, 0.5);
+  border:1px solid $base-highlight;
   font-size: 16px;
-  font-weight: 500;
-  padding: 0;
+  font-weight: 400;
+  padding: 8px 10px;
   // width: 60px;
-  border-radius: 0;
-  color: $base-light;
-  outline: none;
+  border-radius: 3px;
+  color: $base-highlight;
+  // outline: none;
   cursor: pointer;
+  transition: width 0.3s ease;
+  animation-name: fadeInRight;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  animation-delay: 0.6s;
+  &:active {
+
+  }
 }
 .year-links {
-  margin: 30px 0 32px;
+  margin: 30px 0;
   width: 100%;
   text-align: center;
   transition: width 0.3s ease;
@@ -1155,7 +1169,8 @@ $defaultOffset: 45;
   a {
     font-family: $monospace-fonts;
     display: inline-block;
-    margin-left: 25px;
+    margin-left: 10px;
+    padding: 8px 10px;
     opacity: 0.5;
     border-width: 0;
     &:first-child {
@@ -1165,8 +1180,15 @@ $defaultOffset: 45;
       opacity: 1;
     }
     &.selected {
-      border-bottom: 2px solid rgba($base-light, 1);
+      // border-bottom: 2px solid rgba($base-light, 1);
       opacity: 1;
+      display: inline-block;
+      color: $base-dark;
+      opacity: 1;
+      border-radius: 3px;
+      background-color: $base-highlight;
+      font-weight: 500;
+      // border-bottom: 1px solid $base-light;
     }
   }
 }
