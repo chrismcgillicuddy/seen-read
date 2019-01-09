@@ -39,7 +39,9 @@ export default class MediaList extends React.Component {
   }
 
   render() {
-    const {data,
+    const {
+      passedClasses,
+      data,
       yearsAvailable,
       displayYear,
       setDisplayYear,
@@ -57,6 +59,8 @@ export default class MediaList extends React.Component {
     let newDate = true;
     let dailyItems = '';
 
+    console.log("passed classes",passedClasses);
+
     const yearNavItems = yearsAvailable.map((year) => {
       let yearEntry = "";
       let selectedClass ="";
@@ -68,6 +72,13 @@ export default class MediaList extends React.Component {
     }, this);
 
     const yearNav = <div className="year-nav">{yearNavItems}</div>;
+
+    const mediaListClasses = classNames({
+      'media-list': true,
+      'xyz-entering': (passedClasses === "xyz-entering")
+    });
+
+    console.log("mediaListClasses",{mediaListClasses});
 
     const listItems = data.map((item, i) => {
       if (item.values){
@@ -150,7 +161,7 @@ export default class MediaList extends React.Component {
       }
     }, this)
     return (
-      <div className="media-list" id="test-element">
+      <div className={mediaListClasses} id="test-element">
         {listItems}
       </div>
     );

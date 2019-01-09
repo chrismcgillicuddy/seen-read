@@ -98,8 +98,6 @@ $break-small: 400px;
   }
 }
 
-
-
 // setup, resets
 * {
   box-sizing: border-box;
@@ -142,13 +140,13 @@ body {
     opacity: 0.5;
     animation: pulse 1s ease-in-out infinite;
     &:nth-child(1) {
-      // animation-delay: 0.1s;
+      animation-delay: 0.66s;
     }
     &:nth-child(2) {
       animation-delay: 0.33s;
     }
     &:nth-child(3) {
-      animation-delay: 0.66s;
+      animation-delay: 0.0s;
     }
     // &:nth-child(4) {
     //   animation-delay: 0.5s;
@@ -178,6 +176,47 @@ body {
   //   }
   // }
 }
+// .xyz-appear {
+//   background-color: green !important;
+//   &.xyz-appear-active {
+//     background-color: orange;
+//   }
+// }
+// .xyz-entering {
+//   opacity: 0.9;
+//   background-color: gold !important;
+// }
+// .xyz-entered {
+//   background-color: white !important;
+//   opacity: 0.5;
+// }
+
+.xyz-appear {
+  opacity: 0.01;
+}
+.xyz-appear.xyz-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+// .xyz-enter {
+//   background-color: gold;
+//   &.xyz-enter-active {
+//     background-color: blue;
+//   }
+// }
+// .xyz-entered {
+//   background-color: red;
+// }
+//
+// .fade-appear {
+//     opacity: 0.01;
+// }
+// .fade-appear.fade-appear-active {
+//     opacity: 1;
+//     transition: opacity 5000ms ease-in;
+// }
+
 
 // grid layout
 // .cover {
@@ -415,13 +454,7 @@ $defaultOffset: 45;
     font-size: 23px;
     width: 50%;
     // max-width: 720px;
-    // animation
-    // // transform: translate3d(0, 0, 0);
-    animation-name: fadeInUp;
-    animation-duration: 0.6s;
-    animation-fill-mode: both;
-    animation-timing-function: ease;
-    animation-delay: 1s; // default
+
     .title {
       flex: 1;
       font-family: $serif-fonts;
@@ -465,64 +498,81 @@ $defaultOffset: 45;
       margin-right: 70px;
       padding: 10px 15px;
     }
-    // animation
-    $animation-base-increment: 0.01;
-    &:nth-child(1) {
-      animation-delay: $animation-base-increment+s;
-    }
-    &:nth-child(2) {
-      animation-delay: 0.10s+$animation-base-increment;
-    }
-    &:nth-child(3) {
-      animation-delay: 0.15s+$animation-base-increment;
-    }
-    &:nth-child(4) {
-      animation-delay: 0.25s+$animation-base-increment;
-    }
-    &:nth-child(5) {
-      animation-delay: 0.35s+$animation-base-increment;
-    }
-    &:nth-child(6) {
-      animation-delay: 0.40s+$animation-base-increment;
-    }
-    &:nth-child(7) {
-      animation-delay: 0.45s+$animation-base-increment;
-    }
-    &:nth-child(8) {
-      animation-delay: 0.50s+$animation-base-increment;
-    }
-    &:nth-child(9) {
-      animation-delay: 0.55s+$animation-base-increment;
-    }
-    &:nth-child(10) {
-      animation-delay: 0.60s+$animation-base-increment;
-    }
-    &:nth-child(11) {
-      animation-delay: 0.65s+$animation-base-increment;
-    }
-    &:nth-child(12) {
-      animation-delay: 0.70s+$animation-base-increment;
-    }
-    &:nth-child(13) {
-      animation-delay: 0.75s+$animation-base-increment;
-    }
-    &:nth-child(14) {
-      animation-delay: 0.788s+$animation-base-increment;
-    }
-    &:nth-child(15) {
-      animation-delay: 0.811s+$animation-base-increment;
-    }
-    &:nth-child(16) {
-      animation-delay: 0.85s+$animation-base-increment;
-    }
-    &:nth-child(17) {
-      animation-delay: 0.888s+$animation-base-increment;
-    }
-    &:nth-child(18) {
-      animation-delay: 0.911s+$animation-base-increment;
-    }
-    &:nth-child(19) {
-      animation-delay: 0.95s+$animation-base-increment;
+    // appear/enter animation
+    // .media-list-wrap-appear
+    // .media-list-wrap-appear-active
+    // .xyz-enter {
+    //     opacity: 0.01;
+    // }
+
+    .xyz-entering & {
+    //     opacity: 1;
+    //     transition: opacity 500ms ease-in;
+    // }
+    // .media-list-wrap-enter-active & {
+      animation-name: fadeInTop;
+      animation-duration: 0.6s;
+      animation-fill-mode: both;
+      animation-timing-function: ease;
+      animation-delay: 0.60s;
+      $animation-base-increment: 0.01;
+      &:nth-child(1) {
+        animation-delay: $animation-base-increment+s;
+      }
+      &:nth-child(2) {
+        animation-delay: 0.10s+$animation-base-increment;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.15s+$animation-base-increment;
+      }
+      &:nth-child(4) {
+        animation-delay: 0.25s+$animation-base-increment;
+      }
+      &:nth-child(5) {
+        animation-delay: 0.35s+$animation-base-increment;
+      }
+      &:nth-child(6) {
+        animation-delay: 0.40s+$animation-base-increment;
+      }
+      &:nth-child(7) {
+        animation-delay: 0.45s+$animation-base-increment;
+      }
+      &:nth-child(8) {
+        animation-delay: 0.50s+$animation-base-increment;
+      }
+      &:nth-child(9) {
+        animation-delay: 0.55s+$animation-base-increment;
+      }
+      &:nth-child(10) {
+        animation-delay: 0.60s+$animation-base-increment;
+      }
+      &:nth-child(11) {
+        animation-delay: 0.65s+$animation-base-increment;
+      }
+      &:nth-child(12) {
+        animation-delay: 0.70s+$animation-base-increment;
+      }
+      &:nth-child(13) {
+        animation-delay: 0.75s+$animation-base-increment;
+      }
+      &:nth-child(14) {
+        animation-delay: 0.788s+$animation-base-increment;
+      }
+      &:nth-child(15) {
+        animation-delay: 0.811s+$animation-base-increment;
+      }
+      &:nth-child(16) {
+        animation-delay: 0.85s+$animation-base-increment;
+      }
+      &:nth-child(17) {
+        animation-delay: 0.888s+$animation-base-increment;
+      }
+      &:nth-child(18) {
+        animation-delay: 0.911s+$animation-base-increment;
+      }
+      &:nth-child(19) {
+        animation-delay: 0.95s+$animation-base-increment;
+      }
     }
   }
   // READ: books and plays

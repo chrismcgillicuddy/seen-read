@@ -8,7 +8,8 @@ import ButtonList from './buttonList';
 import ProgressCircle from './progressCircle';
 import * as toTitleCase from 'to-title-case';
 import { InView } from 'react-intersection-observer';
-import * as classNames from 'classnames'
+import * as classNames from 'classnames';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // var classNames = require('classnames');
 
@@ -136,7 +137,7 @@ export default class App extends Component {
         this.updateOnScreenItems(onScreenItems);
       }
     } else { // isDesktop
-      console.log("SMALL SCREEN");
+      // console.log("SMALL SCREEN");
     }
   }
 
@@ -316,20 +317,26 @@ export default class App extends Component {
               radialProgress={radialProgress}
               displayYear={displayYear}
             /> */}
-            <MediaList
-              data={mediaLists['list'+displayYear]}
-              yearsAvailable={yearsAvailable}
-              displayYear={displayYear}
-              setDisplayYear={this.setDisplayYear}
-              highlighted={highlighted}
-              highlightedItem={highlightedItem}
-              setHighlight={this.setHighlight}
-              mediaListVisibility={this.mediaListVisibility}
-              updateOnScreenItems={this.updateOnScreenItems}
-              setRadialProgress={this.setRadialProgress}
-              setMediaListHighlight={this.setMediaListHighlight}
-            />
 
+            <CSSTransition
+             in={true}
+             classNames="xyz"
+             appear={true}
+             timeout={5000}>
+                <MediaList
+                  data={mediaLists['list'+displayYear]}
+                  yearsAvailable={yearsAvailable}
+                  displayYear={displayYear}
+                  setDisplayYear={this.setDisplayYear}
+                  highlighted={highlighted}
+                  highlightedItem={highlightedItem}
+                  setHighlight={this.setHighlight}
+                  mediaListVisibility={this.mediaListVisibility}
+                  updateOnScreenItems={this.updateOnScreenItems}
+                  setRadialProgress={this.setRadialProgress}
+                  setMediaListHighlight={this.setMediaListHighlight}
+                />
+            </CSSTransition>
             {/*
             <ScrollPercentage>
               {(percentage, inView) => (
