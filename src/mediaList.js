@@ -3,6 +3,7 @@ import Moment from 'moment';
 import * as classNames from 'classnames';
 import * as toTitleCase from 'to-title-case';
 
+// const uuidv4 = require('uuid/v4');
 const progressRadius = 30;
 
 export default class MediaList extends React.Component {
@@ -110,6 +111,8 @@ export default class MediaList extends React.Component {
 
           const longDate = Moment(item.key).format("MMMM D"); // January 1
           const shortDate = Moment(item.key).format("M/D"); // 1/1
+          const time = new Date().getTime();
+          const key = currentDate+"_"+time;
           const notes = d.notes ? <span className="note">{d.notes}</span> : null;
 
           // create notes element if there are any notes or the date differs from the last entry
@@ -122,6 +125,7 @@ export default class MediaList extends React.Component {
             : null;
 
           let element = <div
+                          // key={uuidv4()}
                           id={currentDate}
                           data-date={currentDate}
                           className={itemClasses}

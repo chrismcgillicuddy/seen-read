@@ -223,6 +223,18 @@ export default class App extends Component {
     }
     if (!this.state.loading){
 
+      const yearNavItems = yearsAvailable.map((year) => {
+        let yearEntry = "";
+        let selectedClass ="";
+        (year == displayYear)
+          ? selectedClass = " selected"
+          : selectedClass = "";
+        yearEntry = <a href="#" className={"link"+selectedClass} onClick={() => this.setDisplayYear(year)}>{year}</a>
+        return yearEntry;
+      }, this);
+
+      const yearNav = <div className="year-links">{yearNavItems}</div>;
+
       const exploreClasses= classNames({
         'explore': true,
         'media-list-view': compactYears,
@@ -248,6 +260,7 @@ export default class App extends Component {
           {/* <section className="cover">
             <span>Seen,Read</span>
           </section> */}
+          {yearNav}
           <section className={exploreClasses} id="test-container">
           {/* <header>
             <span className="title">Seen,Read</span>
@@ -257,9 +270,10 @@ export default class App extends Component {
           </header> */}
           <div className="chart">
               <div className="intro">
-                <h1><span className="seen">Seen,</span> Read</h1>
-                <p>Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh">Steven Soderbergh</a> has maintained a daily account of every book,
-                  play, film and TV show he's seen or read for the past 9 years.</p>
+                <h1><span className="seen">Seen</span><span className="comma">,</span> Read</h1>
+                <p>Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh" className="link">Steven Soderbergh</a> has maintained
+                a daily account of every book, film, play, and TV show he's seen or read for the past 9 years.</p>
+                <p></p>
               </div>
               <div className={yearPlotClasses}>
               {
@@ -372,10 +386,19 @@ export default class App extends Component {
         </div>
 
         {/* explore / browse list toggle */}
-        <div className="options">
-          <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
-        </div>
+        {/* <div className="year-links">
+          <a href="#" className="link" onClick={() => setDisplayYear(year)}>2009</a>
+          <a href="#" className="link" onClick={() => setDisplayYear(year)}>2010</a>
+          <a href="#" className="link" onClick={() => setDisplayYear(year)}>2011</a>
+          <a href="#" className="link">2012</a>
+          <a href="#" className="link">2013</a>
+          <a href="#" className="link">2014</a>
+          <a href="#" className="link">2015</a>
+          <a href="#" className="link">2016</a>
+          <a href="#" className="link selected">2017</a>
 
+        </div> */}
+        {/* <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button> */}
 
       </div>
       );

@@ -1,6 +1,6 @@
 // fonts
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,500');
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,500');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:300,400,500');
 
 // animation
@@ -14,8 +14,8 @@ $base-light-dimmed: #E8E3E0;
 $base-highlight: #ECCC87;
 
 // font families
-$sans-fonts: "IBM Plex Sans", Helvetica, sans-serif;
-$serif-fonts: "IBM Plex Serif", Georgia, serif;
+$sans-fonts: "IBM Plex Sans", helvetica, arial, sans-serif;
+$serif-fonts: "IBM Plex Serif",  georgia, times, serif;
 $monospace-fonts: "IBM Plex Mono", monospace;
 
 // screen size break points
@@ -23,23 +23,34 @@ $break-medium: 1000px;
 $break-small: 400px;
 
 // animation
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    // transform: translate3d(0, 35%, 0);
- }
-  to {
-    opacity: 1;
-    // transform: translate3d(0, 0, 0);
-  }
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
  }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 35%, 0);
+ }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -35%, 0);
+ }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -57,13 +68,37 @@ $break-small: 400px;
 @keyframes fadeInRight {
    0% {
       opacity: 0;
-      // transform: translateX(40px);
+      transform: translateX(40px);
    }
    100% {
       opacity: 1;
-      // transform: translateX(0);
+      transform: translateX(0);
    }
 }
+
+// @keyframes pulse {
+//   0% {
+//     transform: translate(-50%, -50%) scale(0);
+//     opacity: 1;
+//   }
+//   100% {
+//     transform: translate(-50%, -50%) scale(1.0);
+//     opacity: 0;
+//   }
+// }
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+
 
 // setup, resets
 * {
@@ -79,6 +114,69 @@ body {
   text-rendering: optimizeLegibility;
   font-family: $sans-fonts;
   background-color: $base-dark;
+  // position: relative;
+}
+.link {
+  text-decoration: none;
+  border-bottom: 2px solid rgba($base-light, 0.3);
+  color: $base-light;
+  font-weight: 400;
+  &:hover {
+    border-bottom-color: rgba($base-light, 0.8);
+  }
+}
+
+// loader
+.loader{
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  span {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: $sans-fonts;
+    font-weight: 400;
+    font-style: italic;
+    color: $base-light;
+    font-size: 36px;
+    opacity: 0.5;
+    animation: pulse 1s ease-in-out infinite;
+    &:nth-child(1) {
+      // animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.33s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.66s;
+    }
+    // &:nth-child(4) {
+    //   animation-delay: 0.5s;
+    // }
+    // &:nth-child(5) {
+    //   animation-delay: 0.1s;
+    // }
+    // &:nth-child(6) {
+    //   animation-delay: 0.3s;
+    // }
+    // &:nth-child(7) {
+    //   animation-delay: 0.15s;
+    // }
+    // &:nth-child(8) {
+    //   animation-delay: 0.20s;
+    // }
+    // &:nth-child(9) {
+    //   animation-delay: 0.075s;
+    // }
+    // &:nth-child(10) {
+    //   animation-delay: 0.125s;
+    // }
+  }
+  // @for $i from 1 through 9 {
+  //   span:nth-child(#{$i}) {
+  //     animation: pulse #{(random(4)/4)+1}s ease-in-out infinite #{(random(3)/2)}s;
+  //   }
+  // }
 }
 
 // grid layout
@@ -190,39 +288,37 @@ header {
   }
 }
 .intro {
-  margin: 40vh 20px 45vh 40px;
+  margin: 40vh 20px 46vh 40px;
   transition: width 0.3s ease;
   animation-name: fadeInLeft;
   animation-duration: 0.6s;
   animation-fill-mode: both;
   animation-timing-function: ease;
-  animation-delay: 0.60s;
+  animation-delay: 0.6s;
   h1 {
-    margin: 0 auto 10px;
-    color: $base-light-dimmed;
+    font-family: $sans-fonts;
+    font-weight: 300;
+    font-style: italic;
     font-size: 48px;
-    font-family: $serif-fonts;
-    font-weight: 500;
+    color: $base-light-dimmed;
+    margin: 24px 0;
+    line-height: 48px;
     .seen {
-      font-family: $sans-fonts;
+      // font-family: $sans-fonts;
     }
     .comma {
-
+      // font-family: $monospace-fonts;
     }
   }
   p {
     font-family: $serif-fonts;
+    font-weight: 400;
     font-size: 18px;
     color: $base-light;
-    line-height: 1.4;
-    font-weight: 500;
+    line-height: 26px;
+    margin: 24px 0;
   }
-  a {
-    text-decoration: none;
-    border-bottom: 2px solid rgba($base-light, 0.4);
-    color: $base-light;
-    font-weight: 500;
-  }
+
 }
 
 // radial progress
@@ -277,7 +373,7 @@ $specialOffset: 0;
 $defaultOffset: 45;
 .media-list {
   position: relative;
-  // margin-top: 40px;
+  margin-top: 140px;
   .year-nav {
     position: sticky;
     overflow: hidden;
@@ -294,7 +390,6 @@ $defaultOffset: 45;
       cursor: pointer;
       margin-right: 15px;
       color: rgba(246,245,241, 0.7);
-
     }
     & .selected {
       display: inline-block;
@@ -319,7 +414,7 @@ $defaultOffset: 45;
     width: 50%;
     // max-width: 720px;
     // animation
-    // transform: translate3d(0, 0, 0);
+    // // transform: translate3d(0, 0, 0);
     animation-name: fadeInUp;
     animation-duration: 0.6s;
     animation-fill-mode: both;
@@ -348,6 +443,13 @@ $defaultOffset: 45;
     }
     &.chart-selection-highlight {
       background-color: $base-highlight;
+    }
+    // show details on hover
+    &:hover,
+    &.chart-selection-highlight {
+      .date {
+        opacity: 1;
+      }
     }
     // shrink for smaller screens
     @media screen and (max-width: $break-medium) {
@@ -529,7 +631,7 @@ $defaultOffset: 45;
     font-family: $serif-fonts;
     .date {
       font-weight: 300;
-      opacity: 0.7;
+      opacity: 0.3;
     }
     .long-date {
       display: block;
@@ -668,7 +770,7 @@ $defaultOffset: 45;
 .plot-year-label {
   display: block;
   overflow: hidden;
-  font-family: 'IMB Plex Mono', sans-serif;
+  font-family: $monospace-fonts;
   font-size: 10px;
   font-weight: 500;
   margin: 0 0 8px 7px;
@@ -1024,4 +1126,47 @@ $defaultOffset: 45;
   color: $base-dark;
   outline: none;
   cursor: pointer;
+}
+
+.option-button {
+  font-family: $sans-fonts;
+  text-align: left;
+  background-color: transparent;
+  border-bottom: 2px solid rgba($base-light, 0.5);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0;
+  // width: 60px;
+  border-radius: 0;
+  color: $base-light;
+  outline: none;
+  cursor: pointer;
+}
+.year-links {
+  margin: 30px 0 32px;
+  width: 100%;
+  text-align: center;
+  transition: width 0.3s ease;
+  animation-name: fadeInDown;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  animation-delay: 0.60s;
+  a {
+    font-family: $monospace-fonts;
+    display: inline-block;
+    margin-left: 25px;
+    opacity: 0.5;
+    border-width: 0;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &.selected {
+      border-bottom: 2px solid rgba($base-light, 1);
+      opacity: 1;
+    }
+  }
 }
