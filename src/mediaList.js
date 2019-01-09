@@ -115,14 +115,18 @@ export default class MediaList extends React.Component {
           const key = currentDate+"_"+time;
           const notes = d.notes ? <span className="note">{d.notes}</span> : null;
 
+
+          const detailsClasses = classNames({
+            'details': true,
+            'repeatedDate': !(newDate || d.notes)
+          });
+
           // create notes element if there are any notes or the date differs from the last entry
-          const notesNode = (newDate || d.notes)
-            ? <span className="details">
-              <span className="date long-date">{longDate}</span>
-              <span className="date short-date">{shortDate}</span>
-                {notes}
-              </span>
-            : null;
+          const notesNode = <span className={detailsClasses}>
+                              <span className="date long-date">{longDate}</span>
+                              <span className="date short-date">{shortDate}</span>
+                                {notes}
+                            </span>;
 
           let element = <div
                           // key={uuidv4()}

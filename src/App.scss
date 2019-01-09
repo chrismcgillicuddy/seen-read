@@ -448,8 +448,11 @@ $defaultOffset: 45;
     }
     // show details on hover
     &:hover,
-    &.chart-selection-highlight {
-      .date {
+    &:hover .repeatedDate,
+    &.chart-selection-highlight,
+    &.chart-selection-highlight .repeatedDate{
+      .date,
+      .note {
         opacity: 1;
       }
     }
@@ -631,6 +634,9 @@ $defaultOffset: 45;
     font-weight: 500;
     text-align: left;
     font-family: $serif-fonts;
+    &.repeatedDate .date {
+      opacity: 0;
+    }
     .date {
       font-weight: 300;
       opacity: 0.3;
@@ -643,6 +649,8 @@ $defaultOffset: 45;
     }
     .note {
       display: block;
+      opacity: 0.4;
+
       line-height: 1.2;
     }
     @media screen and (max-width: $break-small) {
