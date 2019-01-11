@@ -446,7 +446,7 @@ export default class App extends Component {
           <a href="#" className="link selected">2017</a>
 
         </div> */}
-        <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'View the most seen, read': 'Browse a year'}</button>
+        <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'View the most seen, read': 'Browse by year'}</button>
       </div>
       );
     }

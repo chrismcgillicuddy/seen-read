@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
+import * as _ from 'lodash';
 import * as classNames from 'classnames';
 import * as toTitleCase from 'to-title-case';
 
@@ -11,10 +12,10 @@ export default class MediaList extends React.Component {
   componentDidMount() {
     const mediaListPanel = document.getElementById("list-panel");
     console.log("mediaListPanel",mediaListPanel);
-    mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
-    mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
-    // mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 50));
-    // mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 50));
+    // mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
+    // mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
+    mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 5));
+    mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 5));
     this.props.mediaListVisibility();
   }
 
@@ -120,12 +121,12 @@ export default class MediaList extends React.Component {
             'new-date': sameDate
           });
 
-          const longDate = Moment(item.key).format("MMMM D"); // January 1
-          const shortDate = Moment(item.key).format("M/D"); // 1/1
+          const longDate = <span className="date long-date">{Moment(item.key).format("MMMM D")}</span> // January 1
+          const shortDate = <span className="date short-date">{Moment(item.key).format("M/D")}</span>; // 1/1
           const time = new Date().getTime();
           const key = currentDate+"_"+time;
           const notes = d.notes ? <span className="note">{d.notes}</span> : null;
-
+          const mediaType = d.type ? <span className="type">{d.type}</span> : null;
 
           const detailsClasses = classNames({
             'details': true,
@@ -134,9 +135,9 @@ export default class MediaList extends React.Component {
 
           // create notes element if there are any notes or the date differs from the last entry
           const notesNode = <span className={detailsClasses}>
-                              <span className="date long-date">{longDate}</span>
-                              <span className="date short-date">{shortDate}</span>
-                                {notes}
+                              {longDate}{shortDate}
+                              {notes}
+                              {mediaType}
                             </span>;
 
           let element = <div
