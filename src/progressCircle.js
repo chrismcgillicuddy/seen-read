@@ -11,10 +11,10 @@ function ProgressCircle({ className, radius, radialProgress, displayYear }) {
         <defs>
           <mask id="hole">
             <circle id="disk" fill="white" r="30" cx="30" cy="30"></circle>
-            <circle id="disk-center" r="18" cx="30" cy="30"></circle>
+            <circle id="disk-center" r="27.5" cx="30" cy="30"></circle>
          </mask>
        </defs>
-       <circle className='progress-disk' stroke-dasharray={strokeDashArray} id="disk-progress" mask="url(#hole)" cx="30" cy="30" r="30" stroke-width="30" fill="#333"></circle>
+       <circle className='progress-disk' stroke-dasharray={strokeDashArray} id="disk-progress" mask="url(#hole)" cx="30" cy="30" r="30" stroke-width="45" fill="#333"></circle>
        <text x="18" y="-26" class="progress-year">{displayYear}</text>
       </svg>
     </div>

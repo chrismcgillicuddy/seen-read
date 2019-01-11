@@ -17,7 +17,11 @@ export default class ButtonList extends React.Component {
   }
 
   render() {
-    const {compactMode, setHighlight, highlightedItem, listType} = this.props;
+    const {
+          compactMode,
+          setHighlight,
+          highlightedItem,
+          listType} = this.props;
 
       // highlight class
       let itemClass = "";

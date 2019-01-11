@@ -72,12 +72,16 @@ export default class App extends Component {
 
   onViewChange = (inView, highlight) => {
     console.log(inView, highlight);
-    if (inView){
-      this.setMediaHighlightType(""); // reset here for now, in case a year needs focus
-      var newState = {};
-      newState[highlight.highlight] = highlight.value;
-      this.setState(newState);
-    }
+    // if (inView){
+    //   this.setMediaHighlightType(""); // reset here for now, in case a year needs focus
+    //   var newState = {};
+    //   newState[highlight.highlight] = highlight.value;
+    //   this.setState(newState);
+    // }
+  }
+
+  makeChartSticky = () => {
+    console.log("makechartSticky");
   }
 
   componentWillUnmount(){
@@ -88,8 +92,8 @@ export default class App extends Component {
   mediaListVisibility = () => {
     // this.isUsingDesktop(); // check screen size;
     // console.log("mediaListVisibility, isDesktop?", this.state.isDesktop);
-
-    if (this.state.isDesktop) {
+    console.log("OXOXOXOXOXOXOXOX");
+    if (this.state.isDesktop) {// only update the items visible if we're displaying the year plots on a desktop screen
       // check visible elements in MediaList
       const mediaListContainer = document.getElementById("list-panel");
       const mediaListElement = document.getElementsByClassName("media-list");
@@ -176,7 +180,16 @@ export default class App extends Component {
     this.setState({highlightedMedia});
   }
 
+  setProgressCirclePosition = (year) => {
+    // position progressRadius
+    const index = yearsAvailable.indexOf(year);
+    const leftPosition = ((index * 75) - 8);
+    const element = document.getElementsByClassName("progress-circle-container");
+    element[0].style.left = leftPosition+"px";
+  }
+
   setDisplayYear = (displayYear) => {
+    this.setProgressCirclePosition(displayYear);
     this.setState({highlightMediaType: ''}); // reset mediaType highlight
     this.setState({displayYear});
   }
@@ -238,9 +251,8 @@ export default class App extends Component {
 
       const exploreClasses= classNames({
         'explore': true,
-        'media-list-view': compactYears,
+        'browse-single-year': compactYears,
         'title-highlight': highlightedItem,
-        'expand-year-plots': !compactYears
       });
 
       const highlightMediaTypeOn = highlightMediaType.length > 0;
@@ -256,13 +268,30 @@ export default class App extends Component {
         'highlight-special': highlightMediaType==='special'
       });
 
+      const appStateClasses = classNames({
+        app: true,
+        'expand-year-plots': !compactYears
+      })
+
       return (
-        <div>
+        <div className={appStateClasses}>
           {/* <section className="cover">
             <span>Seen,Read</span>
           </section> */}
-          {yearNav}
-          <section className={exploreClasses} id="test-container">
+
+          <div classname="nav-wrap">
+            <div className="year-nav">
+              {yearNav}
+              <ProgressCircle
+                className={'progress-circle'}
+                radius={progressRadius}
+                radialProgress={radialProgress}
+                displayYear={displayYear}
+              />
+            </div>
+          </div>
+
+          <section className={exploreClasses} id="app-container">
           {/* <header>
             <span className="title">Seen,Read</span>
             <div className="options">
@@ -270,32 +299,37 @@ export default class App extends Component {
             </div>
           </header> */}
           <div className="chart">
-              <div className="intro">
-                <h1><span className="seen">Seen</span><span className="comma">,</span> Read</h1>
-                <p>Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh" className="link">Steven Soderbergh</a> has maintained
-                a daily account of every book, film, play, and TV show he's seen or read for the past 9 years.</p>
-                <p></p>
+
+
+
+              {/* explainer 1.
+              <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
+                <div className="step">TV</div>
+              </InView>
+              */}
+
+              {/* year plot charts */}
+              <InView className="year-plot-container" tag="div" onChange={inView => this.makeChartSticky()}>
+                <div className={yearPlotClasses}>
+                {
+                  yearsAvailable.map((year) => {
+                    const isSelectedYear = (year == displayYear) ? true : false;
+                    return <YearPlot
+                      scrollState={scrollState}
+                      data={mediaLists['list'+year]}
+                      isSelectedYear={isSelectedYear}
+                      highlighted={highlighted}
+                      highlightedItem={highlightedItem}
+                      highlightedType={highlightedType}
+                      highlightMediaType={highlightMediaType}
+                      setHighlight={this.setHighlight}
+                      setDisplayYear={this.setDisplayYear}
+                      mediaListItemsOnScreen={mediaListItemsOnScreen}
+                      mediaListVisibility={this.mediaListVisibility}
+                    />
+                  })
+                }
               </div>
-              <div className={yearPlotClasses}>
-              {
-                yearsAvailable.map((year) => {
-                  const isSelectedYear = (year == displayYear) ? true : false;
-                  return <YearPlot
-                    scrollState={scrollState}
-                    data={mediaLists['list'+year]}
-                    isSelectedYear={isSelectedYear}
-                    highlighted={highlighted}
-                    highlightedItem={highlightedItem}
-                    highlightedType={highlightedType}
-                    highlightMediaType={highlightMediaType}
-                    setHighlight={this.setHighlight}
-                    setDisplayYear={this.setDisplayYear}
-                    mediaListItemsOnScreen={mediaListItemsOnScreen}
-                    mediaListVisibility={this.mediaListVisibility}
-                  />
-                })
-              }
-            </div>
               <div className="chart-selection-container">
                 <div className="title-hightlight chart-selection">
                   <div className="left-col">
@@ -307,22 +341,22 @@ export default class App extends Component {
                   <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
                 </div>
               </div>
+            </InView>
 
           </div>
 
           <div className="controls" id="list-panel">
-            {/* <ProgressCircle
-              className={'progress-circle'}
-              radius={progressRadius}
-              radialProgress={radialProgress}
-              displayYear={displayYear}
-            /> */}
 
-            <CSSTransition
-             in={true}
-             classNames="xyz"
-             appear={true}
-             timeout={5000}>
+            {/* intro text */}
+            {/*
+            <InView tag="div" className="intro" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
+                <h1><span className="seen">Seen</span><span className="comma">,</span> Read</h1>
+                <p>Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh" className="link">Steven Soderbergh</a> has maintained
+                a daily account of every book, film, play, and TV show he's seen or read for the past 9 years.</p>
+                <p></p>
+            </InView>
+            */}
+
                 <MediaList
                   data={mediaLists['list'+displayYear]}
                   yearsAvailable={yearsAvailable}
@@ -336,7 +370,11 @@ export default class App extends Component {
                   setRadialProgress={this.setRadialProgress}
                   setMediaListHighlight={this.setMediaListHighlight}
                 />
-            </CSSTransition>
+                <ButtonList
+                  compactMode={compactYears}
+                  highlightedItem={highlightedItem}
+                  setHighlight={this.setHighlight}
+                />
             {/*
             <ScrollPercentage>
               {(percentage, inView) => (
@@ -382,6 +420,9 @@ export default class App extends Component {
 
         </section>
 
+        {/* title */}
+        <div className="name-plate">Seen,Read</div>
+
         {/* hover title */}
         <div className="title-hightlight selected-title-hover">
           <div className="left-col">
@@ -405,9 +446,7 @@ export default class App extends Component {
           <a href="#" className="link selected">2017</a>
 
         </div> */}
-
-        <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'View all years': 'Browse one year'}</button>
-
+        <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'View the most seen, read': 'Browse a year'}</button>
       </div>
       );
     }
