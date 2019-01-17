@@ -14,7 +14,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 // var classNames = require('classnames');
 
 const progressRadius = 30;
-const yearsAvailable = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
+const yearsAvailable = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018];
 const desktopSize = 800;
 
 export default class App extends Component {
@@ -29,7 +29,7 @@ export default class App extends Component {
       loading: true,
       mediaLists: {},
       compactYears: true,
-      displayYear: '2017',
+      displayYear: '2018',
       radialProgress: 0,
       mediaListItemsOnScreen: [],
       scrollState: 0,
@@ -39,7 +39,7 @@ export default class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('./data/2009-2017.json',
+      fetch('./data/2009-2018.json',
         {headers:
           {'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -48,6 +48,7 @@ export default class App extends Component {
       )
     ]).then(responses => Promise.all(responses.map(resp => resp.json())))
     .then(([list]) => {
+      const list2018 = this.getYear(list, 2018);
       const list2017 = this.getYear(list, 2017);
       const list2016 = this.getYear(list, 2016);
       const list2015 = this.getYear(list, 2015);
@@ -58,7 +59,7 @@ export default class App extends Component {
       const list2010 = this.getYear(list, 2010);
       const list2009 = this.getYear(list, 2009);
 
-      this.setState({ mediaLists: {list2017, list2016, list2015, list2014, list2013, list2012, list2011, list2010, list2009} });
+      this.setState({ mediaLists: {list2018, list2017, list2016, list2015, list2014, list2013, list2012, list2011, list2010, list2009} });
       this.setState({ loading: false });
       this.isUsingDesktop();
     });
@@ -92,7 +93,6 @@ export default class App extends Component {
   mediaListVisibility = () => {
     // this.isUsingDesktop(); // check screen size;
     // console.log("mediaListVisibility, isDesktop?", this.state.isDesktop);
-    console.log("OXOXOXOXOXOXOXOX");
     if (this.state.isDesktop) {// only update the items visible if we're displaying the year plots on a desktop screen
       // check visible elements in MediaList
       const mediaListContainer = document.getElementById("list-panel");
@@ -183,7 +183,7 @@ export default class App extends Component {
   setProgressCirclePosition = (year) => {
     // position progressRadius
     const index = yearsAvailable.indexOf(year);
-    const leftPosition = ((index * 75) - 8);
+    const leftPosition = ((index * 64) - 8);
     const element = document.getElementsByClassName("progress-circle-container");
     element[0].style.left = leftPosition+"px";
   }
@@ -446,7 +446,7 @@ export default class App extends Component {
           <a href="#" className="link selected">2017</a>
 
         </div> */}
-        <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'View the most seen, read': 'Browse by year'}</button>
+        <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'View most seen, read': 'Browse by year'}</button>
       </div>
       );
     }

@@ -121,7 +121,7 @@ export default class MediaList extends React.Component {
             'new-date': sameDate
           });
 
-          const longDate = <span className="date long-date">{Moment(item.key).format("MMMM D")}</span> // January 1
+          const longDate = <span className="date long-date">{Moment(item.key).format("MMM D")}</span> // January 1
           const shortDate = <span className="date short-date">{Moment(item.key).format("M/D")}</span>; // 1/1
           const time = new Date().getTime();
           const key = currentDate+"_"+time;
