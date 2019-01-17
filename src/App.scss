@@ -330,7 +330,7 @@ $defaultOffset: 45;
   }
 
   // base media list item appearance
-  $title-color: #3a3a3a;
+  $title-color: #3A3938;
 
   .item {
     position: relative;
@@ -387,71 +387,71 @@ $defaultOffset: 45;
       margin-right: 70px;
       padding: 10px 15px;
     }
-    .xyz-entering & {
-      animation-name: fadeInTop;
-      animation-duration: 0.6s;
-      animation-fill-mode: both;
-      animation-timing-function: ease;
-      // animation-delay: 0.60s;
-      $animation-base-increment: 0.01;
-      &:nth-child(1) {
-        animation-delay: $animation-base-increment+s;
-      }
-      &:nth-child(2) {
-        animation-delay: 0.10s+$animation-base-increment;
-      }
-      &:nth-child(3) {
-        animation-delay: 0.15s+$animation-base-increment;
-      }
-      &:nth-child(4) {
-        animation-delay: 0.25s+$animation-base-increment;
-      }
-      &:nth-child(5) {
-        animation-delay: 0.35s+$animation-base-increment;
-      }
-      &:nth-child(6) {
-        animation-delay: 0.40s+$animation-base-increment;
-      }
-      &:nth-child(7) {
-        animation-delay: 0.45s+$animation-base-increment;
-      }
-      &:nth-child(8) {
-        animation-delay: 0.50s+$animation-base-increment;
-      }
-      &:nth-child(9) {
-        animation-delay: 0.55s+$animation-base-increment;
-      }
-      &:nth-child(10) {
-        animation-delay: 0.60s+$animation-base-increment;
-      }
-      &:nth-child(11) {
-        animation-delay: 0.65s+$animation-base-increment;
-      }
-      &:nth-child(12) {
-        animation-delay: 0.70s+$animation-base-increment;
-      }
-      &:nth-child(13) {
-        animation-delay: 0.75s+$animation-base-increment;
-      }
-      &:nth-child(14) {
-        animation-delay: 0.788s+$animation-base-increment;
-      }
-      &:nth-child(15) {
-        animation-delay: 0.811s+$animation-base-increment;
-      }
-      &:nth-child(16) {
-        animation-delay: 0.85s+$animation-base-increment;
-      }
-      &:nth-child(17) {
-        animation-delay: 0.888s+$animation-base-increment;
-      }
-      &:nth-child(18) {
-        animation-delay: 0.911s+$animation-base-increment;
-      }
-      &:nth-child(19) {
-        animation-delay: 0.95s+$animation-base-increment;
-      }
-    }
+    // .xyz-entering & {
+    //   animation-name: fadeInTop;
+    //   animation-duration: 0.6s;
+    //   animation-fill-mode: both;
+    //   animation-timing-function: ease;
+    //   // animation-delay: 0.60s;
+    //   $animation-base-increment: 0.01;
+    //   &:nth-child(1) {
+    //     animation-delay: $animation-base-increment+s;
+    //   }
+    //   &:nth-child(2) {
+    //     animation-delay: 0.10s+$animation-base-increment;
+    //   }
+    //   &:nth-child(3) {
+    //     animation-delay: 0.15s+$animation-base-increment;
+    //   }
+    //   &:nth-child(4) {
+    //     animation-delay: 0.25s+$animation-base-increment;
+    //   }
+    //   &:nth-child(5) {
+    //     animation-delay: 0.35s+$animation-base-increment;
+    //   }
+    //   &:nth-child(6) {
+    //     animation-delay: 0.40s+$animation-base-increment;
+    //   }
+    //   &:nth-child(7) {
+    //     animation-delay: 0.45s+$animation-base-increment;
+    //   }
+    //   &:nth-child(8) {
+    //     animation-delay: 0.50s+$animation-base-increment;
+    //   }
+    //   &:nth-child(9) {
+    //     animation-delay: 0.55s+$animation-base-increment;
+    //   }
+    //   &:nth-child(10) {
+    //     animation-delay: 0.60s+$animation-base-increment;
+    //   }
+    //   &:nth-child(11) {
+    //     animation-delay: 0.65s+$animation-base-increment;
+    //   }
+    //   &:nth-child(12) {
+    //     animation-delay: 0.70s+$animation-base-increment;
+    //   }
+    //   &:nth-child(13) {
+    //     animation-delay: 0.75s+$animation-base-increment;
+    //   }
+    //   &:nth-child(14) {
+    //     animation-delay: 0.788s+$animation-base-increment;
+    //   }
+    //   &:nth-child(15) {
+    //     animation-delay: 0.811s+$animation-base-increment;
+    //   }
+    //   &:nth-child(16) {
+    //     animation-delay: 0.85s+$animation-base-increment;
+    //   }
+    //   &:nth-child(17) {
+    //     animation-delay: 0.888s+$animation-base-increment;
+    //   }
+    //   &:nth-child(18) {
+    //     animation-delay: 0.911s+$animation-base-increment;
+    //   }
+    //   &:nth-child(19) {
+    //     animation-delay: 0.95s+$animation-base-increment;
+    //   }
+    // }
   }
   // READ: books and plays
   .play,
@@ -539,7 +539,7 @@ $defaultOffset: 45;
       font-weight: 400;
     }
     &.chart-selection-highlight .title {
-      color: #3a3a3a;
+      color: #3A3938;
       font-weight: 500;
     }
   }
@@ -735,7 +735,7 @@ $defaultOffset: 45;
   z-index: 2000;
   background: $base-light;
   border: 1px solid rgba(#111, 0.3);
-  color: #3a3a3a;
+  color: #3A3938;
 }
 
 // display the selected title under the charts with a clear button
@@ -799,6 +799,8 @@ $defaultOffset: 45;
 }
 
 // a row of watched/read media from a day within a year plot
+
+$chart-item-background: #888584;
 .daily-items {
   list-style: none;
   font-family: $monospace-fonts;
@@ -831,7 +833,7 @@ $defaultOffset: 45;
     position: relative;
     cursor: pointer;
     padding: 0;
-    background-color: #888;
+    background-color: $chart-item-background;
     border-radius: 0px;
     text-indent: -99999px;
     transition: width 0.3s ease 4s;
@@ -864,7 +866,8 @@ $defaultOffset: 45;
       width: 9px;
     }
     &.highlight {
-      background-color: $base-light-dimmed;
+      // background-color: $chart-item-background;
+      background-color: $base-light;
       height: 1px;
       z-index: 1;
     }
@@ -872,7 +875,7 @@ $defaultOffset: 45;
       content: "";
       position: absolute;
       background-color: $base-highlight;
-      opacity: 0.5;
+      opacity: 0.6;
       top: -8px;
       width: 17px;
       height: 17px;
@@ -880,15 +883,22 @@ $defaultOffset: 45;
       z-index: -1;
       transition:all $animation-rate-fast ease;
     }
-    &.short-title.highlight::before {
-      left: -6px;
-    }
-    &.medium-title.highlight::before {
-      left: -5px;
-    }
-    &.long-title.highlight::before {
-      left: -4px;
-    }
+      &.short-title.highlight::before,
+      &.medium-title.highlight::before,
+      &.long-title.highlight::before {
+        left: -7px;
+      }
+    // .expand-year-plots & {
+    //   &.short-title.highlight::before {
+    //     left: -6px;
+    //   }
+    //   &.medium-title.highlight::before {
+    //     left: -5px;
+    //   }
+    //   &.long-title.highlight::before {
+    //     left: -4px;
+    //   }
+    // }
     // days with no entry
     &.empty-date {
       background-color: #bbb;
@@ -926,21 +936,21 @@ $defaultOffset: 45;
       transition: width 0.5s ease;
     }
     // circle highlight
-    &.highlight {
-      background-color: $base-light;
-    }
-    &.highlight::before {
-      content: "";
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      width: 14px;
-      height: 14px;
-      opacity: 0.4;
-      border-radius: 20px;
-      transition: all $animation-rate-fast ease;
-      z-index: 2;
-    }
+    // &.highlight {
+    //   background-color: $base-light;
+    // }
+    // &.highlight::before {
+    //   content: "";
+    //   position: absolute;
+    //   top: -6px;
+    //   left: -6px;
+    //   width: 14px;
+    //   height: 14px;
+    //   opacity: 0.4;
+    //   border-radius: 20px;
+    //   transition: all $animation-rate-fast ease;
+    //   z-index: 2;
+    // }
   }
 }
 
@@ -1003,7 +1013,7 @@ $defaultOffset: 45;
   font-size: 26px;
   line-height: 1;
   font-style: italic;
-  color: $base-light-dimmed;
+  color: $base-light;
   animation-name: fadeInLeft;
   animation-duration: 0.6s;
   animation-fill-mode: both;

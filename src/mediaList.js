@@ -50,6 +50,7 @@ export default class MediaList extends React.Component {
       highlightedItem,
       setHighlight,
       mediaListVisibility,
+      mediaListItemsOnScreen,
       updateOnScreenItems,
       setRadialProgress,
       setMediaListHighlight} = this.props;
@@ -60,7 +61,6 @@ export default class MediaList extends React.Component {
     let newDate = true;
     let dailyItems = '';
 
-    console.log("passed classes",passedClasses);
 
     const yearNavItems = yearsAvailable.map((year) => {
       let yearEntry = "";
@@ -79,7 +79,7 @@ export default class MediaList extends React.Component {
       'xyz-entering': (passedClasses === "xyz-entering")
     });
 
-    console.log("mediaListClasses",{mediaListClasses});
+    // console.log("mediaListClasses",{mediaListClasses});
 
     const listItems = data.map((item, i) => {
       if (item.values){
@@ -107,6 +107,14 @@ export default class MediaList extends React.Component {
           const movieYear = (( type === 'movie' || type === 'short') && d.year) ? <span className="year">{d.year}</span> : null;
           const bookCredit = d.credit ? <span className="credit">{d.credit}</span> : null;
 
+          // console.log("mediaListItemsOnScreen",mediaListItemsOnScreen);
+          // if (mediaListItemsOnScreen.includes(currentDate.toString())) {
+          //   console.log("includes: ",mediaListItemsOnScreen.includes(currentDate));
+          //
+          // }
+          // console.log("includes: ",mediaListItemsOnScreen.includes(currentDate));
+          // console.log("mediaListItemsOnScreen.indexOf(currentDate)==1",mediaListItemsOnScreen.indexOf(currentDate)==1);
+
           // item classes
           const itemClasses = classNames({
             'item': true,
@@ -118,7 +126,8 @@ export default class MediaList extends React.Component {
             'book': type==="book",
             'play': type==="play",
             'special': type==="special",
-            'new-date': sameDate
+            'new-date': sameDate,
+            'display-item': mediaListItemsOnScreen.includes(currentDate.toString())
           });
 
           const longDate = <span className="date long-date">{Moment(item.key).format("MMM D")}</span> // January 1

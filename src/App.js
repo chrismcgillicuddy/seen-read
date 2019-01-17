@@ -357,31 +357,31 @@ export default class App extends Component {
             </InView>
             */}
 
-                <MediaList
-                  data={mediaLists['list'+displayYear]}
-                  yearsAvailable={yearsAvailable}
-                  displayYear={displayYear}
-                  setDisplayYear={this.setDisplayYear}
-                  highlighted={highlighted}
-                  highlightedItem={highlightedItem}
-                  setHighlight={this.setHighlight}
-                  mediaListVisibility={this.mediaListVisibility}
-                  updateOnScreenItems={this.updateOnScreenItems}
-                  setRadialProgress={this.setRadialProgress}
-                  setMediaListHighlight={this.setMediaListHighlight}
-                />
-                <ButtonList
-                  compactMode={compactYears}
-                  highlightedItem={highlightedItem}
-                  setHighlight={this.setHighlight}
-                />
+            <MediaList
+              data={mediaLists['list'+displayYear]}
+              yearsAvailable={yearsAvailable}
+              displayYear={displayYear}
+              setDisplayYear={this.setDisplayYear}
+              highlighted={highlighted}
+              highlightedItem={highlightedItem}
+              setHighlight={this.setHighlight}
+              mediaListVisibility={this.mediaListVisibility}
+              updateOnScreenItems={this.updateOnScreenItems}
+              setRadialProgress={this.setRadialProgress}
+              setMediaListHighlight={this.setMediaListHighlight}
+            />
+            <ButtonList
+              compactMode={compactYears}
+              highlightedItem={highlightedItem}
+              setHighlight={this.setHighlight}
+            />
+
             {/*
             <ScrollPercentage>
               {(percentage, inView) => (
                 <h2>{`Percentage scrolled: ${calcPercentage(percentage)}%.`}</h2>
               )}
             </ScrollPercentage> */}
-
 
             {/* <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "movie"} )}>
               <div className="step">Movies</div>
