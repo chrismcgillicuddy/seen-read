@@ -4,14 +4,11 @@ import YearPlot from './yearPlot';
 import MediaList from './mediaList';
 import * as _ from 'lodash';
 import Loader from './loader';
-import ButtonList from './buttonList';
+import MostSeenRead from './mostSeenRead';
 import ProgressCircle from './progressCircle';
 import * as toTitleCase from 'to-title-case';
 import { InView } from 'react-intersection-observer';
 import * as classNames from 'classnames';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-// var classNames = require('classnames');
 
 const progressRadius = 30;
 const yearsAvailable = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018];
@@ -28,13 +25,14 @@ export default class App extends Component {
       highlightMediaType: "", // highlight all books, movies...
       loading: true,
       mediaLists: {},
-      compactYears: true,
+      browseYearLists: true,
       displayYear: '2018',
       radialProgress: 0,
       mediaListItemsOnScreen: [],
       scrollState: 0,
       isDesktop: true
     }
+    this.grid = React.createRef();
   }
 
   componentDidMount() {
@@ -97,8 +95,8 @@ export default class App extends Component {
       // check visible elements in MediaList
       const mediaListContainer = document.getElementById("list-panel");
       const mediaListElement = document.getElementsByClassName("media-list");
-      console.log("mediaListContainer scrollHeight",mediaListContainer.scrollHeight);
-      console.log("mediaListElement scrollHeight",mediaListElement[0].scrollHeight);
+      // console.log("mediaListContainer scrollHeight",mediaListContainer.scrollHeight);
+      // console.log("mediaListElement scrollHeight",mediaListElement[0].scrollHeight);
       let clientHeight = document.documentElement.clientHeight;
 
       if (_.isElement(mediaListElement[0])){
@@ -124,8 +122,8 @@ export default class App extends Component {
 
           let item = dailyItems[onScreenItemCount];
           if (item){
-            console.log("item",item);
-            console.log("item.offsetTop",item.offsetTop);
+            // console.log("item",item);
+            // console.log("item.offsetTop",item.offsetTop);
 
             if ((item.offsetTop - mediaListContainer.scrollTop) < (clientHeight))
               onScreenItems.push(item.dataset.date);
@@ -134,10 +132,6 @@ export default class App extends Component {
           }
           onScreenItemCount++;
         }
-        // console.log("------");
-        // console.log("onScreenItems", onScreenItems);
-        // console.log("clientHeight", clientHeight);
-
         this.updateOnScreenItems(onScreenItems);
       }
     } else { // isDesktop
@@ -183,7 +177,7 @@ export default class App extends Component {
   setProgressCirclePosition = (year) => {
     // position progressRadius
     const index = yearsAvailable.indexOf(year);
-    const leftPosition = ((index * 64) - 8);
+    const leftPosition = ((index * 65) - 12);
     const element = document.getElementsByClassName("progress-circle-container");
     element[0].style.left = leftPosition+"px";
   }
@@ -210,23 +204,23 @@ export default class App extends Component {
 
   // toggle YearPlot size
   toggleExpanded() {
-    const currentState = this.state.compactYears;
-    this.setState({ compactYears: !currentState });
+    const currentState = this.state.browseYearLists;
+    this.setState({ browseYearLists: !currentState });
   }
 
   render() {
     const { mediaLists,
-          error,
-          scrollState,
-          highlighted,
-          highlightedItem,
-          highlightedType,
-          highlightMediaType,
-          compactYears,
-          displayYear,
-          radialProgress,
-          mediaListItemsOnScreen,
-          isDesktop } = this.state;
+            error,
+            scrollState,
+            highlighted,
+            highlightedItem,
+            highlightedType,
+            highlightMediaType,
+            browseYearLists,
+            displayYear,
+            radialProgress,
+            mediaListItemsOnScreen,
+            isDesktop } = this.state;
 
     if (error) {
       return(
@@ -251,7 +245,7 @@ export default class App extends Component {
 
       const exploreClasses= classNames({
         'explore': true,
-        'browse-single-year': compactYears,
+        'browse-single-year': browseYearLists,
         'title-highlight': highlightedItem,
       });
 
@@ -259,7 +253,7 @@ export default class App extends Component {
 
       const yearPlotClasses = classNames({
         'year-plots': true,
-        'compact-years': compactYears,
+        'browse-year-lists': browseYearLists,
         'mediaTypeHighlighting': highlightMediaTypeOn,
         'highlight-tv': highlightMediaType==='tv',
         'highlight-movies': highlightMediaType==='movie',
@@ -270,7 +264,7 @@ export default class App extends Component {
 
       const appStateClasses = classNames({
         app: true,
-        'expand-year-plots': !compactYears
+        'expand-year-plots': !browseYearLists
       })
 
       return (
@@ -279,6 +273,7 @@ export default class App extends Component {
             <span>Seen,Read</span>
           </section> */}
 
+{/*
           <div classname="nav-wrap">
             <div className="year-nav">
               {yearNav}
@@ -291,7 +286,9 @@ export default class App extends Component {
             </div>
           </div>
 
-          <section className={exploreClasses} id="app-container">
+          */}
+
+          <section className={exploreClasses} id="app-container" ref={this.grid}>
           {/* <header>
             <span className="title">Seen,Read</span>
             <div className="options">
@@ -300,17 +297,16 @@ export default class App extends Component {
           </header> */}
           <div className="chart">
 
+            {/* explainer 1.
+            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
+              <div className="step">TV</div>
+            </InView>
+            */}
 
+            {/* year plot charts */}
 
-              {/* explainer 1.
-              <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
-                <div className="step">TV</div>
-              </InView>
-              */}
-
-              {/* year plot charts */}
-              <InView className="year-plot-container" tag="div" onChange={inView => this.makeChartSticky()}>
-                <div className={yearPlotClasses}>
+            <InView className="year-plot-container" tag="div" onChange={inView => this.makeChartSticky()}>
+              <div className={yearPlotClasses}>
                 {
                   yearsAvailable.map((year) => {
                     const isSelectedYear = (year == displayYear) ? true : false;
@@ -343,6 +339,7 @@ export default class App extends Component {
               </div>
             </InView>
 
+
           </div>
 
           <div className="controls" id="list-panel">
@@ -356,7 +353,7 @@ export default class App extends Component {
                 <p></p>
             </InView>
             */}
-
+{/* */}
             <MediaList
               data={mediaLists['list'+displayYear]}
               yearsAvailable={yearsAvailable}
@@ -370,9 +367,13 @@ export default class App extends Component {
               setRadialProgress={this.setRadialProgress}
               setMediaListHighlight={this.setMediaListHighlight}
             />
-            <ButtonList
-              compactMode={compactYears}
+
+
+            <MostSeenRead
+              compactMode={browseYearLists}
               highlightedItem={highlightedItem}
+              highlightMediaType={highlightMediaType}
+              setMediaHighlightType={this.setMediaHighlightType}
               setHighlight={this.setHighlight}
             />
 
@@ -446,7 +447,12 @@ export default class App extends Component {
           <a href="#" className="link selected">2017</a>
 
         </div> */}
-        <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'View most seen, read': 'Browse by year'}</button>
+        <button onClick={() => this.toggleExpanded()} className="option-button">
+        {browseYearLists
+          ? 'View most seen, read'
+          : 'Browse by year'
+        }
+        </button>
       </div>
       );
     }

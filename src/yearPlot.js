@@ -123,7 +123,7 @@ export default class YearPlot extends React.Component {
                                 className={itemClass+" item-"+type}
                                 onMouseOver={this.showTitle(d.title, type)}
                                 onMouseOut={this.hideTitle}
-                                onClick={() => setHighlight(d.title, "title", type)}>{d.title}</li>;
+                                onClick={() => setHighlight(d.title, "title", type)}></li>;
               mediaIndex++;
               return element;
             })}

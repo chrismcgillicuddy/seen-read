@@ -50,7 +50,6 @@ export default class MediaList extends React.Component {
       highlightedItem,
       setHighlight,
       mediaListVisibility,
-      mediaListItemsOnScreen,
       updateOnScreenItems,
       setRadialProgress,
       setMediaListHighlight} = this.props;
@@ -75,8 +74,7 @@ export default class MediaList extends React.Component {
     const yearNav = <div className="year-nav">{yearNavItems}</div>;
 
     const mediaListClasses = classNames({
-      'media-list': true,
-      'xyz-entering': (passedClasses === "xyz-entering")
+      'media-list': true
     });
 
     // console.log("mediaListClasses",{mediaListClasses});
@@ -126,8 +124,7 @@ export default class MediaList extends React.Component {
             'book': type==="book",
             'play': type==="play",
             'special': type==="special",
-            'new-date': sameDate,
-            'display-item': mediaListItemsOnScreen.includes(currentDate.toString())
+            'new-date': sameDate
           });
 
           const longDate = <span className="date long-date">{Moment(item.key).format("MMM D")}</span> // January 1

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animate-css-grid": "^1.2.1",
     "change-case": "^3.0.2",
     "classnames": "^2.2.6",
     "d3": "^5.7.0",

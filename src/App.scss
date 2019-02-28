@@ -9,14 +9,16 @@
 
 // animation
 $animation-rate: 0.75s;
-$animation-rate-fast: 0.2s;
+$animation-rate-fast: 0.3s;
 
 // core palette
 $base-dark: #111010;
 $base-dark-lighter: #232221;
 $base-light: #F6F5F1;
 $base-light-dimmed: #E8E3E0;
-$base-highlight: #ECCC87;
+$base-highlight: #ECC971;//#D4A26C;
+$media-highlight-color: #129DC6;  // media highlight color
+
 
 // font families
 $sans-fonts: "IBM Plex Sans", helvetica, arial, sans-serif;
@@ -126,7 +128,7 @@ body {
 .loader {
   position: absolute;
   top: 48%;
-  left: 46%;
+  left: 49%;
   margin: 0 auto;
   width: 36px;
   height: 6px;
@@ -167,29 +169,73 @@ body {
 //     opacity: 0.8;
 //   }
 // }
+
+// TESTS
+// .explore {
+//   background-color: #ede;
+// }
+// .controls {
+//   background-color: #ffe;
+// }
+// .chart {
+//   background-color: gold;
+// }
+
 .explore {
-  display: grid;
-  padding: 0 10px;
-  grid-template-areas: "a b";
-  grid-gap: 40px;
-  // grid-auto-columns: minmax(90px, 700px); // KEEP for large view
-  grid-auto-columns: 70% 30%;
-  // min-width: 1000px; // // KEEP for large view
+  padding: 0 15px;
+  // display: grid;
+  // grid-template-areas: "a b";
+  // grid-gap: 40px;
+  // grid-auto-columns: 70% 30%;
+
+  display: flex;
+  flex-direction: row;
+  // flex-basis: 70% 30%;
+  height: 100%;
+  & .controls,
+  & .chart {
+    transition: all 0.6s ease;
+  }
+  & .controls {
+    flex: 1;
+  }
+  & .chart {
+    flex: 0 55%;
+  }
+  &.browse-single-year .chart {
+    flex: 0 30%;
+    // background-color: red !important;
+  }
+
+
   position: relative;
   height: calc(100vh-93px);
-  // overflow: hidden;
+  overflow: hidden;
+  margin-top: 80px;
+  transition: all $animation-rate ease;
+
   &.browse-single-year {
     // default, for larger screens
-    grid-auto-columns: 30% 70%;
+    // grid-auto-columns: 30% 70%;
+
     transition:all $animation-rate ease;
+    transition: margin 1200ms;
   }
   .expand-year-plots & {
     margin-top: 80px;
-    grid-auto-columns: 55% 45%;
-    transition:all $animation-rate ease;
+
+    // grid-auto-columns: 55% 45%;
+    // flex-basis: 55% 45%;
+    transition: all $animation-rate ease;
+    // transition: margin 1200ms;
     .most-seen-read {
       opacity: 1;
       display: block;
+      animation-name: fadeIn;
+      animation-duration: 0.4s;
+      animation-fill-mode: both;
+      animation-timing-function: ease;
+      animation-delay: 0.7s;
       transition:all $animation-rate ease;
     }
   }
@@ -233,15 +279,18 @@ body {
     "footer footer footer footer footer footer footer footer footer footer";
     grid-auto-columns: minmax(60px, 90px);
     grid-template-rows: 770px auto;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
     animation-name: fadeInLeft;
     animation-duration: 0.6s;
     animation-fill-mode: both;
     animation-timing-function: ease;
     // animation-delay: 0.60s;
     // opacity: 0;
+    transition: all 0.5s ease;
     .browse-single-year & {
       grid-auto-columns: minmax(30px, 40px);
+      transition: all 0.5s ease;
+
     }
     // medium screens
     @media screen and (max-width: $break-medium) {
@@ -254,7 +303,6 @@ body {
   }
 }
 .controls {
-  // max-width: 800px;
   overflow: auto;
   height: 100vh;
   position: relative;
@@ -317,6 +365,7 @@ $defaultOffset: 45;
 .media-list {
   position: relative;
   margin-top: 80px;
+  margin-left: 40px;
   overflow-y: hidden;
   animation-name: fadeInUp;
   animation-duration: 0.6s;
@@ -742,6 +791,9 @@ $defaultOffset: 45;
 .chart-selection-container {
   grid-area: footer;
   max-width: 430px; // default max-width, change max-width if expanded
+  .expand-year-plots & {
+    max-width: none;
+  }
 }
 .chart-selection {
   grid-template-columns: auto 1fr 45px;
@@ -750,8 +802,10 @@ $defaultOffset: 45;
   display: none;
   position: relative;
   border: 2px solid $base-highlight;
-  color: $base-light;
+  color: $base-highlight;
   .type {
+    color: $base-highlight;
+
     opacity: 0.5;
   }
   .right-col {
@@ -836,12 +890,13 @@ $chart-item-background: #888584;
     background-color: $chart-item-background;
     border-radius: 0px;
     text-indent: -99999px;
-    transition: width 0.3s ease 4s;
-    transition: background-color 0.3s ease;
+    // transition: width 0.1s ease;
+    // transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 10;
     .expand-year-plots &,
     .selected-year & {
-      background-color: $base-light;
+      background-color: $base-light-dimmed;
     }
     .title-highlight & {
       background-color: #666;
@@ -854,7 +909,7 @@ $chart-item-background: #888584;
     &.short-title,
     &.medium-title,
     &.long-title {
-      transition: width 0.3s ease 0.4s;
+      transition: width 0.5s ease 0.3s;
     }
     &.short-title {
       width: 5px;
@@ -865,40 +920,45 @@ $chart-item-background: #888584;
     &.long-title {
       width: 9px;
     }
+    .highlight-movies &.highlight,
+    .highlight-tv &.highlight,
+    .highlight-books &.highlight,
+    .highlight-plays &.highlight,
     &.highlight {
-      // background-color: $chart-item-background;
       background-color: $base-light;
       height: 1px;
       z-index: 1;
-    }
-    &.highlight::before {
-      content: "";
-      position: absolute;
-      background-color: $base-highlight;
-      opacity: 0.6;
-      top: -8px;
-      width: 17px;
-      height: 17px;
-      border-radius: 20px;
-      z-index: -1;
+      opacity: 1;
       transition:all $animation-rate-fast ease;
-    }
-      &.short-title.highlight::before,
-      &.medium-title.highlight::before,
-      &.long-title.highlight::before {
-        left: -7px;
+      &::before {
+        content: "";
+        position: absolute;
+        background-color: $base-highlight;
+        opacity: 0.6;
+        top: -8px;
+        width: 17px;
+        height: 17px;
+        border-radius: 20px;
+        z-index: -1;
+        transition:all $animation-rate-fast ease;
       }
-    // .expand-year-plots & {
-    //   &.short-title.highlight::before {
-    //     left: -6px;
-    //   }
-    //   &.medium-title.highlight::before {
-    //     left: -5px;
-    //   }
-    //   &.long-title.highlight::before {
-    //     left: -4px;
-    //   }
-    // }
+    }
+    &.short-title.highlight::before,
+    &.medium-title.highlight::before,
+    &.long-title.highlight::before {
+      left: -7px;
+    }
+    .expand-year-plots & {
+      &.short-title.highlight::before {
+        left: -6px;
+      }
+      &.medium-title.highlight::before {
+        left: -5px;
+      }
+      &.long-title.highlight::before {
+        left: -4px;
+      }
+    }
     // days with no entry
     &.empty-date {
       background-color: #bbb;
@@ -907,15 +967,53 @@ $chart-item-background: #888584;
       margin-bottom: 0;
       margin-left: 1px;
     }
+    // media highlighting
+    .highlight-movies & {
+      opacity: 0.3;
+      &.item-movie {
+        opacity: 1;
+        background-color: $media-highlight-color;
+        transition: all 0.3s ease;
+
+      }
+    }
+    .highlight-books & {
+      opacity: 0.3;
+      &.item-book {
+        opacity: 1;
+        background-color: $media-highlight-color;
+        transition: all 0.3s ease;
+
+      }
+    }
+    .highlight-plays & {
+      opacity: 0.3;
+      &.item-play {
+        opacity: 1;
+        background-color: $media-highlight-color;
+        transition: all 0.3s ease;
+
+      }
+    }
+    .highlight-tv & {
+      opacity: 0.3;
+      &.item-tv {
+        opacity: 1;
+        background-color: $media-highlight-color;
+        transition: all 0.3s ease;
+
+      }
+    }
+
   }
 }
 
 // collapsed year plots (default)
-.compact-years {
-  transition: all 0.3 ease;
+.browse-year-lists {
+  transition: all 0.5 ease;
   .year-plot {
     width: 40px;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
   }
   .plot-year-label {
     font-family: $monospace-fonts;
@@ -956,29 +1054,35 @@ $chart-item-background: #888584;
 
 // the most-seen-read titles
 .most-seen-read {
+  h2 {
+    color: $base-light;
+    font-weight: 600;
+    font-size: 16px;
+    font-style: italic;
+    margin: 0 0 20px;
+  }
   text-align: left;
   display: none;
-  opacity: 0;
-  margin: 15px 60px 20px 0;
+  margin: -5px 60px 20px 0;
   padding: 0 20px;
   list-style: none;
   overflow: auto;
-  transition: all 3s ease;
+  transition: opacity 0.6s ease 2s;
   ul{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
   li {
     display: inline-block;
     margin: 0;
     font-family: $sans-fonts;
     color: $base-light;
-    font-size: 11px;
+    font-size: 12px;
     text-decoration: none;
-    padding: 3px 5px;
+    padding: 4px 6px;
     margin-right: 3px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     border-radius: 2px;
-    background-color: $base-dark-lighter;
+    background-color: rgba($base-dark-lighter, 0.7);
     &.highlight,
     &.highlight:hover {
       background-color: $base-highlight;
@@ -988,15 +1092,59 @@ $chart-item-background: #888584;
       background: lighten($base-dark-lighter, 5%);
       cursor: pointer;
     }
+    // a {
+    //   text-decoration: none;
+    //   display: inline-block;
+    //   margin-left: 6px;
+    //   background: #bbb;
+    //   &:hover {
+    //     background-color: #000;
+    //     color: #fff;
+    //   }
+    // }
   }
   .top-title-type {
+    // border-bottom: 2px solid rgba($base-dark-lighter, 0.7);
+    width: 100%;
+    // padding: 0 0 5px;
     display: inline-block;
-    font-family: $sans-fonts;
-    font-weight: 500;
-    font-size: 11px;
-    color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    // font-family: $monospace-fonts;
+    font-weight: 600;
+    font-size: 12px;
+    color: $base-light;
+    // text-transform: uppercase;
+    margin-bottom: 3px;
+    a {
+      // text-transform: uppercase;
+      // color: #8A8683;
+      text-decoration: none;
+      font-size: 10px;
+      display: inline-block;
+      // margin-left: 10px;
+      span {
+        background-color: rgba($base-dark-lighter, 0.7);
+        border: 1px solid transparent;
+        padding: 4px 6px;
+        margin-right: 3px;
+        margin-bottom: 0px;
+        border-radius: 2px;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 500;
+        // line-height: 0.8;
+        color: $media-highlight-color;
+        // margin: 0 10px -1px 0;
+        &.selected {
+          background-color: $media-highlight-color;
+          color: $base-dark;
+          border: 1px solid $media-highlight-color;
+        }
+      }
+      &:hover {
+        text-decoration: underline;
+        color: $base-light-dimmed;
+      }
+    }
   }
 }
 
@@ -1006,7 +1154,7 @@ $chart-item-background: #888584;
 // seen,read name plate
 .name-plate {
   position: absolute;
-  top: 20px;
+  top: 25px;
   left: 20px;
   font-family: $sans-fonts;
   font-weight:400;
@@ -1070,7 +1218,7 @@ $chart-item-background: #888584;
 // radial progress, appears behind the selected year in the year list navigation
 .progress-circle-container {
   position: absolute;
-  left: 572px; // default position for 2017
+  left: 573px; // default position for 2017
   top: -15px;
   width: 90px;
   padding: 15px 15px;
@@ -1087,7 +1235,6 @@ $chart-item-background: #888584;
   width:60px;
   height:60px;
   display: block;
-  // z-index: 100;
   transform: rotate(-90deg);
   transition: all 0.3s ease;
   circle.progress-disk {
@@ -1113,18 +1260,19 @@ $chart-item-background: #888584;
 }
 .option-button {
   position: absolute;
-  top: 20px;
+  top: 22px;
   right: 20px;
   font-family: $sans-fonts;
   text-align: left;
   background-color: transparent;
-  border: 2px solid $base-light-dimmed;
+  // border: 2px solid $base-light-dimmed;
+  border: 2px solid #2EE392;
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
-  padding: 8px 8px;
+  padding: 9px 8px -25px 8px;
   border-radius: 3px;
-  color: $base-light-dimmed;
+  color: #2EE392;
   outline: none;
   cursor: pointer;
   transition: width 0.3s ease;
@@ -1132,12 +1280,13 @@ $chart-item-background: #888584;
   animation-duration: 0.6s;
   animation-fill-mode: both;
   animation-timing-function: ease;
-  // animation-delay: 0.6s;
-  // &:active { }
-  // &:before {
-  //   content: "✨";
-  //     color: transparent;
-  //     text-shadow: 0 0 0 $base-highlight;
-  //     line-height: 1;
-  //   }
+  &:before {
+    content: url(./assets/star.svg);
+    width: 20px;
+    float: left;
+    margin-right: 6px;
+    margin-top: -4px;
+    margin-bottom: -9px;
+    fill: gold;
+  }
 }

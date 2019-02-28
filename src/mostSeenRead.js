@@ -1,7 +1,7 @@
 import React from 'react';
 import * as toTitleCase from 'to-title-case';
 
-export default class ButtonList extends React.Component {
+export default class MostSeenRead extends React.Component {
 
   sortTitles = (a,b) => {
     a = a.toLowerCase();
@@ -16,10 +16,18 @@ export default class ButtonList extends React.Component {
     }
   }
 
+  // toggle YearPlot size
+  toggleMediaHighlight(mediaType) {
+    const currentState = this.props.highlightMediaType;
+    (mediaType===currentState) ? this.props.setMediaHighlightType("") : this.props.setMediaHighlightType(mediaType);
+  }
+
   render() {
     const {
           compactMode,
           setHighlight,
+          highlightMediaType,
+          setMediaHighlightType,
           highlightedItem,
           listType} = this.props;
 
@@ -54,8 +62,8 @@ export default class ButtonList extends React.Component {
       // frequent books, plays
       const bookPlayList = bookPlayData.map((item, i) => {
         let title = item.toString().toLowerCase();
-
         let itemClass = "";
+        const itemHighlighted = (title===highlightedItem);
 
         if (title===highlightedItem) {
           itemClass+="highlight ";
@@ -63,7 +71,10 @@ export default class ButtonList extends React.Component {
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "title", "book")}>{toTitleCase(item)}</li>;
+                          onClick={() => setHighlight(title, "title", "book")}>
+                        {toTitleCase(item)}
+                        {/* (itemHighlighted) ? <a href="#" onClick={() => setHighlight(" ", "title", " ")}>✕</a> : null */}
+                      </li>;
         return element;
       }, this);
 
@@ -71,49 +82,58 @@ export default class ButtonList extends React.Component {
       // Soderbergh buttons
       const soderberghList = soderberghFilms.map((item, i) => {
         let title = item.toString().toLowerCase();
-
         let itemClass = "";
+        const itemHighlighted = (title===highlightedItem);
 
-        if (title===highlightedItem) {
+        if (itemHighlighted) {
           itemClass+="highlight ";
         }
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "title", "movie")}>{item}</li>;
+                          onClick={() => setHighlight(title, "title", "movie")}>
+                          {toTitleCase(item)}
+                          {/* (itemHighlighted) ? <a href="#" onClick={() => setHighlight("", "title", "")}>✕</a> : null */}
+                      </li>;
         return element;
       }, this);
 
       // movie buttons
       const movieList = movieData.map((item, i) => {
-        let title = item.toString().toLowerCase();
-
+        const title = item.toString().toLowerCase();
         let itemClass = "";
+        const itemHighlighted = (title===highlightedItem);
 
-        if (title===highlightedItem) {
+        if (itemHighlighted) {
           itemClass+="highlight ";
         }
 
         let element = <li key={i}
                           className={itemClass}
-                          onClick={() => setHighlight(title, "title", "movie")}>{item}</li>;
+                          onClick={() => setHighlight(title, "title", "movie")}>
+                        {toTitleCase(item)}
+                        {/*(itemHighlighted) ? <a href="#" onClick={() => this.props.setHighlight("", "title", "")}>✕</a> : null */}
+                      </li>;
         return element;
       }, this);
 
       // tv buttons
       const tvList = tvData.map((item, i) => {
-
-        let title = item.toString().toLowerCase();
-
+        const title = item.toString().toLowerCase();
         let itemClass = "";
+        const itemHighlighted = (title===highlightedItem);
 
-        if (title===highlightedItem) {
+        if (itemHighlighted){
           itemClass+="highlight ";
         }
 
         let element = <li key={i}
-                          className={itemClass}
-                          onClick={() => setHighlight(title, "title", "tv")}>{item}</li>;
+                        className={itemClass}
+                        onClick={() => setHighlight(title, "title", "tv")}
+                      >
+                        {toTitleCase(item)}
+                        {/* (itemHighlighted) ? <span onClick={() => setHighlight("", "title", "")}>✕</span> : null */}
+                      </li>;
         return element;
       }, this);
 
@@ -128,21 +148,36 @@ export default class ButtonList extends React.Component {
           <li>Principal photography</li>
           <li>Other</li>
         </ul> */}
+        <h2>Most frequently seen, read</h2>
 
-        <span className='top-title-type'>Soderbergh Films</span>
+        <span className='top-title-type'>Soderbergh projects</span>
         <ul className={''}>
           {soderberghList}
         </ul>
 
-        <span className='top-title-type'>Film</span>
+        <span className='top-title-type'>
+          <a href="#" onClick={() => this.toggleMediaHighlight("movie")}>{highlightMediaType==="movie" ? <span className="selected">Movies ✕</span> : <span>Movies</span>}
+          </a>
+        </span>
         <ul className={''}>
           {movieList}
         </ul>
-        <span className='top-title-type'>TV</span>
+        <span className='top-title-type'>
+          <a href="#" onClick={() => this.toggleMediaHighlight("tv")}>
+          {highlightMediaType==="tv" ? <span className="selected">TV ✕</span> : <span>TV</span>}
+          </a>
+        </span>
         <ul className={''}>
           {tvList}
         </ul>
-        <span className='top-title-type'>Books/Plays</span>
+        <span className='top-title-type'>
+          <a href="#" onClick={() => this.toggleMediaHighlight("book")}>
+          {highlightMediaType==="book" ? <span className="selected">Books  ✕</span> : <span>Books</span>}
+          </a>
+          <a href="#" onClick={() => this.toggleMediaHighlight("play")}>
+            {highlightMediaType==="play" ? <span className="selected">Plays  ✕</span> : <span>Plays</span>}
+          </a>
+        </span>
         <ul className={''}>
           {bookPlayList}
         </ul>
