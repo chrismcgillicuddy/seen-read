@@ -19,6 +19,7 @@
     "react-rangeslider": "^2.2.0",
     "react-scroll-percentage": "^3.0.0",
     "react-transition-group": "^2.5.2",
+    "react-window": "^1.5.2",
     "scroll-into-view": "^1.9.3",
     "to-title-case": "^1.0.0",
     "uuid": "^3.3.2"

@@ -3,6 +3,7 @@ import Moment from 'moment';
 import * as _ from 'lodash';
 import * as classNames from 'classnames';
 import * as toTitleCase from 'to-title-case';
+import { VariableSizeList as List } from 'react-window';
 
 // const uuidv4 = require('uuid/v4');
 const progressRadius = 30;
@@ -23,6 +24,18 @@ export default class MediaList extends React.Component {
     const mediaListPanel = document.getElementById("list-panel");
     mediaListPanel.removeEventListener('scroll', this.updateRadialProgress);
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // console.log("_.size(this.props.data)",_.size(this.props.data));
+  //   // console.log("_.size(nextProps.data)",_.size(nextProps.data));
+  //   console.log("this.props.displayYear", this.props.displayYear);
+  //   console.log("nextProps.displayYear", nextProps.displayYear);
+  //   if (_.size(this.props.displayYear) == _.size(nextProps.displayYear)) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   updateRadialProgress = (event) => {
     // move this radial progress setup
@@ -77,8 +90,6 @@ export default class MediaList extends React.Component {
       'media-list': true
     });
 
-    // console.log("mediaListClasses",{mediaListClasses});
-
     const listItems = data.map((item, i) => {
       if (item.values){
         let itemsPerDay = item.values;
@@ -113,6 +124,11 @@ export default class MediaList extends React.Component {
           // console.log("includes: ",mediaListItemsOnScreen.includes(currentDate));
           // console.log("mediaListItemsOnScreen.indexOf(currentDate)==1",mediaListItemsOnScreen.indexOf(currentDate)==1);
 
+          // color assignment test
+          // const bgColors = ['red-bg','pink-bg','green-bg','brown-bg','purple-bg'];
+          // const itemColorClass = bgColors[Math.floor(Math.random()*bgColors.length)];
+          // console.log("itemColorClass",itemColorClass);
+
           // item classes
           const itemClasses = classNames({
             'item': true,
@@ -121,10 +137,12 @@ export default class MediaList extends React.Component {
             'movie': type==="movie",
             'tv': type==="tv",
             'short': type==="short",
+            'short-story': type==="short story",
             'book': type==="book",
             'play': type==="play",
             'special': type==="special",
             'new-date': sameDate
+            // [`${itemColorClass}`]: true
           });
 
           const longDate = <span className="date long-date">{Moment(item.key).format("MMM D")}</span> // January 1
@@ -168,8 +186,10 @@ export default class MediaList extends React.Component {
       }
     }, this)
     return (
-      <div className={mediaListClasses} id="test-element">
-        {listItems}
+      <div>
+        <div className={mediaListClasses} id="test-element">
+          {listItems}
+        </div>
       </div>
     );
   }

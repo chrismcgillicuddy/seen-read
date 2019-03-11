@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import './App.scss';
-import YearPlot from './yearPlot';
-import MediaList from './mediaList';
 import * as _ from 'lodash';
-import Loader from './loader';
-import MostSeenRead from './mostSeenRead';
-import ProgressCircle from './progressCircle';
 import * as toTitleCase from 'to-title-case';
 import { InView } from 'react-intersection-observer';
 import * as classNames from 'classnames';
+
+import './App.scss';
+import Loader from './loader';
+import YearPlot from './yearPlot';
+import MediaList from './mediaList';
+import MostSeenRead from './mostSeenRead';
+import ProgressCircle from './progressCircle';
+import soderbergh from './assets/soderbergh.png';
 
 const progressRadius = 30;
 const yearsAvailable = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018];
@@ -112,7 +114,6 @@ export default class App extends Component {
           else
             end = mid;
         }
-        // console.log('dailyItems start',start);
 
         let isOnScreen = true;
         let onScreenItems = [];
@@ -269,24 +270,35 @@ export default class App extends Component {
 
       return (
         <div className={appStateClasses}>
-          {/* <section className="cover">
-            <span>Seen,Read</span>
-          </section> */}
 
-{/*
-          <div classname="nav-wrap">
-            <div className="year-nav">
-              {yearNav}
-              <ProgressCircle
-                className={'progress-circle'}
-                radius={progressRadius}
-                radialProgress={radialProgress}
-                displayYear={displayYear}
-              />
+          {/* */}
+          <div className="header-row">
+            <img className="steven" src={soderbergh} width="250" alt="Soderbergh" />
+            <div className="name-plate">Seen, Read</div>
+            <p className="intro">Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh">Stephen Soderbergh</a> has been sharing
+            a <a href="http://extension765.com/soderblogh/33-seen-read-2018">daily account</a> of
+            every <span className="movie-label">movie</span>, <span className="book-label">book</span>, <span className="play-label">play</span>, and <span className="tv-label">TV</span> show he's
+            seen or read for the past 10 years.</p>
+            {/* <p class="intro">The lists highlight the directpr's interests in span the history of cinema</p>
+            Offers a glimps (more than a glimps)
+            In that time, he's created film and television projects
+            */}
+            <div classname="nav-wrap">
+              <div className="year-nav">
+                {yearNav}
+                <ProgressCircle
+                  className={'progress-circle'}
+                  radius={progressRadius}
+                  radialProgress={radialProgress}
+                  displayYear={displayYear}
+                />
+              </div>
             </div>
           </div>
 
-          */}
+
+
+
 
           <section className={exploreClasses} id="app-container" ref={this.grid}>
           {/* <header>
@@ -420,9 +432,6 @@ export default class App extends Component {
         {/* <section className="media-list-panel" id="list-panel"> */}
 
         </section>
-
-        {/* title */}
-        <div className="name-plate">Seen,Read</div>
 
         {/* hover title */}
         <div className="title-hightlight selected-title-hover">

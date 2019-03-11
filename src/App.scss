@@ -1,5 +1,3 @@
-
-/////////////////////////////////////////////////////
 // SETUP
 
 // fonts
@@ -16,9 +14,15 @@ $base-dark: #111010;
 $base-dark-lighter: #232221;
 $base-light: #F6F5F1;
 $base-light-dimmed: #E8E3E0;
-$base-highlight: #ECC971;//#D4A26C;
+$base-highlight: #E0B628; //#ECC971;//#D4A26C;
 $media-highlight-color: #129DC6;  // media highlight color
 
+// media colors
+$book-color: #D54731;
+$play-color: #B18759;
+$short-story-color: #D97035;
+$movie-color: #236A9F;
+$tv-color: #248B44;
 
 // font families
 $sans-fonts: "IBM Plex Sans", helvetica, arial, sans-serif;
@@ -152,6 +156,27 @@ body {
   }
 }
 
+////////////////
+// COLOR TESTS
+// ['red-bg','pink-bg','green-bg','brown-bg','purple-bg']
+// .media-list .item {
+//   &.red-bg {
+//     background-color: red !important;
+//   }
+//   &.pink-bg {
+//     background-color: pink !important;
+//   }
+//   &.green-bg {
+//     background-color: green!important;
+//   }
+//   &.brown-bg {
+//     background-color: brown!important;
+//   }
+//   &.purple-bg {
+//     background-color: purple!important;
+//   }
+// }
+
 /////////////////////////////////////////////////////
 // LAYOUT
 
@@ -211,7 +236,7 @@ body {
   position: relative;
   height: calc(100vh-93px);
   overflow: hidden;
-  margin-top: 80px;
+  margin-top: 20px;
   transition: all $animation-rate ease;
 
   &.browse-single-year {
@@ -249,9 +274,6 @@ body {
     &.browse-single-year {
       grid-auto-columns: 0 auto;
       grid-gap: 0px;
-      .media-list {
-
-      }
     }
   }
 
@@ -263,6 +285,7 @@ body {
   // height: 100vh;
   // overflow-y: auto;
   .year-plot-container {
+    display: none;
     float: right;
     // display: none;
     .sticky-header {
@@ -364,8 +387,8 @@ $specialOffset: 0;
 $defaultOffset: 45;
 .media-list {
   position: relative;
-  margin-top: 80px;
-  margin-left: 40px;
+  margin-top: 10px;
+  // margin-left: 40px;
   overflow-y: hidden;
   animation-name: fadeInUp;
   animation-duration: 0.6s;
@@ -387,9 +410,11 @@ $defaultOffset: 45;
     x-align-items: stretch;
     align-items: center;
     margin-top: 2px;
-    padding: 17px 30px;
+    padding: 12px 22px;
     background-color: $base-light-dimmed;
-    font-size: 23px;
+    transition:all 0.2s ease;
+    font-size: 24px;
+    line-height: 1.3;
     width: 60%;
     // max-width: 720px;
     .title {
@@ -425,6 +450,7 @@ $defaultOffset: 45;
       .date,
       .note {
         opacity: 1;
+        transition:all 0.2 ease;
       }
     }
     // shrink for smaller screens
@@ -504,7 +530,8 @@ $defaultOffset: 45;
   }
   // READ: books and plays
   .play,
-  .book {
+  .book,
+  .short-story {
     padding: 22px 30px;
     font-family: $serif-fonts;
     flex-direction: row;
@@ -515,7 +542,9 @@ $defaultOffset: 45;
     .title,
     .credit {
       display: block;
-      color: $title-color;
+      // color: $title-color;
+      color: #111;
+
       flex-grow: 1;
       text-align: left;
     }
@@ -529,19 +558,26 @@ $defaultOffset: 45;
   }
   .book {
     margin-left: $bookOffset+px;
+    background-color: $book-color;
+  }
+  .short-story {
+    margin-left: $bookOffset+px;
+    background-color: $short-story-color;
   }
   .play {
     margin-left: $playOffset+px;
+    background-color: $play-color;
   }
   // SEEN: TV, movies, shorts
   .tv,
   .movie,
   .short {
     border-radius: 8px;
-    background-color: $base-light;
+    // background-color: $base-light;
     .title,
     .year {
       font-family: $sans-fonts;
+      color: #fff;
     }
     .title {
       font-weight: 500;
@@ -550,12 +586,19 @@ $defaultOffset: 45;
   .tv {
     text-align: center;
     margin-left: $tvOffset+px;
+    background-color: $tv-color;
   }
   .movie,
   .short {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 18px;
+    padding-bottom: 18px;
     display: flex;
+    background-color: $movie-color;
+
+    .title,
+    .year {
+      color: #fff;
+    }
     .title {
       flex: 1;
     }
@@ -577,10 +620,9 @@ $defaultOffset: 45;
   }
   // special items: when principal photograpy starts on a Soderbergh project
   .special {
-    max-width: 720px;
     text-align: center;
     border-radius: 8px;
-    background-color: #333;
+    background-color: $base-dark;
     padding-top: 25px;
     padding-bottom: 25px;
     .title {
@@ -654,7 +696,8 @@ $defaultOffset: 45;
   .short .details {
     padding-left: ($defaultOffset - $shortOffset)+px;
   }
-  .book .details {
+  .book .details,
+  .short-story .details {
     padding-left: ($defaultOffset - $bookOffset)+px;
   }
   .play .details {
@@ -667,11 +710,12 @@ $defaultOffset: 45;
   .tv,
   .movie,
   .book,
+  .short-story,
   .short,
   .play,
   .special {
-    &.highlight {
-      background-color: #474642;
+    &.chart-selection-highlight {
+      // background-color: #474642;
       font-weight: bold;
       .title,
       .year,
@@ -680,7 +724,7 @@ $defaultOffset: 45;
       }
       .year,
       .credit {
-        font-weight: 300;
+        font-weight: 400;
       }
     }
   }
@@ -840,7 +884,7 @@ $defaultOffset: 45;
     .type {
       text-transform: uppercase;
       font-weight: 300;
-      opacity: 0.7;
+      opacity: 1;
     }
   }
   .right-col {
@@ -983,7 +1027,6 @@ $chart-item-background: #888584;
         opacity: 1;
         background-color: $media-highlight-color;
         transition: all 0.3s ease;
-
       }
     }
     .highlight-plays & {
@@ -1153,19 +1196,27 @@ $chart-item-background: #888584;
 
 // seen,read name plate
 .name-plate {
-  position: absolute;
-  top: 25px;
-  left: 20px;
+  // position: absolute;
+  // top: 25px;
+  // left: 20px;
   font-family: $sans-fonts;
-  font-weight:400;
-  font-size: 26px;
+  font-weight: 200;
+  font-size: 52px;
   line-height: 1;
   font-style: italic;
   color: $base-light;
-  animation-name: fadeInLeft;
-  animation-duration: 0.6s;
-  animation-fill-mode: both;
-  animation-timing-function: ease;
+  // animation-name: fadeInUp ;
+  // animation-duration: 0.6s;
+  // animation-fill-mode: both;
+  // animation-timing-function: ease;
+  display: block;
+  text-align: center;
+  margin: 20px 0 25px 0;
+}
+
+.nav-wrap,
+.option-button {
+  display: none;
 }
 
 // display all available years for browsing with the list
@@ -1178,10 +1229,10 @@ $chart-item-background: #888584;
   margin: 10px auto 5px auto;
   overflow: visible;
   transition: width 0.3s ease;
-  animation-name: fadeInDown;
-  animation-duration: 0.6s;
-  animation-fill-mode: both;
-  animation-timing-function: ease;
+  // animation-name: fadeInDown;
+  // animation-duration: 0.6s;
+  // animation-fill-mode: both;
+  // animation-timing-function: ease;
   .expand-year-plots & {
     display: none;
   }
@@ -1264,15 +1315,15 @@ $chart-item-background: #888584;
   right: 20px;
   font-family: $sans-fonts;
   text-align: left;
-  background-color: transparent;
+  background-color: $base-light;
   // border: 2px solid $base-light-dimmed;
-  border: 2px solid #2EE392;
+  border: 2px solid $base-light;
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
-  padding: 9px 8px -25px 8px;
+  padding: 9px 8px 9px 8px;
   border-radius: 3px;
-  color: #2EE392;
+  color: $base-dark;
   outline: none;
   cursor: pointer;
   transition: width 0.3s ease;
@@ -1281,12 +1332,81 @@ $chart-item-background: #888584;
   animation-fill-mode: both;
   animation-timing-function: ease;
   &:before {
+    display: none;
     content: url(./assets/star.svg);
     width: 20px;
     float: left;
     margin-right: 6px;
     margin-top: -4px;
     margin-bottom: -9px;
-    fill: gold;
+    // fill: gold;
   }
+}
+
+
+.header-row {
+  animation-name: fadeInUp;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+}
+.soderbergh {
+  display: block;
+  background-size: cover;
+  resize: both;
+}
+.steven {
+  margin: 80px auto 0 auto;
+  display: block;
+}
+h1 {
+  font-family: $sans-fonts;
+  font-weight:400;
+  font-size: 68px;
+  line-height: 1;
+  font-style: italic;
+  color: $base-light;
+  text-align: center;
+}
+.intro {
+  margin: 0 auto 20px auto;
+  font-size: 18px;
+  font-family: $serif-fonts;
+  font-weight: 300;
+  text-align: center;
+  color: #fff;
+  width: 500px;
+  line-height: 1.5;
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: 1px solid #888;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  // .book-label,
+  // .play-label,
+  // .tv-label,
+  // .movie-label {
+  //   padding: 1px 5px;
+  //   border-radius: 3px;
+  //   color: #fff;
+  //   font-size: 16px;
+  // }
+  // .book-label {
+  //   background-color: $book-color;
+  //   color: #000;
+  // }
+  // .play-label {
+  //   background-color: $play-color;
+  //   color: #000;
+  // }
+  // .tv-label {
+  //   background-color: $tv-color;
+  // }
+  // .movie-label {
+  //   background-color: $movie-color;
+  // }
 }
