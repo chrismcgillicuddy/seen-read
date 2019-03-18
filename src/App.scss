@@ -30,6 +30,7 @@ $serif-fonts: "IBM Plex Serif",  georgia, times, serif;
 $monospace-fonts: "IBM Plex Mono", monospace;
 
 // screen size break points
+$break-large: 1300px;
 $break-medium: 1000px;
 $break-small: 400px;
 
@@ -114,7 +115,6 @@ body {
   text-rendering: optimizeLegibility;
   font-family: $sans-fonts;
   background-color: $base-dark;
-  // position: relative;
 }
 .link {
   text-decoration: none;
@@ -206,6 +206,109 @@ body {
 //   background-color: gold;
 // }
 
+//////////////////////////////////////////////////
+// heading and intro
+.seen-read-intro {
+  margin: 15px auto;
+  width: 550px;
+  // animation-name: fadeInUp ;
+  // animation-duration: 0.6s;
+  // animation-fill-mode: both;
+  // animation-timing-function: ease;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  width: 100%;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  flex: 1;
+}
+// .illustration-column {
+//   // height: 100px;
+// }
+// .intro-column {
+//   // background-color: green;
+//   // height: 100px;
+// }
+
+.content {
+  margin: 0 auto;
+  width: 300px;
+  color: #fff;
+}
+.steven {
+  margin: 80px auto 0 auto;
+  display: block;
+}
+.intro-with-illustration {
+  margin: 50px auto 0 auto;
+  width: 550px;
+  padding: 30px 0 0 230px;
+  height: 460px;
+  background: url('./assets/soderbergh_sm.png') top left no-repeat;
+}
+
+// seen,read name plate
+.name-plate {
+  font-family: $sans-fonts;
+  font-weight: 200;
+  font-size: 48px;
+  line-height: 1.5;
+  font-style: italic;
+  color: $base-light;
+  display: block;
+  margin: 0 0 15px 0;
+}
+.intro {
+  margin: 0 auto 20px auto;
+  font-size: 17px;
+  font-family: $serif-fonts;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #fff;
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: 2px solid #444;
+    &:hover {
+      text-decoration: none;
+      border-color: #999;
+    }
+  }
+  // .book-label,
+  // .play-label,
+  // .tv-label,
+  // .movie-label {
+  //   padding: 1px 5px;
+  //   border-radius: 3px;
+  //   color: #fff;
+  //   font-size: 16px;
+  // }
+  // .book-label {
+  //   background-color: $book-color;
+  //   color: #000;
+  // }
+  // .play-label {
+  //   background-color: $play-color;
+  //   color: #000;
+  // }
+  // .tv-label {
+  //   background-color: $tv-color;
+  // }
+  // .movie-label {
+  //   background-color: $movie-color;
+  // }
+}
+
+
+
+
 .explore {
   padding: 0 15px;
   // display: grid;
@@ -264,6 +367,7 @@ body {
       transition:all $animation-rate ease;
     }
   }
+
   // medium screens
   @media screen and (max-width: $break-medium) {
     grid-auto-columns: 20% 80%;
@@ -278,58 +382,106 @@ body {
   }
 
 }
+
+
+.year-chart {
+  position: fixed;
+  top: 0;
+  left: 40px;
+  width: 300px;
+  z-index: 200;
+}
+
+
 .chart {
   // background: #aaa; //testing
   // position: sticky;
   justify-self: end;
   // height: 100vh;
   // overflow-y: auto;
-  .year-plot-container {
-    display: none;
-    float: right;
-    // display: none;
-    .sticky-header {
-      position: sticky;
-      top: 40px;
-    }
-  }
-  .year-plots {
-    display: none;
-    // position: sticky;
-    margin-left: 30px;
-    display: grid;
-    grid-template-areas: ". . . . . . . . . ."
-    "footer footer footer footer footer footer footer footer footer footer";
-    grid-auto-columns: minmax(60px, 90px);
-    grid-template-rows: 770px auto;
-    transition: width 0.5s ease;
-    animation-name: fadeInLeft;
-    animation-duration: 0.6s;
-    animation-fill-mode: both;
-    animation-timing-function: ease;
-    // animation-delay: 0.60s;
-    // opacity: 0;
-    transition: all 0.5s ease;
-    .browse-single-year & {
-      grid-auto-columns: minmax(30px, 40px);
-      transition: all 0.5s ease;
 
-    }
-    // medium screens
-    @media screen and (max-width: $break-medium) {
-      grid-auto-columns: 10% 90%;
-
-      .year-plot:not(.selected-year) {
-        display: none;
-      }
-    }
-  }
 }
 .controls {
-  overflow: auto;
-  height: 100vh;
+  // overflow: auto;
+  // height: 100vh;
   position: relative;
+  background-color: #ccc;
 }
+
+
+.year-plot-container {
+  display: none;
+  height: 760px;
+  // float: right;
+  // // display: none;
+  // .sticky-header {
+  //   position: sticky;
+  //   top: 40px;
+  // }
+}
+.year-plots {
+  margin-left: 30px;
+  display: grid;
+  grid-template-areas: ". . . . . . . . . ."
+  "footer footer footer footer footer footer footer footer footer footer";
+  grid-auto-columns: minmax(40px, 90px);
+  grid-template-rows: 590px auto;
+  transition: width 0.5s ease;
+  animation-name: fadeInLeft;
+  animation-duration: 0.2s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  // animation-delay: 0.60s;
+  opacity: 0;
+  transition: all 0.5s ease;
+  .browse-single-year & {
+    grid-auto-columns: minmax(30px, 40px);
+    transition: all 0.5s ease;
+
+  }
+
+  // large screens
+  @media screen and (min-width: $break-large) {
+    // .year-plot.selected-year {
+    //   width: 100px;
+    // }
+    // .year-plot:not(.selected-year) .daily-items li {
+    //   transition: width 0.3s ease 0.8s;
+    //   &.short-title,
+    //   &.medium-title,
+    //   &.long-title {
+    //     width: 2px;
+    //     height: 1px;
+    //     margin-right: 1px;
+    //     transition: width 0.5s ease;
+    //   }
+    // }
+
+  }
+
+  // large screens
+  @media screen and (max-width: $break-large) {
+    // background: pink;
+  }
+
+  // small screens
+  @media screen and (max-width: $break-small) {
+    background: white;
+
+  }
+
+  // medium screens
+  @media screen and (max-width: $break-medium) {
+    grid-auto-columns: 10% 90%;
+    background: gold;
+    .year-plot:not(.selected-year) {
+      display: none;
+    }
+  }
+}
+
+
+
 
 // header
 // header {
@@ -376,7 +528,6 @@ body {
 //   }
 // }
 
-// scrollable media list
 // horizontal offset for types of list items
 $bookOffset: 20;
 $playOffset: 15;
@@ -385,11 +536,14 @@ $shortOffset: 10;
 $tvOffset: 5;
 $specialOffset: 0;
 $defaultOffset: 45;
+
+// scrollable media list
 .media-list {
   position: relative;
   margin-top: 10px;
-  // margin-left: 40px;
-  overflow-y: hidden;
+  margin-bottom: 20px;
+  margin-left: 520px;
+  // overflow-y: hidden;
   animation-name: fadeInUp;
   animation-duration: 0.6s;
   animation-fill-mode: both;
@@ -638,10 +792,11 @@ $defaultOffset: 45;
   .details {
     position: absolute;
     display: block;
-    width: 40%;
+    // width: 40%;
+    width: 300px;
     height: 100%;
     color: $base-light-dimmed;
-    padding: 5px 15px 0 $defaultOffset+px;
+    padding: 0px 15px 0 $defaultOffset+px;
     top: 0px;
     left: 100%;
     font-size: 15px;
@@ -821,7 +976,7 @@ $defaultOffset: 45;
 
 // show item title in chart when hovering
 .selected-title-hover {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 20px;
   opacity: 0;
@@ -849,7 +1004,6 @@ $defaultOffset: 45;
   color: $base-highlight;
   .type {
     color: $base-highlight;
-
     opacity: 0.5;
   }
   .right-col {
@@ -866,6 +1020,9 @@ $defaultOffset: 45;
     color: $base-highlight;
   }
   .title-highlight & { // show / hide based on parent state
+    display: grid;
+  }
+  &.has-title {
     display: grid;
   }
 }
@@ -1193,44 +1350,24 @@ $chart-item-background: #888584;
 
 /////////////////////////////////////////////////////
 // HEADER elements: name plate & main navigation
-
-// seen,read name plate
-.name-plate {
-  // position: absolute;
-  // top: 25px;
-  // left: 20px;
-  font-family: $sans-fonts;
-  font-weight: 200;
-  font-size: 52px;
-  line-height: 1;
-  font-style: italic;
-  color: $base-light;
-  // animation-name: fadeInUp ;
-  // animation-duration: 0.6s;
-  // animation-fill-mode: both;
-  // animation-timing-function: ease;
-  display: block;
-  text-align: center;
-  margin: 20px 0 25px 0;
-}
-
-.nav-wrap,
-.option-button {
-  display: none;
+.nav-wrap {
+  height: 77px;
 }
 
 // display all available years for browsing with the list
 .year-nav {
-  height: 65px;
+  height: 77px;
   display: block;
   position: relative;
   width: 650px;
   // background-color: #555;
-  margin: 10px auto 5px auto;
-  overflow: visible;
+  // padding: 10px 0;
+
+  margin: 0 auto;
+  overflow: hidden;
   transition: width 0.3s ease;
   // animation-name: fadeInDown;
-  // animation-duration: 0.6s;
+  animation-duration: 0.4s;
   // animation-fill-mode: both;
   // animation-timing-function: ease;
   .expand-year-plots & {
@@ -1239,12 +1376,13 @@ $chart-item-background: #888584;
 }
 .year-links {
   position: absolute;
+  top: 9px;
   margin: 18px 0;
   width: 100%;
   text-align: center;
   opacity: 1;
-  z-index: 100;
-  a {
+  z-index: 50;
+  span {
     font-size: 13px;
     font-family: $monospace-fonts;
     font-weight: 00;
@@ -1257,6 +1395,7 @@ $chart-item-background: #888584;
     }
     &:hover {
       opacity: 1;
+      cursor: pointer;
     }
     &.selected {
       color: $base-light;
@@ -1269,8 +1408,8 @@ $chart-item-background: #888584;
 // radial progress, appears behind the selected year in the year list navigation
 .progress-circle-container {
   position: absolute;
-  left: 573px; // default position for 2017
-  top: -15px;
+  left: 573px; // default position for 2018
+  top: -7px;
   width: 90px;
   padding: 15px 15px;
   background: transparent;
@@ -1315,15 +1454,14 @@ $chart-item-background: #888584;
   right: 20px;
   font-family: $sans-fonts;
   text-align: left;
-  background-color: $base-light;
-  // border: 2px solid $base-light-dimmed;
   border: 2px solid $base-light;
+  background-color: $base-dark;
   font-size: 14px;
   line-height: 16px;
   font-weight: 500;
-  padding: 9px 8px 9px 8px;
+  padding: 9px 14px 9px 14px;
   border-radius: 3px;
-  color: $base-dark;
+  color: $base-light;
   outline: none;
   cursor: pointer;
   transition: width 0.3s ease;
@@ -1331,18 +1469,12 @@ $chart-item-background: #888584;
   animation-duration: 0.6s;
   animation-fill-mode: both;
   animation-timing-function: ease;
-  &:before {
-    display: none;
-    content: url(./assets/star.svg);
-    width: 20px;
-    float: left;
-    margin-right: 6px;
-    margin-top: -4px;
-    margin-bottom: -9px;
-    // fill: gold;
+  &:hover {
+    color: $base-dark;
+    background-color: $base-light;
+
   }
 }
-
 
 .header-row {
   animation-name: fadeInUp;
@@ -1355,58 +1487,71 @@ $chart-item-background: #888584;
   background-size: cover;
   resize: both;
 }
-.steven {
-  margin: 80px auto 0 auto;
-  display: block;
-}
-h1 {
-  font-family: $sans-fonts;
-  font-weight:400;
-  font-size: 68px;
-  line-height: 1;
-  font-style: italic;
-  color: $base-light;
-  text-align: center;
-}
-.intro {
-  margin: 0 auto 20px auto;
-  font-size: 18px;
-  font-family: $serif-fonts;
-  font-weight: 300;
-  text-align: center;
-  color: #fff;
-  width: 500px;
-  line-height: 1.5;
-  a {
-    color: #fff;
+.logo-block {
+  // height: 67px;
+  opacity: 0;
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  // background-color: gold;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  a, a:hover {
     text-decoration: none;
-    font-weight: 400;
-    border-bottom: 1px solid #888;
-    &:hover {
-      text-decoration: none;
-    }
+    color: #fff;
   }
-  // .book-label,
-  // .play-label,
-  // .tv-label,
-  // .movie-label {
-  //   padding: 1px 5px;
-  //   border-radius: 3px;
-  //   color: #fff;
-  //   font-size: 16px;
-  // }
-  // .book-label {
-  //   background-color: $book-color;
-  //   color: #000;
-  // }
-  // .play-label {
-  //   background-color: $play-color;
-  //   color: #000;
-  // }
-  // .tv-label {
-  //   background-color: $tv-color;
-  // }
-  // .movie-label {
-  //   background-color: $movie-color;
-  // }
+}
+
+.stick-header {
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: $base-dark;
+    overflow: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform : translate3d(0, 0, 0);
+
+    .logo-block {
+      font-weight: 400;
+      animation-name: fadeInLeft;
+      animation-duration: 0.2s;
+      animation-fill-mode: both;
+      animation-timing-function: ease;
+      opacity: 1;
+      bottom: 30px;
+      left: 20px;
+      font-size: 28px;
+    }
+
+  }
+  .media-list-test {
+    position: sticky;
+    // top: 105px;
+    z-index: 1;
+    // bottom: 0;
+    // overflow-y: auto;
+    // background: pink;
+  }
+  .year-plot-container {
+    display: block;
+    position: absolute;
+    top: 80px;
+  }
+  .year-plots {
+    height: 770px;
+  }
+
+  .option-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    animation-name: fadeInRight;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+    animation-timing-function: ease;
+    z-index: 300;
+  }
 }

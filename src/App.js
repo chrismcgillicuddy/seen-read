@@ -32,7 +32,8 @@ export default class App extends Component {
       radialProgress: 0,
       mediaListItemsOnScreen: [],
       scrollState: 0,
-      isDesktop: true
+      isDesktop: true,
+      stickHeader: false
     }
     this.grid = React.createRef();
   }
@@ -68,11 +69,14 @@ export default class App extends Component {
     document.addEventListener("keydown", this.escKey, false);
 
     // check window size
-    window.addEventListener("resize", _.debounce(this.isUsingDesktop, 50));
+    window.addEventListener("resize", _.debounce(this.isUsingDesktop, 100));
+
+    // check scroll position to stick nav to top of window
+    window.addEventListener('scroll', this.stickHeaderNav);
   }
 
   onViewChange = (inView, highlight) => {
-    console.log(inView, highlight);
+    // console.log(inView, highlight);
     // if (inView){
     //   this.setMediaHighlightType(""); // reset here for now, in case a year needs focus
     //   var newState = {};
@@ -83,6 +87,20 @@ export default class App extends Component {
 
   makeChartSticky = () => {
     console.log("makechartSticky");
+  }
+
+  stickHeaderNav = () => {
+    // const container = document.getElementById("app-container");
+    const yearNavBlock = document.getElementById("year-nav-block");
+    const navPosition = yearNavBlock.offsetTop;
+    if (window.pageYOffset >= navPosition) {
+      this.setState({stickHeader: true});
+      console.log("stickHeader: true");
+    } else {
+      this.setState({stickHeader: false});
+      console.log("stickHeader: false");
+
+    }
   }
 
   componentWillUnmount(){
@@ -96,43 +114,54 @@ export default class App extends Component {
     if (this.state.isDesktop) {// only update the items visible if we're displaying the year plots on a desktop screen
       // check visible elements in MediaList
       const mediaListContainer = document.getElementById("list-panel");
+      // console.log("mediaListContainer",mediaListContainer);
       const mediaListElement = document.getElementsByClassName("media-list");
-      // console.log("mediaListContainer scrollHeight",mediaListContainer.scrollHeight);
-      // console.log("mediaListElement scrollHeight",mediaListElement[0].scrollHeight);
       let clientHeight = document.documentElement.clientHeight;
+      // console.log("clientHeight",clientHeight);
 
       if (_.isElement(mediaListElement[0])){
-        const dailyItems = mediaListElement[0].childNodes;
+        const listItems = mediaListElement[0].childNodes;
         let start = 0;
-        let end = dailyItems.length;
+        let end = listItems.length;
 
         while(start !== end) {
           let mid = start + Math.floor((end - start) / 2);
-          let item = dailyItems[mid];
-          if(item.offsetTop < mediaListContainer.scrollTop)
+          let item = listItems[mid];
+          if(item.offsetTop < (mediaListContainer.scrollTop - 77)) {
             start = mid + 1;
-          else
+          } else {
             end = mid;
+          }
         }
 
         let isOnScreen = true;
         let onScreenItems = [];
-        let onScreenItemCount = start;
+        let onScreenItemListPosition = start;
+        const headerElementHeight = 77; // TODO, set this elsewhere?
 
-        while(isOnScreen) {
-
-          let item = dailyItems[onScreenItemCount];
+        while(isOnScreen && (onScreenItemListPosition <= listItems.length)) {
+          let item = listItems[onScreenItemListPosition];
           if (item){
-            // console.log("item",item);
-            // console.log("item.offsetTop",item.offsetTop);
+            // console.log("document scrollTop",document.documentElement.scrollTop);
+            // console.log("document scrollHeight",document.documentElement.scrollHeight);
+            // console.log("document offsetHeight",document.documentElement.offsetHeight);
+            const itemPosition = (item.getBoundingClientRect().top - mediaListContainer.scrollTop - headerElementHeight);
+            // const test = (itemPosition > 0) ? console.log("item > 0") : console.log("OFF SCREEN");
+            // const test2 = (itemPosition < clientHeight) ? console.log("LESS than height") : console.log("more than height");
+            // const test2 = (itemPosition < clientHeight && itemPosition > 0) ? console.log("BOTH") : console.log("NEITHER");
 
-            if ((item.offsetTop - mediaListContainer.scrollTop) < (clientHeight))
-              onScreenItems.push(item.dataset.date);
-            else
+            if ( itemPosition < clientHeight ){
+              if ( itemPosition > 0 ) {
+                onScreenItems.push(item.dataset.date);
+              }
+            }
+            else {
               isOnScreen = false;
+            }
           }
-          onScreenItemCount++;
+          onScreenItemListPosition++;
         }
+        // console.log(onScreenItems);
         this.updateOnScreenItems(onScreenItems);
       }
     } else { // isDesktop
@@ -199,7 +228,7 @@ export default class App extends Component {
   }
 
   isUsingDesktop = () => {
-    console.log("window.innerWidth",window.innerWidth);
+    // console.log("window.innerWidth",window.innerWidth);
     this.setState({ isDesktop: window.innerWidth > desktopSize });
   }
 
@@ -238,7 +267,7 @@ export default class App extends Component {
         (year == displayYear)
           ? selectedClass = " selected"
           : selectedClass = "";
-        yearEntry = <a href="#" className={"link"+selectedClass} onClick={() => this.setDisplayYear(year)}>{year}</a>
+        yearEntry = <span className={"link"+selectedClass} onClick={() => this.setDisplayYear(year)}>{year}</span>
         return yearEntry;
       }, this);
 
@@ -265,183 +294,156 @@ export default class App extends Component {
 
       const appStateClasses = classNames({
         app: true,
-        'expand-year-plots': !browseYearLists
+        'expand-year-plots': !browseYearLists,
+        'stick-header': this.state.stickHeader
+      })
+
+      const chartTitleHighlightClasses = classNames({
+        'title-hightlight chart-selection': true,
+        'has-title': highlightedItem
       })
 
       return (
-        <div className={appStateClasses}>
+        <div className={appStateClasses} id="app-container">
 
-          {/* */}
+          {/*
           <div className="header-row">
-            <img className="steven" src={soderbergh} width="250" alt="Soderbergh" />
-            <div className="name-plate">Seen, Read</div>
+
+            <div className="main-heading heading-name-plate">Seen, Read</div>
+
             <p className="intro">Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh">Stephen Soderbergh</a> has been sharing
             a <a href="http://extension765.com/soderblogh/33-seen-read-2018">daily account</a> of
             every <span className="movie-label">movie</span>, <span className="book-label">book</span>, <span className="play-label">play</span>, and <span className="tv-label">TV</span> show he's
             seen or read for the past 10 years.</p>
+
+
+          </div>
+
+          */}
+
             {/* <p class="intro">The lists highlight the directpr's interests in span the history of cinema</p>
             Offers a glimps (more than a glimps)
             In that time, he's created film and television projects
             */}
-            <div classname="nav-wrap">
-              <div className="year-nav">
-                {yearNav}
-                <ProgressCircle
-                  className={'progress-circle'}
-                  radius={progressRadius}
-                  radialProgress={radialProgress}
-                  displayYear={displayYear}
-                />
-              </div>
+
+
+            <div className="intro-with-illustration">
+              <div className="name-plate">Seen,Read</div>
+              <p className="intro">Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh">Stephen Soderbergh</a> has been sharing
+              a <a href="http://extension765.com/soderblogh/33-seen-read-2018">daily account</a> of
+              every <span className="movie-label">movie</span>, <span className="book-label">book</span>, <span className="play-label">play</span>,
+              and <span className="tv-label">TV</span> show he's
+              seen or read for the past 10 years.</p>
+              <p className="intro">Taken as a whole or explored per year, this is a fascinating backdrop of
+              influences to study or mine related to his own projects over the last decade.</p>
             </div>
-          </div>
 
 
-
-
-
-          <section className={exploreClasses} id="app-container" ref={this.grid}>
-          {/* <header>
-            <span className="title">Seen,Read</span>
-            <div className="options">
-              <button onClick={() => this.toggleExpanded()} className="option-button">{compactYears ? 'More': 'Less'}</button>
-            </div>
-          </header> */}
-          <div className="chart">
-
-            {/* explainer 1.
-            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
-              <div className="step">TV</div>
-            </InView>
-            */}
-
-            {/* year plot charts */}
-
-            <InView className="year-plot-container" tag="div" onChange={inView => this.makeChartSticky()}>
-              <div className={yearPlotClasses}>
-                {
-                  yearsAvailable.map((year) => {
-                    const isSelectedYear = (year == displayYear) ? true : false;
-                    return <YearPlot
-                      scrollState={scrollState}
-                      data={mediaLists['list'+year]}
-                      isSelectedYear={isSelectedYear}
-                      highlighted={highlighted}
-                      highlightedItem={highlightedItem}
-                      highlightedType={highlightedType}
-                      highlightMediaType={highlightMediaType}
-                      setHighlight={this.setHighlight}
-                      setDisplayYear={this.setDisplayYear}
-                      mediaListItemsOnScreen={mediaListItemsOnScreen}
-                      mediaListVisibility={this.mediaListVisibility}
-                    />
-                  })
-                }
-              </div>
-              <div className="chart-selection-container">
-                <div className="title-hightlight chart-selection">
-                  <div className="left-col">
-                    <span id="selected-title-type" className="type"></span>
-                  </div>
-                  <div className="right-col">
-                    <span id="selected-title" className="title"></span>
-                  </div>
-                  <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
+{/*
+          <div class='seen-read-intro'>
+            <div class='row'>
+              <div class='column'>
+                <div class='illustration-column'>
+                <img className="steven" src={soderbergh} width="250" alt="Steven Soderbergh" />
                 </div>
               </div>
-            </InView>
-
-
-          </div>
-
-          <div className="controls" id="list-panel">
-
-            {/* intro text */}
-            {/*
-            <InView tag="div" className="intro" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
-                <h1><span className="seen">Seen</span><span className="comma">,</span> Read</h1>
-                <p>Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh" className="link">Steven Soderbergh</a> has maintained
-                a daily account of every book, film, play, and TV show he's seen or read for the past 9 years.</p>
-                <p></p>
-            </InView>
-            */}
-{/* */}
-            <MediaList
-              data={mediaLists['list'+displayYear]}
-              yearsAvailable={yearsAvailable}
-              displayYear={displayYear}
-              setDisplayYear={this.setDisplayYear}
-              highlighted={highlighted}
-              highlightedItem={highlightedItem}
-              setHighlight={this.setHighlight}
-              mediaListVisibility={this.mediaListVisibility}
-              updateOnScreenItems={this.updateOnScreenItems}
-              setRadialProgress={this.setRadialProgress}
-              setMediaListHighlight={this.setMediaListHighlight}
-            />
-
-
-            <MostSeenRead
-              compactMode={browseYearLists}
-              highlightedItem={highlightedItem}
-              highlightMediaType={highlightMediaType}
-              setMediaHighlightType={this.setMediaHighlightType}
-              setHighlight={this.setHighlight}
-            />
-
-            {/*
-            <ScrollPercentage>
-              {(percentage, inView) => (
-                <h2>{`Percentage scrolled: ${calcPercentage(percentage)}%.`}</h2>
-              )}
-            </ScrollPercentage> */}
-
-            {/* <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "movie"} )}>
-              <div className="step">Movies</div>
-            </InView>
-
-            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "tv"} )}>
-              <div className="step">TV</div>
-            </InView>
-
-            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "book"} )}>
-              <div className="step">Books</div>
-            </InView>
-
-            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "play"} )}>
-              <div className="step">Plays</div>
-            </InView>
-
-            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: "special"} )}>
-              <div className="step">Special!</div>
-            </InView>
-
-            <InView tag="div" onChange={inView => this.onViewChange(inView, {highlight: "highlightMediaType", value: ""} )}>
-              <div className="step">
-                <ButtonList
-                  compactMode={compactYears}
-                  highlightedItem={highlightedItem}
-                  setHighlight={this.setHighlight}
-                />
+              <div class='column'>
+                <div class='intro-column'>
+                                  </div>
               </div>
-            </InView> */}
+            </div>
+          </div>
+*/}
+
+          <div className="nav-wrap" id="year-nav-block">
+            <div className="logo-block name-plate"><a href="#" title="Home">Seen,Read</a></div>
+            <div className="year-nav">
+              {yearNav}
+              <ProgressCircle
+                className={'progress-circle'}
+                radius={progressRadius}
+                radialProgress={radialProgress}
+                displayYear={displayYear}
+              />
+            </div>
+            <button onClick={() => this.toggleExpanded()} className="option-button">
+            {browseYearLists
+              ? 'View most seen, read'
+              : 'Browse by year'
+            }
+            </button>
+          </div>
+
+
+          {/* hover title */}
+          <div className="title-hightlight selected-title-hover">
+            <div className="left-col">
+              <span className="type"></span>
+            </div>
+            <div className="right-col">
+              <span className="title"></span>
+            </div>
+          </div>
+
+        <div className="year-chart">
+
+          <div className="year-plot-container" tag="div">
+
+            <div className={yearPlotClasses}>
+              {
+                yearsAvailable.map((year) => {
+                  const isSelectedYear = (year == displayYear) ? true : false;
+                  return <YearPlot
+                    scrollState={scrollState}
+                    data={mediaLists['list'+year]}
+                    isSelectedYear={isSelectedYear}
+                    highlighted={highlighted}
+                    highlightedItem={highlightedItem}
+                    highlightedType={highlightedType}
+                    highlightMediaType={highlightMediaType}
+                    setHighlight={this.setHighlight}
+                    setDisplayYear={this.setDisplayYear}
+                    mediaListItemsOnScreen={mediaListItemsOnScreen}
+                    mediaListVisibility={this.mediaListVisibility}
+                  />
+                })
+              }
+            </div>
+
+            <div className="chart-selection-container">
+              <div className={chartTitleHighlightClasses}>
+                <div className="left-col">
+                  <span id="selected-title-type" className="type"></span>
+                </div>
+                <div className="right-col">
+                  <span id="selected-title" className="title"></span>
+                </div>
+                <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
+              </div>
+            </div>
 
           </div>
 
-        {/* </section> */}
-        {/* <section className="media-list-panel" id="list-panel"> */}
-
-        </section>
-
-        {/* hover title */}
-        <div className="title-hightlight selected-title-hover">
-          <div className="left-col">
-            <span className="type"></span>
-          </div>
-          <div className="right-col">
-            <span className="title"></span>
-          </div>
         </div>
+
+{/*     <div className="controls" id="list-panel"> */}
+        <div className="media-list-test" id="list-panel">
+          <MediaList
+            data={mediaLists['list'+displayYear]}
+            yearsAvailable={yearsAvailable}
+            displayYear={displayYear}
+            setDisplayYear={this.setDisplayYear}
+            highlighted={highlighted}
+            highlightedItem={highlightedItem}
+            setHighlight={this.setHighlight}
+            mediaListVisibility={this.mediaListVisibility}
+            updateOnScreenItems={this.updateOnScreenItems}
+            setRadialProgress={this.setRadialProgress}
+            setMediaListHighlight={this.setMediaListHighlight}
+          />
+        </div>
+
+
 
         {/* explore / browse list toggle */}
         {/* <div className="year-links">
@@ -456,12 +458,7 @@ export default class App extends Component {
           <a href="#" className="link selected">2017</a>
 
         </div> */}
-        <button onClick={() => this.toggleExpanded()} className="option-button">
-        {browseYearLists
-          ? 'View most seen, read'
-          : 'Browse by year'
-        }
-        </button>
+
       </div>
       );
     }

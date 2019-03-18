@@ -11,12 +11,15 @@ const progressRadius = 30;
 export default class MediaList extends React.Component {
 
   componentDidMount() {
-    const mediaListPanel = document.getElementById("list-panel");
-    console.log("mediaListPanel",mediaListPanel);
+    const mediaListPanel = document.getElementById("app-container");
+    // console.log("mediaListPanel",mediaListPanel);
     // mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
     // mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
-    mediaListPanel.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 5));
-    mediaListPanel.addEventListener('scroll', _.debounce(this.updateRadialProgress, 5));
+    // window.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 5));
+    // window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 5));
+
+    window.addEventListener('scroll', this.props.mediaListVisibility);
+    window.addEventListener('scroll', this.updateRadialProgress);
     this.props.mediaListVisibility();
   }
 
@@ -43,9 +46,11 @@ export default class MediaList extends React.Component {
     const mediaListContainer = document.getElementById("list-panel");;
 
     let clientHeight = document.documentElement.clientHeight;
-    let scrollHeight = mediaListContainer.scrollHeight;
+    let scrollHeight = document.documentElement.scrollHeight;
     let contentHeight = scrollHeight - clientHeight;
-    let strokeDashArray = (mediaListContainer.scrollTop / contentHeight) * circumference;
+    // console.log("radial, contentHeight:",contentHeight);
+    // console.log("mediaListContainer.scrollTop:",mediaListContainer.scrollTop);
+    let strokeDashArray = (document.documentElement.scrollTop / contentHeight) * circumference;
 
     // update radial progress state with strokeDashArray
     // this.setState({radialProgress: strokeDashArray});

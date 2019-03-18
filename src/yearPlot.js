@@ -57,6 +57,7 @@ export default class YearPlot extends React.Component {
     const date = new Date(data[0].key);
     const year = date.getFullYear();
     const selectedYearClass = (isSelectedYear) ? "selected-year" : "";
+
     const listItems = data.map((item, i) => {
       // get date object from date string
       currentDate = new Date(item.key);
