@@ -3,7 +3,6 @@ import Moment from 'moment';
 import * as _ from 'lodash';
 import * as classNames from 'classnames';
 import * as toTitleCase from 'to-title-case';
-import { VariableSizeList as List } from 'react-window';
 
 // const uuidv4 = require('uuid/v4');
 const progressRadius = 30;
@@ -11,45 +10,31 @@ const progressRadius = 30;
 export default class MediaList extends React.Component {
 
   componentDidMount() {
-    const mediaListPanel = document.getElementById("app-container");
-    // console.log("mediaListPanel",mediaListPanel);
+    // const mediaListPanel = document.getElementById("app-container");
+
     // mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
     // mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
-    // window.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 5));
-    // window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 5));
+
+    // window.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 100));
+    // window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 100));
 
     window.addEventListener('scroll', this.props.mediaListVisibility);
     window.addEventListener('scroll', this.updateRadialProgress);
+
     this.props.mediaListVisibility();
   }
 
   componentWillUnmount(){
-    const mediaListPanel = document.getElementById("list-panel");
-    mediaListPanel.removeEventListener('scroll', this.updateRadialProgress);
+    window.removeEventListener('scroll', this.props.mediaListVisibility);
+    window.removeEventListener('scroll', this.updateRadialProgress);
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // console.log("_.size(this.props.data)",_.size(this.props.data));
-  //   // console.log("_.size(nextProps.data)",_.size(nextProps.data));
-  //   console.log("this.props.displayYear", this.props.displayYear);
-  //   console.log("nextProps.displayYear", nextProps.displayYear);
-  //   if (_.size(this.props.displayYear) == _.size(nextProps.displayYear)) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
 
   updateRadialProgress = (event) => {
     // move this radial progress setup
     let circumference = 2 * Math.PI * progressRadius;
-    const mediaListContainer = document.getElementById("list-panel");;
-
     let clientHeight = document.documentElement.clientHeight;
     let scrollHeight = document.documentElement.scrollHeight;
     let contentHeight = scrollHeight - clientHeight;
-    // console.log("radial, contentHeight:",contentHeight);
-    // console.log("mediaListContainer.scrollTop:",mediaListContainer.scrollTop);
     let strokeDashArray = (document.documentElement.scrollTop / contentHeight) * circumference;
 
     // update radial progress state with strokeDashArray
@@ -59,7 +44,6 @@ export default class MediaList extends React.Component {
 
   render() {
     const {
-      passedClasses,
       data,
       yearsAvailable,
       displayYear,
@@ -77,7 +61,6 @@ export default class MediaList extends React.Component {
     let itemDate = '';
     let newDate = true;
     let dailyItems = '';
-
 
     const yearNavItems = yearsAvailable.map((year) => {
       let yearEntry = "";
@@ -121,19 +104,6 @@ export default class MediaList extends React.Component {
           const movieYear = (( type === 'movie' || type === 'short') && d.year) ? <span className="year">{d.year}</span> : null;
           const bookCredit = d.credit ? <span className="credit">{d.credit}</span> : null;
 
-          // console.log("mediaListItemsOnScreen",mediaListItemsOnScreen);
-          // if (mediaListItemsOnScreen.includes(currentDate.toString())) {
-          //   console.log("includes: ",mediaListItemsOnScreen.includes(currentDate));
-          //
-          // }
-          // console.log("includes: ",mediaListItemsOnScreen.includes(currentDate));
-          // console.log("mediaListItemsOnScreen.indexOf(currentDate)==1",mediaListItemsOnScreen.indexOf(currentDate)==1);
-
-          // color assignment test
-          // const bgColors = ['red-bg','pink-bg','green-bg','brown-bg','purple-bg'];
-          // const itemColorClass = bgColors[Math.floor(Math.random()*bgColors.length)];
-          // console.log("itemColorClass",itemColorClass);
-
           // item classes
           const itemClasses = classNames({
             'item': true,
@@ -147,7 +117,6 @@ export default class MediaList extends React.Component {
             'play': type==="play",
             'special': type==="special",
             'new-date': sameDate
-            // [`${itemColorClass}`]: true
           });
 
           const longDate = <span className="date long-date">{Moment(item.key).format("MMM D")}</span> // January 1

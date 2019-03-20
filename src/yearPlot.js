@@ -6,7 +6,6 @@ import * as toTitleCase from 'to-title-case';
 export default class YearPlot extends React.Component {
 
   showTitle = (title, type) => (e) => {
-    console.log("title",title);
     title = toTitleCase (title);
     d3.select(".selected-title-hover .title").text(title);
     d3.select(".selected-title-hover .type").text(type);
@@ -36,35 +35,22 @@ export default class YearPlot extends React.Component {
           setHighlight,
           highlightedItem,
           highlightedType,
-          highlightMediaType,
-          setDisplayYear,
-          mediaListItemsOnScreen,
-          scrollState} = this.props;
-    let previousDate = '';
+          mediaListItemsOnScreen } = this.props;
     let currentDate = '';
-    let dateMatch = false;
     let itemDate = '';
-    let newDate = true;
-    let newDateClass = "new-date";
-    let rowClass = '';
     let onScreenClass = '';
-    let itemCSS = '';
-    let dateClass = '';
-    let dailyItems = '';
-    let mediaListLength = data.length;
     let mediaIndex = 0;
 
     const date = new Date(data[0].key);
     const year = date.getFullYear();
     const selectedYearClass = (isSelectedYear) ? "selected-year" : "";
-
     const listItems = data.map((item, i) => {
       // get date object from date string
       currentDate = new Date(item.key);
       let dateCompare = Date.parse(new Date(item.key));
       let rowClass = "";
       // is an even or odd numbered month?
-      if (currentDate.getMonth() % 2 == 0) {
+      if (currentDate.getMonth() % 2 === 0) {
         rowClass = "odd-month";
       }
 
@@ -90,8 +76,6 @@ export default class YearPlot extends React.Component {
             {itemsPerDay.map(d => {
               // highlight class
               let itemClass = "";
-              let highlightTitleLower = "";
-
               let title = d.title.toString().toLowerCase();
               let type = d.type.toString().toLowerCase();
               let credit = d.credit.toString().toLowerCase();
@@ -117,7 +101,6 @@ export default class YearPlot extends React.Component {
               }
 
               // track id
-              let index = mediaIndex;
               let key, id = year+"_"+mediaIndex;
               let element = <li key={key}
                                 id={id}
