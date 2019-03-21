@@ -15,11 +15,11 @@ export default class MediaList extends React.Component {
     // mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
     // mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
 
-    // window.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 10));
-    // window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 10));
+    window.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 10));
+    window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 10));
 
-    window.addEventListener('scroll', this.props.mediaListVisibility);
-    window.addEventListener('scroll', this.updateRadialProgress);
+    // window.addEventListener('scroll', this.props.mediaListVisibility);
+    // window.addEventListener('scroll', this.updateRadialProgress);
 
     this.props.mediaListVisibility();
   }
@@ -45,34 +45,14 @@ export default class MediaList extends React.Component {
   render() {
     const {
       data,
-      yearsAvailable,
-      displayYear,
-      setDisplayYear,
       highlighted,
       highlightedItem,
       setHighlight,
-      mediaListVisibility,
-      updateOnScreenItems,
-      setRadialProgress,
       setMediaListHighlight} = this.props;
     let previousDate = '';
     let currentDate = '';
-    let dateMatch = false;
     let itemDate = '';
     let newDate = true;
-    let dailyItems = '';
-
-    const yearNavItems = yearsAvailable.map((year) => {
-      let yearEntry = "";
-      let selectedClass ="";
-      (year == displayYear)
-        ? selectedClass = " selected"
-        : selectedClass = "";
-      yearEntry = <span className={"year"+selectedClass} onClick={() => setDisplayYear(year)}>{year}</span>
-      return yearEntry;
-    }, this);
-
-    const yearNav = <div className="year-nav">{yearNavItems}</div>;
 
     const mediaListClasses = classNames({
       'media-list': true
@@ -102,7 +82,7 @@ export default class MediaList extends React.Component {
           const type = d.type.toString().toLowerCase();
           const title = d.title.toString().toLowerCase();
           const movieYear = (( type === 'movie' || type === 'short') && d.year) ? <span className="year">{d.year}</span> : null;
-          const bookCredit = d.credit ? <span className="credit">{d.credit}</span> : null;
+          const bookCredit = d.credit ? <span className="credit">{toTitleCase(d.credit)}</span> : null;
 
           // item classes
           const itemClasses = classNames({

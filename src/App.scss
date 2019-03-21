@@ -1,3 +1,5 @@
+
+////////////////////
 // SETUP
 
 // fonts
@@ -34,7 +36,7 @@ $break-large: 1300px;
 $break-medium: 1000px;
 $break-small: 400px;
 
-/////////////////////////////////////////////////////
+////////////////////
 // ANIMATIONS
 
 @keyframes pulse {
@@ -46,30 +48,10 @@ $break-small: 400px;
     }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
- }
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
- }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -15%, 0);
  }
   to {
     opacity: 1;
@@ -106,7 +88,7 @@ $break-small: 400px;
   animation-timing-function: ease;
 }
 
-/////////////////////////////////////////////////////
+////////////////////
 // RESETS, COMMON
 
 * {
@@ -133,57 +115,7 @@ body {
   }
 }
 
-// // // //
-// TEST
-.navbar {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background: #555;
-  color: #fff;
-  text-align: center;
-  height: 77px;
-  z-index: 100;
-}
-
-.content {
-  height: 2000px;
-  background: #dde;
-  padding-top: 100px;
-}
-
-.inner-header {
-  position: sticky;
-  top: 77px;
-  float: left;
-  background: #cce;
-  width: 40%;
-  height: 30px;
-  text-align: right;
-  color: #000;
-}
-.chart {
-/*   position: absolute;
-  top: 0; */
-  float: right;
-  right: 0;
-  width: 200px;
-  height: 50px;
-  background:#ccc;
-}
-
-.inner-content {
-  width: calc(60% - 40px);
-
-  background-color: #dde;
-  height: 1000px;
-  float: right;
-  color: red;
-}
-
-
-
-/////////////////////////////////////////////////////
+////////////////////
 // LOADER . . .
 
 .loader {
@@ -213,9 +145,11 @@ body {
   }
 }
 
-/////////////////////////////////////////////////////
+////////////////////
 // LAYOUT
-
+.app {
+  position: relative;
+}
 .seen-read-chart-and-list {
   height: 40000px;
   padding-top: 20px;
@@ -235,69 +169,11 @@ body {
   width: 60%;
 }
 
+////////////////////
+// HEADER elements: name plate & main navigation
 
-// .charts{
-//   display: flex;
-//   flex-direction: row;
-//   z-index: -11;
-//   overflow:hidden;
-//   // flex-basis: 70% 30%;
-//   // height: 100%;
-//   & .controls,
-//   & .chart {
-//     transition: all 0.6s ease;
-//   }
-//   & .controls {
-//     flex: 1;
-//   }
-//   & .chart {
-//     flex: 0 55%;
-//   }
-//   .expand-year-plots & .chart {
-//     flex: 0 55%;
-//   }
-//   // browse mode (default)
-//   .browse-single-year & .chart {
-//     flex: 0 40%;
-//   }
-//   .expand-year-plots & {
-//     .year-plot-container {
-//       opacity: 1;
-//     }
-//
-//     // grid-auto-columns: 55% 45%;
-//     // flex-basis: 55% 45%;
-//     transition: all $animation-rate ease;
-//     // transition: margin 1200ms;
-//     .most-seen-read {
-//       opacity: 1;
-//       display: block;
-//       animation-name: fadeIn;
-//       animation-duration: 0.4s;
-//       animation-fill-mode: both;
-//       animation-timing-function: ease;
-//       animation-delay: 0.7s;
-//       transition:all $animation-rate ease;
-//     }
-//   }
-// }
-
-//////////////////////////////////////////////////
-// heading and intro
-.content {
-  margin: 0 auto;
-  width: 300px;
-  color: #fff;
-}
-.steven {
-  margin: 80px auto 0 auto;
-  display: block;
-}
 .intro-wrap {
-  // position: -webkit-sticky;
-  // position: sticky;
   width: 100%;
-  // z-index: 100;
   background: $base-dark;
   @include fadeInUpAnimation();
   .expand-year-plots & {
@@ -339,14 +215,17 @@ body {
 }
 
 // seen,read name plate
-.name-plate {
+.name-plate,
+.logo-block {
   font-family: $sans-fonts;
-  font-weight: 200;
-  font-size: 48px;
   line-height: 1.5;
   font-style: italic;
   color: $base-light;
   display: block;
+}
+.name-plate {
+  font-weight: 200;
+  font-size: 48px;
   margin: 0 0 15px 0;
 }
 .intro {
@@ -366,32 +245,7 @@ body {
       border-color: #999;
     }
   }
-  // .book-label,
-  // .play-label,
-  // .tv-label,
-  // .movie-label {
-  //   padding: 1px 5px;
-  //   border-radius: 3px;
-  //   color: #fff;
-  //   font-size: 16px;
-  // }
-  // .book-label {
-  //   background-color: $book-color;
-  //   color: #000;
-  // }
-  // .play-label {
-  //   background-color: $play-color;
-  //   color: #000;
-  // }
-  // .tv-label {
-  //   background-color: $tv-color;
-  // }
-  // .movie-label {
-  //   background-color: $movie-color;
-  // }
 }
-/////////////////////////////////////////////////////
-// HEADER elements: name plate & main navigation
 .nav-wrap {
   height: 77px;
   position: -webkit-sticky;
@@ -446,8 +300,52 @@ body {
     }
   }
 }
+.options {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.option-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-align: center;
+  opacity: 0;
+}
+.logo-block {
+  position: absolute;
+  top: 17px;
+  left: 20px;
+  opacity: 0;
+  font-size: 28px;
+  font-weight: 400;
+  a,
+  a:hover {
+    text-decoration: none;
+    color: #fff;
+  }
+}
+// show project name and 'most seen,read' button when the year nav is sticking to window top
+.stick-header,
+.expand-year-plots {
+  .logo-block {
+    animation-name: fadeInLeft;
+    animation-duration: 0.1s;
+    animation-timing-function: ease;
+    opacity: 1;
+  }
+  .option-button {
+    animation-name: fadeInRight;
+    animation-duration: 0.1s;
+    animation-timing-function: ease;
+    opacity: 1;
+  }
+}
 
-// radial progress, appears behind the selected year in the year list navigation
+////////////////////
+// radial progress
+// appears behind the selected year in the year list navigation
+
 .progress-circle-container {
   position: absolute;
   left: 573px; // default position for 2018
@@ -484,86 +382,10 @@ body {
   }
 }
 
-// button to change between exploring individual years and viewing the top titles
-.options {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-.option-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  text-align: left;
-  transition: width 0.3s ease;
-  opacity: 0;
-}
-
-.logo-block {
-  opacity: 0;
-  position: absolute;
-  top: 17px;
-  left: 20px;
-  animation-duration: 0.6s;
-  animation-fill-mode: both;
-  animation-timing-function: ease;
-  a, a:hover {
-    text-decoration: none;
-    color: #fff;
-  }
-}
-
-.stick-header {
-  .nav-wrap {
-    .logo-block {
-      font-weight: 400;
-      animation-name: fadeInLeft;
-      animation-duration: 0.2s;
-      animation-fill-mode: both;
-      animation-timing-function: ease;
-      opacity: 1;
-      bottom: 30px;
-      left: 20px;
-      font-size: 28px;
-    }
-  }
-  // .chart {
-  //   position: relative;
-  //
-  // }
-  // .year-plot-container {
-  //   // opacity: 1;
-  // }
-  // &.browse-single-year {
-  //   // .year-plot-container {
-  //   //   position: fixed;
-  //   //   top: 80px;
-  //   //   left: 220px;
-  //   //   z-index: 0;
-  //   //   transition: all 1s ease;
-  //   // }
-  //   .chart {
-  //     // flex: 0 40%;
-  //   }
-  // }
-  .option-button {
-    animation-name: fadeInRight;
-    animation-duration: 0.2s;
-    animation-fill-mode: both;
-    animation-timing-function: ease;
-    opacity: 1;
-  }
-
-}
-
-
-
+// TO DELETE .explore
 .explore {
   padding: 0 15px;
-  // display: grid;
-  // grid-template-areas: "a b";
-  // grid-gap: 40px;
-  // grid-auto-columns: 70% 30%;
+
 
   display: flex;
   flex-direction: row;
@@ -664,11 +486,6 @@ body {
   grid-template-rows: 590px auto;
   transition: width 0.5s ease;
   @include fadeInUpAnimation;
-  // animation-name: fadeInLeft;
-  // animation-duration: 0.2s;
-  // animation-fill-mode: both;
-  // animation-timing-function: ease;
-  // animation-delay: 0.60s;
   opacity: 0;
   transition: all 0.5s ease;
   height: 765px;
@@ -803,7 +620,7 @@ $defaultOffset: 45;
   .play,
   .book,
   .short-story {
-    padding: 22px 30px;
+    padding: 18px 30px;
     font-family: $serif-fonts;
     flex-direction: row;
     justify-content: flex-start;
@@ -1002,7 +819,7 @@ $defaultOffset: 45;
   }
 }
 
-/////////////////////////////////////////////////////
+////////////////////
 // YEARLY CHARTS
 
 // year plots
@@ -1323,6 +1140,9 @@ $chart-item-background: #888584;
   }
 }
 
+////////////////////
+// media list color legend
+
 .media-legend {
   display: none;
   position: fixed;
@@ -1395,7 +1215,9 @@ $chart-item-background: #888584;
   }
 }
 
-// the most-seen-read titles
+////////////////////
+// most seen,read titles
+
 .most-seen-read {
   h2 {
     color: $base-light;

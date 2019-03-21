@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as _ from 'lodash';
 import * as toTitleCase from 'to-title-case';
 import * as classNames from 'classnames';
+import ReactGA from 'react-ga';
 
 import './App.scss';
 import Loader from './loader';
@@ -23,7 +24,7 @@ export default class App extends Component {
       highlightedItem: "",
       highlightedType: "title", // is the highlightedItem a titles or credit
       highlightMedia: "", // what is the highlightedItem? A book, film...
-      highlightMediaType: "", // highlight all books, movies...
+      highlightMediaType: "", // highlight all items matching type: books, movies...
       loading: true,
       mediaLists: {},
       browseYearLists: true,
@@ -68,31 +69,16 @@ export default class App extends Component {
     document.addEventListener("keydown", this.escKey, false);
 
     // check window size
-    window.addEventListener("resize", _.debounce(this.isUsingDesktop, 100));
+    window.addEventListener("resize", _.debounce(this.isUsingDesktop, 10));
 
     // check scroll position to stick nav to top of window
-    window.addEventListener('scroll', this.stickHeaderNav);
+    window.addEventListener("scroll", _.debounce(this.stickHeaderNav, 10));
+    // window.addEventListener("scroll", this.stickHeaderNav);
   }
 
-  // onViewChange = (event) => {
-  //   // console.log("onViewChange event", event);
-  //
-  //   this.setState({
-  //     stickHeader: event.isIntersecting ? true : false,
-  //   });
-  //
-  //
-  //
-  //   // if (inView){
-  //   //   this.setMediaHighlightType(""); // reset here for now, in case a year needs focus
-  //   //   var newState = {};
-  //   //   newState[highlight.highlight] = highlight.value;
-  //   //   this.setState(newState);
-  //   // }
-  // }
-
-  makeChartSticky = () => {
-    console.log("makechartSticky");
+  initializeReactGA = () => {
+    ReactGA.initialize("UA-169426-3");
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   stickHeaderNav = () => {
@@ -112,8 +98,6 @@ export default class App extends Component {
     // this.isUsingDesktop(); // check screen size;
     if (this.state.isDesktop) {// only update the items visible if we're displaying the year plots on a desktop screen
       // check visible elements in MediaList
-      console.log("media List Visibility");
-
       const mediaListContainer = document.getElementById("list-panel");
       const mediaListElement = document.getElementsByClassName("media-list");
       let clientHeight = document.documentElement.clientHeight;
@@ -122,7 +106,6 @@ export default class App extends Component {
         const listItems = mediaListElement[0].childNodes;
         let start = 0;
         let end = listItems.length;
-        console.log("listItems",listItems);
 
         while(start !== end) {
           let mid = start + Math.floor((end - start) / 2);
@@ -197,7 +180,7 @@ export default class App extends Component {
   }
 
   setProgressCirclePosition = (year) => {
-    // position progressRadius
+    // position progressRadius display around the selected year
     const index = yearsAvailable.indexOf(year);
     const leftPosition = ((index * 65) - 12);
     const element = document.getElementsByClassName("progress-circle-container");
@@ -304,13 +287,14 @@ export default class App extends Component {
               every <span className="movie-label">movie</span>, <span className="book-label">book</span>, <span className="play-label">play</span>,
               and <span className="tv-label">TV</span> show he's
               seen or read for the past 10 years.</p>
-              <p className="intro">Scroll down to explore individual years of Stephen's media diet or check out
-              his <span className="inline-button" onClick={() => this.toggleExpanded()}>frequently seen and read titles</span> over the last decade to see what's been influencing his work most..</p>
+              <p className="intro">Scroll down to explore individual years of Stephen's media diet
+              or check out his <span className="inline-button" onClick={() => this.toggleExpanded()}>
+              most frequently seen and read titles</span> from the last decade to learn what's been influencing his work most.</p>
             </div>
           </div>
 
           <div className="nav-wrap" id="year-nav-block">
-            <div className="logo-block name-plate"><a href="#" title="Home">Seen,Read</a></div>
+            <div className="logo-block"><a href="#" title="Home">Seen,Read</a></div>
             <div className="year-nav">
               {yearNav}
               <ProgressCircle
@@ -379,14 +363,10 @@ export default class App extends Component {
             <div className="scrolling-list" id="list-panel">
               <MediaList
                 data={mediaLists['list'+displayYear]}
-                yearsAvailable={yearsAvailable}
-                displayYear={displayYear}
-                setDisplayYear={this.setDisplayYear}
                 highlighted={highlighted}
                 highlightedItem={highlightedItem}
                 setHighlight={this.setHighlight}
                 mediaListVisibility={this.mediaListVisibility}
-                updateOnScreenItems={this.updateOnScreenItems}
                 setRadialProgress={this.setRadialProgress}
                 setMediaListHighlight={this.setMediaListHighlight}
               />
