@@ -305,7 +305,7 @@ export default class App extends Component {
               and <span className="tv-label">TV</span> show he's
               seen or read for the past 10 years.</p>
               <p className="intro">Scroll down to explore individual years of Stephen's media diet or check out
-              his <span className="inline-button" onClick={() => this.toggleExpanded()}>most seen and read titles</span> over the last decade.</p>
+              his <span className="inline-button" onClick={() => this.toggleExpanded()}>frequently seen and read titles</span> over the last decade to see what's been influencing his work most..</p>
             </div>
           </div>
 
@@ -338,9 +338,10 @@ export default class App extends Component {
             </div>
           </div>
 
-          <div className="charts">
-            <div className="chart">
-              <div className="year-plot-container" tag="div">
+          <div className="seen-read-chart-and-list">
+
+            <div className="multi-year-comparison">
+              <div className="multi-year-charts">
                 <div className={yearPlotClasses}>
                   {
                     yearsAvailable.map((year) => {
@@ -360,6 +361,7 @@ export default class App extends Component {
                     })
                   }
                 </div>
+
                 <div className="chart-selection-container">
                   <div className={chartTitleHighlightClasses}>
                     <div className="left-col">
@@ -373,7 +375,8 @@ export default class App extends Component {
                 </div>
               </div>
             </div>
-            <div className="controls" id="list-panel">
+
+            <div className="scrolling-list" id="list-panel">
               <MediaList
                 data={mediaLists['list'+displayYear]}
                 yearsAvailable={yearsAvailable}
@@ -395,6 +398,7 @@ export default class App extends Component {
                 setHighlight={this.setHighlight}
               />
             </div>
+
           </div>
           <MediaLegend />
       </div>

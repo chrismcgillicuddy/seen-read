@@ -15,8 +15,8 @@ export default class MediaList extends React.Component {
     // mediaListPanel.addEventListener('scroll', this.props.mediaListVisibility);
     // mediaListPanel.addEventListener('scroll', this.updateRadialProgress);
 
-    // window.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 100));
-    // window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 100));
+    // window.addEventListener('scroll', _.debounce(this.props.mediaListVisibility, 10));
+    // window.addEventListener('scroll', _.debounce(this.updateRadialProgress, 10));
 
     window.addEventListener('scroll', this.props.mediaListVisibility);
     window.addEventListener('scroll', this.updateRadialProgress);
