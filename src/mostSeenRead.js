@@ -1,4 +1,6 @@
 import React from 'react';
+import { nest as d3nest } from 'd3-collection';
+import { sum as d3sum } from 'd3-array';
 import * as toTitleCase from 'to-title-case';
 
 export default class MostSeenRead extends React.Component {
@@ -22,8 +24,11 @@ export default class MostSeenRead extends React.Component {
     (mediaType===currentState) ? this.props.setMediaHighlightType("") : this.props.setMediaHighlightType(mediaType);
   }
 
+
+
   render() {
     const {
+          titleCounts,
           compactMode,
           setHighlight,
           highlightMediaType,
@@ -34,7 +39,7 @@ export default class MostSeenRead extends React.Component {
       // highlight class
       let itemClass = "";
       const authors = ["bill james","john barth","arthur nersesian","robert m. pirsig","david mitchell","michel houllebecq","edward st. aubyn","patricia highsmith","raymond chandler","kingsley amis","scott z. burns","karl ove gnausgaard","elena ferrante","john gray","patrick marber","simon callow","rachel cusk","jeffrey moussaieff masson","p. d. james"]
-      const soderberghFilms = ["Haywire","Side Effects","Logan Lucky","Behind the Candelabra","Contagion","Magic Mike","Bitter Pill","Ocean's 8","Magic Mike XXL","Unsane","The Informant!"];
+      const soderberghFilms = ["Haywire","Side Effects","Logan Lucky","Behind the Candelabra","Contagion","Magic Mike","Bitter Pill","Ocean's 8","Magic Mike XXL","Unsane","The Informant!", "High Flying Bird","The Laundromat"];
       // const movieData = ['Haywire', 'Side Effects', 'Logan Lucky', 'All the President\'s Men', 'Behind the Candelabra', 'Jaws', 'The Social Network', 'Magic Mike', 'Sunset Boulevard'];
       const movieData= ["All the President's Men","Jaws","The Social Network","Sunset Boulevard","The Day of the Jackal","Panic Room","The Parallax View","2001: A Space Odyssey","Three Days of the Condor","Citizen Kane","Sexy Beast","Raiders of the Lost Ark","Sweet Smell of Success","Carnal Knowledge","Anatomy of a Murder","The Hot Rock","Barry Lyndon","Zodiac","Chinatown","Apocalypse Now","All About Eve","Catch-22","Fatal Attraction","A Walk Among the Tombstones","The Godfather","The Verdict","American Graffiti","The Graduate","Repulsion","Alien","The French Connection","Funeral in Berlin","The Killing","Se7en","The Conformist","Klute","Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb","Double Indemnity","The Game","Ryan's Daughter","Sorcerer","Visitors","The Third Man","Mad Max: Fury Road"];
       const tvData = ["Dateline","Breaking Bad","The Americans","Boardwalk Empire","Mad Men","Veep","Girls","The Thick of It","Silicon Valley","The Killing","House of Cards","Homeland","Smash","Borgen","Transparent","The Man From U.N.C.L.E.","48 Hours Mystery","Better Call Saul","Masterminds","Inside Amy Schumer","Billions","Louie","W1A","Vanity Fair Confidential","Twin Peaks","Black Mirror","Getting On","Mindhunter","Boss","American Greed","The Knick","2016 Olympic Games"];
@@ -77,7 +82,6 @@ export default class MostSeenRead extends React.Component {
                       </li>;
         return element;
       }, this);
-
 
       // Soderbergh buttons
       const soderberghList = soderberghFilms.map((item, i) => {
@@ -136,6 +140,45 @@ export default class MostSeenRead extends React.Component {
                       </li>;
         return element;
       }, this);
+
+
+
+
+      ///////////////////////////////////////////////////////////////////////////
+      //
+
+      var titleScounted = d3nest()
+                  .key(function(d){
+                    return d.title;
+                  })
+                  .rollup(function(d){
+                    const type = d[0].type;
+                    return {
+                      type: type,
+                      count: d3sum(d, function(d) { return (d.count) })
+                    };
+                  })
+                  .entries(titleCounts);
+
+      const getMostFrequentTitles = (data, mediaType) => {
+        const mostFrequentTitles = data.filter(d => {
+          return ( (d.value.count > 1) && (d.value.type == mediaType) );
+        });
+        return mostFrequentTitles;
+      }
+
+      // get most frequently watched and read
+      const frequentMovies = getMostFrequentTitles(titleScounted, "movie");
+      const frequentTV = getMostFrequentTitles(titleScounted, "tv");
+      const frequentBooks = getMostFrequentTitles(titleScounted, "book");
+      const frequentPlays = getMostFrequentTitles(titleScounted, "play");
+
+      console.log("Movies",frequentMovies);
+      console.log("TV",frequentTV);
+      console.log("Books",frequentBooks);
+      console.log("Plays",frequentPlays);
+
+      ///////////////////////////////////////////////////////////
 
     return (
       <div className={compactMode ? 'hide-buttons most-seen-read' : 'show-buttons most-seen-read'}>

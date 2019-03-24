@@ -3,6 +3,7 @@ import Moment from 'moment';
 import * as _ from 'lodash';
 import * as classNames from 'classnames';
 import * as toTitleCase from 'to-title-case';
+import { soderberghProjects } from './soderberghProjects';
 
 // const uuidv4 = require('uuid/v4');
 const progressRadius = 30;
@@ -38,7 +39,6 @@ export default class MediaList extends React.Component {
     let strokeDashArray = (document.documentElement.scrollTop / contentHeight) * circumference;
 
     // update radial progress state with strokeDashArray
-    // this.setState({radialProgress: strokeDashArray});
     this.props.setRadialProgress(strokeDashArray);
   }
 
@@ -81,6 +81,7 @@ export default class MediaList extends React.Component {
           // remove upper case from type
           const type = d.type.toString().toLowerCase();
           const title = d.title.toString().toLowerCase();
+          const isSoderberghProject = soderberghProjects.includes(title);
           const movieYear = (( type === 'movie' || type === 'short') && d.year) ? <span className="year">{d.year}</span> : null;
           const bookCredit = d.credit ? <span className="credit">{toTitleCase(d.credit)}</span> : null;
 
@@ -104,12 +105,14 @@ export default class MediaList extends React.Component {
           const time = new Date().getTime();
           const key = currentDate+"_"+time;
           const notes = d.notes ? <span className="note">{d.notes}</span> : null;
-          const mediaType = d.type ? <span className="type">{d.type}</span> : null;
-
+          const mediaType = isSoderberghProject ? <span className="type">{d.type} (Soderbergh project)</span> : <span className="type">{d.type}</span>;
           const detailsClasses = classNames({
             'details': true,
             'repeatedDate': !(newDate || d.notes)
           });
+
+          // const isThisAFavorite = 
+          const favorite = (title == "the social network") ? <div className="favorite" title="A most watched movie">★</div> : null;
 
           // create notes element if there are any notes or the date differs from the last entry
           const notesNode = <span className={detailsClasses}>
@@ -129,6 +132,7 @@ export default class MediaList extends React.Component {
                           }}
                         >
                           <span className="title">{toTitleCase(d.title)}</span>
+                          {favorite}
                           {movieYear}
                           {bookCredit}
                           {notesNode}

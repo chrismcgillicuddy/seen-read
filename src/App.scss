@@ -152,7 +152,7 @@ body {
 }
 .seen-read-chart-and-list {
   height: 40000px;
-  padding-top: 20px;
+  // padding-top: 20px;
 }
 .multi-year-comparison {
   position: sticky;
@@ -161,22 +161,47 @@ body {
   float: left;
   .multi-year-charts {
     float: right;
-    max-width: 430px;
+    margin-left: 40px;
+    // max-width: 430px;
   }
 }
 .scrolling-list {
   float: right;
   width: 60%;
 }
+.view-most-seen-read {
+  // .seen-read-chart-and-list {
+  //   height: auto;
+  //   overflow: auto;
+  // }
+  .multi-year-comparison {
+    // position: fixed;
+    // top: 77px;
+    width: 60%;
+    // padding-left: 40px;
+    // min-width: 730px; // below this with, some daily entries start to break to multiple lines
+    // .multi-year-charts {
+    //   max-width: none;
+    // }
+  }
+  .scrolling-list {
+    padding-left: 20px;
+    width: 40%;
+  }
+  .most-seen-read {
+    opacity: 1;
+    display: block;
+    @include fadeInUpAnimation();
+  }
+}
 
 ////////////////////
 // HEADER elements: name plate & main navigation
-
 .intro-wrap {
   width: 100%;
   background: $base-dark;
   @include fadeInUpAnimation();
-  .expand-year-plots & {
+  .view-most-seen-read & {
     display: none;
   }
 }
@@ -195,8 +220,9 @@ body {
   padding: 9px 14px 9px 14px;
   border: 2px solid $base-light;
   border-radius: 3px;
-  background-color: $base-dark;
-  color: $base-light;
+  color: $base-dark;
+  background-color: $base-light;
+  border-color: $base-light;
   outline: none;
   cursor: pointer;
   &:hover {
@@ -211,6 +237,18 @@ body {
   &:hover {
     border-color: #999;
     cursor: pointer;
+  }
+}
+.expand-reduce-chart,
+.expand-reduce-chart:active {
+  background: none;
+  color: #8B8887;
+  border: 1px solid $base-dark;
+  em {
+    font-size: 18px;
+  }
+  .title-highlight & {
+    display: none;
   }
 }
 
@@ -266,7 +304,7 @@ body {
   margin: 0 auto;
   overflow: hidden;
   @include fadeInUpAnimation();
-  .expand-year-plots & {
+  .view-most-seen-read & {
     display: none;
   }
 }
@@ -311,12 +349,15 @@ body {
   right: 20px;
   text-align: center;
   opacity: 0;
+  visibility: hidden;
+  border: none;
 }
 .logo-block {
   position: absolute;
   top: 17px;
   left: 20px;
   opacity: 0;
+  visibility: hidden;
   font-size: 28px;
   font-weight: 400;
   a,
@@ -327,18 +368,20 @@ body {
 }
 // show project name and 'most seen,read' button when the year nav is sticking to window top
 .stick-header,
-.expand-year-plots {
+.view-most-seen-read {
   .logo-block {
     animation-name: fadeInLeft;
     animation-duration: 0.1s;
     animation-timing-function: ease;
     opacity: 1;
+    visibility: visible;
   }
   .option-button {
     animation-name: fadeInRight;
     animation-duration: 0.1s;
     animation-timing-function: ease;
     opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -356,7 +399,7 @@ body {
   background-color: rgba(17,17,17,0.6);
   z-index: 1;
   border-radius: 100%;
-  .expand-year-plots & {
+  .view-most-seen-read & {
     display: none;
     transition:all $animation-rate ease;
   }
@@ -385,8 +428,6 @@ body {
 // TO DELETE .explore
 .explore {
   padding: 0 15px;
-
-
   display: flex;
   flex-direction: row;
   // flex-basis: 70% 30%;
@@ -398,7 +439,7 @@ body {
   & .controls {
     flex: 1;
   }
-  &.expand-year-plots .chart {
+  &.view-most-seen-read .chart {
     flex: 0 55%;
   }
   &.browse-single-year .chart {
@@ -419,7 +460,7 @@ body {
     transition:all $animation-rate ease;
     transition: margin 1200ms;
   }
-  .expand-year-plots & {
+  .view-most-seen-read & {
     // margin-top: 80px;
 
     // grid-auto-columns: 55% 45%;
@@ -483,12 +524,12 @@ body {
   grid-template-areas: ". . . . . . . . . ."
   "footer footer footer footer footer footer footer footer footer footer";
   grid-auto-columns: minmax(40px, 90px);
-  grid-template-rows: 590px auto;
+  grid-template-rows: 765px auto;
   transition: width 0.5s ease;
   @include fadeInUpAnimation;
   opacity: 0;
   transition: all 0.5s ease;
-  height: 765px;
+  // height: 765px;
   .browse-single-year & {
     grid-auto-columns: minmax(30px, 40px);
     transition: all 0.5s ease;
@@ -510,7 +551,39 @@ body {
     //     transition: width 0.5s ease;
     //   }
     // }
+    // .year-plot .daily-items li {
+    //   transition: width 0.3s ease;
+    //   &.short-title,
+    //   &.medium-title,
+    //   &.long-title {
+    //     width: 2px;
+    //     height: 1px;
+    //     margin-right: 1px;
+    //     transition: width 0.5s ease;
+    //   }
+    // }
+  }
 
+  @media screen and (max-width: 1200px) {
+    // view-most-seen-read, below 1200
+    // reduce the width of the daily items chart entries
+    // .multi-year-charts {
+    //   width: 730px;
+    // }
+    // .year-plot {
+    //   width: 40px;
+    // }
+    // .year-plot .daily-items li {
+    //   transition: width 0.3s ease 0.8s;
+    //   &.short-title,
+    //   &.medium-title,
+    //   &.long-title {
+    //     width: 2px;
+    //     height: 1px;
+    //     margin-right: 1px;
+    //     transition: width 0.5s ease;
+    //   }
+    // }
   }
 
   // large screens
@@ -521,7 +594,6 @@ body {
   // small screens
   @media screen and (max-width: $break-small) {
     background: white;
-
   }
 
   // medium screens
@@ -545,10 +617,9 @@ $defaultOffset: 45;
 
 // scrollable media list
 .media-list {
-  // position: relative;
   margin: 5px 0 20px 40px;
   @include fadeInUpAnimation();
-  .expand-year-plots & {
+  .view-most-seen-read & {
     opacity: 0;
     display: none;
     transition:all $animation-rate ease;
@@ -599,11 +670,15 @@ $defaultOffset: 45;
     &:hover .repeatedDate,
     &.chart-selection-highlight,
     &.chart-selection-highlight .repeatedDate{
+      .favorite,
       .type,
       .date,
       .note {
         opacity: 1;
         transition:all 0.2 ease;
+      }
+      .favorite {
+        // color: $base-highlight;
       }
     }
     // shrink for smaller screens
@@ -630,9 +705,7 @@ $defaultOffset: 45;
     .title,
     .credit {
       display: block;
-      // color: $title-color;
       color: #111;
-
       flex-grow: 1;
       text-align: left;
     }
@@ -661,7 +734,6 @@ $defaultOffset: 45;
   .movie,
   .short {
     border-radius: 8px;
-    // background-color: $base-light;
     .title,
     .year {
       font-family: $sans-fonts;
@@ -722,6 +794,7 @@ $defaultOffset: 45;
       font-weight: 500;
     }
   }
+
   // $notesOffset: 760px;
   .details {
     position: absolute;
@@ -795,6 +868,43 @@ $defaultOffset: 45;
   .special .details {
     padding-left: ($defaultOffset - $specialOffset)+px;
   }
+
+  .favorite {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 100%;
+    font-family: $monospace-fonts;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: right;
+    color: $base-light-dimmed;
+    padding-right: 6px;
+    opacity: 0.4;
+  }
+
+  // offset the item favorite column
+  // $favoriteOffset: 5;
+  // .tv .favorite {
+  //   padding-right: ($favoriteOffset + $tvOffset)+px;
+  // }
+  // .movie .favorite {
+  //   padding-right: ($favoriteOffset + $movieOffset)+px;
+  // }
+  // .short .favorite {
+  //   padding-right: ($favoriteOffset + $shortOffset)+px;
+  // }
+  // .book .favorite,
+  // .short-story .favorite {
+  //   padding-right: ($favoriteOffset + $bookOffset)+px;
+  // }
+  // .play .favorite {
+  //   padding-right: ($favoriteOffset + $playOffset)+px;
+  // }
+  // .special .favorite {
+  //   padding-right: ($favoriteOffset + $specialOffset)+px;
+  // }
+
   // list item highlight appearance
   .tv,
   .movie,
@@ -831,7 +941,7 @@ $defaultOffset: 45;
   &.selected-year {
     // background-color: rgba(60,60,60, 0.4);
   }
-  .expand-year-plots &.selected-year {
+  .view-most-seen-read &.selected-year {
     background-color: transparent ;
   }
   &:nth-of-type(1) {
@@ -899,8 +1009,8 @@ $defaultOffset: 45;
   .selected-year & {
     opacity: 1;
   }
-  .expand-year-plots &,
-  .expand-year-plots .selected-year &,
+  .view-most-seen-read &,
+  .view-most-seen-read .selected-year &,
   .selected-year & {
     width: 24px;
     text-indent: 0;
@@ -923,13 +1033,14 @@ $defaultOffset: 45;
 // display the selected title under the charts with a clear button
 .chart-selection-container {
   grid-area: footer;
-  max-width: 430px; // default max-width, change max-width if expanded
-  .expand-year-plots & {
+  text-align: right; // orient non-full with items to the right (expand button)
+  // max-width: 430px; // default max-width, change max-width if expanded
+  .view-most-seen-read & {
     max-width: none;
   }
 }
 .chart-selection {
-  grid-template-columns: auto 1fr 45px;
+  grid-template-columns: auto 1fr 55px;
   grid-template-rows: 1fr;
   grid-template-areas: ". . .";
   display: none;
@@ -955,6 +1066,9 @@ $defaultOffset: 45;
   }
   .title-highlight & { // show / hide based on parent state
     display: grid;
+    .right-col {
+      padding-right: 0;
+    }
   }
   &.has-title {
     display: grid;
@@ -970,6 +1084,7 @@ $defaultOffset: 45;
   .right-col {
     display: inline-block;
     padding: 15px 20px;
+    text-align: left;
   }
   .left-col {
     .type {
@@ -998,9 +1113,9 @@ $chart-item-background: #888584;
   margin: 0;
   padding-left: 8px;
   position: relative;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.4s ease;
   &.odd-month,
-  .expand-year-plots .selected-year &.odd-month {
+  .view-most-seen-read .selected-year &.odd-month {
     background-color: lighten($base-dark, 4%);
   }
   .selected-year &.odd-month {
@@ -1025,14 +1140,13 @@ $chart-item-background: #888584;
     background-color: $chart-item-background;
     border-radius: 0px;
     text-indent: -99999px;
-    // transition: width 0.1s ease;
-    // transition: background-color 0.3s ease;
-    transition: all 0.3s ease;
+    // transition: all 0.1s ease;
     z-index: 10;
-    .expand-year-plots &,
+    .view-most-seen-read &,
     .selected-year & {
       background-color: $base-light-dimmed;
     }
+    .view-most-seen-read .title-highlight &,
     .title-highlight & {
       background-color: #666;
     }
@@ -1044,7 +1158,7 @@ $chart-item-background: #888584;
     &.short-title,
     &.medium-title,
     &.long-title {
-      transition: width 0.5s ease 0.3s;
+      transition: width 0.1s ease;
     }
     &.short-title {
       width: 5px;
@@ -1083,7 +1197,7 @@ $chart-item-background: #888584;
     &.long-title.highlight::before {
       left: -7px;
     }
-    .expand-year-plots & {
+    .view-most-seen-read & {
       &.short-title.highlight::before {
         left: -6px;
       }
@@ -1107,16 +1221,17 @@ $chart-item-background: #888584;
       opacity: 0.3;
       &.item-movie {
         opacity: 1;
-        background-color: $media-highlight-color;
+        // background-color: $media-highlight-color;
+        background-color: $movie-color;
         transition: all 0.3s ease;
-
       }
     }
     .highlight-books & {
       opacity: 0.3;
       &.item-book {
         opacity: 1;
-        background-color: $media-highlight-color;
+        // background-color: $media-highlight-color;
+        background-color: $book-color;
         transition: all 0.3s ease;
       }
     }
@@ -1124,16 +1239,18 @@ $chart-item-background: #888584;
       opacity: 0.3;
       &.item-play {
         opacity: 1;
-        background-color: $media-highlight-color;
+        // background-color: $media-highlight-color;
+        background-color: $play-color;
         transition: all 0.3s ease;
-
       }
     }
     .highlight-tv & {
       opacity: 0.3;
       &.item-tv {
         opacity: 1;
-        background-color: $media-highlight-color;
+        // background-color: $media-highlight-color;
+        background-color: $tv-color;
+
         transition: all 0.3s ease;
       }
     }
@@ -1183,15 +1300,15 @@ $chart-item-background: #888584;
   }
   .browse-single-year & {
     display: block;
-    transition: all 0.5 ease;
+    transition: all 0.5s ease;
   }
 }
 
 // collapsed year plots (default)
 .browse-year-lists {
-  transition: all 0.5 ease;
+  transition: all 0.5s ease;
   .year-plot {
-    width: 40px;
+    // width: 40px;
     transition: all 0.5s ease;
   }
   .plot-year-label {
@@ -1203,7 +1320,7 @@ $chart-item-background: #888584;
     position: relative;
   }
   .daily-items li {
-    transition: width 0.3s ease 0.8s;
+    transition: width 0.3s ease;
     &.short-title,
     &.medium-title,
     &.long-title {
@@ -1217,7 +1334,9 @@ $chart-item-background: #888584;
 
 ////////////////////
 // most seen,read titles
+.view-most-seen-read {
 
+}
 .most-seen-read {
   h2 {
     color: $base-light;
@@ -1232,7 +1351,7 @@ $chart-item-background: #888584;
   padding: 0 20px;
   list-style: none;
   overflow: auto;
-  transition: opacity 0.6s ease 2s;
+  transition: opacity 0.6s ease;
   ul{
     margin-bottom: 30px;
   }

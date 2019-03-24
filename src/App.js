@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import * as toTitleCase from 'to-title-case';
 import * as classNames from 'classnames';
 import ReactGA from 'react-ga';
+import * as d3 from 'd3';
 
 import './App.scss';
 import Loader from './loader';
@@ -27,6 +28,7 @@ export default class App extends Component {
       highlightMediaType: "", // highlight all items matching type: books, movies...
       loading: true,
       mediaLists: {},
+      titleCounts: {},
       browseYearLists: true,
       displayYear: '2018',
       radialProgress: 0,
@@ -46,9 +48,16 @@ export default class App extends Component {
           'Content-Type': 'application/json'
           }
         }
+      ),
+      fetch('./data/titles-with-count.json',
+        {headers:
+          {'Accept': 'text/json',
+          'Content-Type': 'application/json'
+          }
+        }
       )
     ]).then(responses => Promise.all(responses.map(resp => resp.json())))
-    .then(([list]) => {
+    .then(([list, titleCounts]) => {
       const list2018 = this.getYear(list, 2018);
       const list2017 = this.getYear(list, 2017);
       const list2016 = this.getYear(list, 2016);
@@ -62,8 +71,71 @@ export default class App extends Component {
 
       this.setState({ mediaLists: {list2018, list2017, list2016, list2015, list2014, list2013, list2012, list2011, list2010, list2009} });
       this.setState({ loading: false });
+      this.setState({ titleCounts: titleCounts });
+      // console.log("titleCounts",titleCounts);
       this.isUsingDesktop();
+    }).catch(function(e) {
+      console.log('err',e);
     });
+    //
+    // d3.csv('./data/2009-2018-titles-w-counts.csv').then(function(data){
+    //
+    //         //-------------------------------------------
+    //         // get title totals by type
+    //         // console.log("MAIN LIST", list);
+    //
+    //         // var expensesAvgAmount = d3.nest()
+    //         //   .key(function(d) { return d.name; })
+    //         //   .rollup(function(v) { return d3.mean(v, function(d) { return d.amount; }); })
+    //         //   .entries(expenses);
+    //         // console.log(JSON.stringify(expensesAvgAmount));
+    //
+    //         // var expenseMetrics = d3.nest()
+    //         //   .key(function(d) { return d.name; })
+    //         //   .rollup(function(v) { return {
+    //         //     count: v.length,
+    //         //     total: d3.sum(v, function(d) { return d.amount; }),
+    //         //     avg: d3.mean(v, function(d) { return d.amount; })
+    //         //   }; })
+    //         //   .entries(expenses);
+    //         // console.log(JSON.stringify(expenseMetrics));
+    //
+    //         // var mediaByTitle = d3.nest()
+    //         //   .key(function(d) { return d.values.title; })
+    //         //   .entries(list);
+    //         //
+    //         // console.log("mediaByTitle",mediaByTitle);
+    //
+    //
+    //         // https://stackoverflow.com/questions/42448647/sum-of-nested-json-array-using-d3-rollup
+    //         // var data = [
+    //         //     {department:'Electro',quant:{M:30, T:20, W:51, R:22, F:35 }},
+    //         //     {department:'Beauty',quant:{M:50, T:32, W:75, R:61, F: 45}},
+    //         //     {department:'Apparel',quant:{M:62, T:42, W:135, R: 82, F:89}},
+    //         //     {department:'Misc',quant:{M:89, T:54, W:103, T:94, F:90}}
+    //         // ];
+    //         //
+    //         // var deptSum = d3.nest()
+    //         // .key(function(d) { return d.department; })
+    //         // .rollup(function(v) { return {
+    //         //     count: v.length,
+    //         //     total: d3.sum(d3.values(v[0].quant)),
+    //         //     avg: d3.mean(d3.values(v[0].quant))
+    //         // }; })
+    //         // .entries(data)
+    //         //
+    //         // console.log(deptSum)
+    //
+    //         var result = d3.nest()
+    //                        .key(function(d) { return d.title.toLowerCase(); })
+    //                        .rollup(function(v) { return {
+    //                          total: d3.sum(v, function(d) { return d.count; }),
+    //                          type: v[0].type
+    //                          }; })
+    //                        .entries(data);
+    //
+    //         console.log(result)
+    // })
 
     // ESC key clears title highlight
     document.addEventListener("keydown", this.escKey, false);
@@ -194,7 +266,8 @@ export default class App extends Component {
   }
 
   setMediaHighlightType = (highlightMediaType) => {
-    this.setState({'displayYear': ''});// reset selected year
+    console.log("setMediaHighlightType MEDIA",highlightMediaType);
+    // this.setState({'displayYear': ''});// reset selected year
     this.setState({highlightMediaType}); // reset mediaType highlight
   }
 
@@ -208,6 +281,23 @@ export default class App extends Component {
 
   // toggle YearPlot size
   toggleExpanded() {
+    const height = document.getElementsByClassName('scrolling-list')[0].clientHeight;
+
+    console.log(".scrolling-list HEIGHT:",height);
+    // scrolling-list
+
+    // about to show most seen, read
+    if (this.state.browseYearLists){
+      this.setHighlight("", "title", ""); // reset title selection
+      this.setState({ stickHeader: false });
+      window.scrollTo(0,0); // orient the most-seen-read content to the top
+      const currentState = this.state.browseYearLists;
+    } else {
+      // about to browse by year
+      this.setState({highlightMediaType: ''}); // reset mediaType highlight
+      this.setState({ stickHeader: true });
+      window.scrollTo(0,515); // orient the default year scroll position
+    }
     const currentState = this.state.browseYearLists;
     this.setState({ browseYearLists: !currentState });
   }
@@ -223,7 +313,8 @@ export default class App extends Component {
             browseYearLists,
             displayYear,
             radialProgress,
-            mediaListItemsOnScreen } = this.state;
+            mediaListItemsOnScreen,
+            titleCounts } = this.state;
 
     if (error) {
       return(
@@ -266,9 +357,10 @@ export default class App extends Component {
 
       const appStateClasses = classNames({
         app: true,
-        'expand-year-plots': !browseYearLists,
+        'view-most-seen-read': !browseYearLists,
         'browse-single-year': browseYearLists,
-        'stick-header': this.state.stickHeader
+        'stick-header': this.state.stickHeader,
+        'title-highlight': highlightedItem
       })
 
       const chartTitleHighlightClasses = classNames({
@@ -283,13 +375,13 @@ export default class App extends Component {
             <div className="intro-with-illustration">
               <div className="name-plate">Seen,Read</div>
               <p className="intro">Filmmaker <a href="https://en.wikipedia.org/wiki/Steven_Soderbergh">Stephen Soderbergh</a> has shared
-              a <a href="http://extension765.com/soderblogh/33-seen-read-2018">meticulous daily account</a> of
+              a <a href="http://extension765.com/soderblogh/33-seen-read-2018">daily account</a> of
               every <span className="movie-label">movie</span>, <span className="book-label">book</span>, <span className="play-label">play</span>,
               and <span className="tv-label">TV</span> show he's
               seen or read for the past 10 years.</p>
               <p className="intro">Scroll down to explore individual years of Stephen's media diet
               or check out his <span className="inline-button" onClick={() => this.toggleExpanded()}>
-              most frequently seen and read titles</span> from the last decade to learn what's been influencing his work most.</p>
+              most frequently seen and read titles</span> from the last decade to learn his prominent tastes and influences.</p>
             </div>
           </div>
 
@@ -307,7 +399,7 @@ export default class App extends Component {
             <button className="button option-button" onClick={() => this.toggleExpanded()} >
             {browseYearLists
               ? '★ Most seen, read'
-              : 'Browse by year'
+              : 'Ξ Browse by year'
             }
             </button>
           </div>
@@ -345,8 +437,13 @@ export default class App extends Component {
                     })
                   }
                 </div>
-
                 <div className="chart-selection-container">
+                <button className="button expand-reduce-chart" onClick={() => this.toggleExpanded()} >
+                {browseYearLists
+                  ? <span>Expand <em>→</em></span>
+                  : <span><em>←</em> Reduce</span>
+                }
+                </button>
                   <div className={chartTitleHighlightClasses}>
                     <div className="left-col">
                       <span id="selected-title-type" className="type"></span>
@@ -371,6 +468,7 @@ export default class App extends Component {
                 setMediaListHighlight={this.setMediaListHighlight}
               />
               <MostSeenRead
+                titleCounts={titleCounts}
                 compactMode={browseYearLists}
                 highlightedItem={highlightedItem}
                 highlightMediaType={highlightMediaType}
