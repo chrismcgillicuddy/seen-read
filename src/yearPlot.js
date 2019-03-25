@@ -35,6 +35,7 @@ export default class YearPlot extends React.Component {
           setHighlight,
           highlightedItem,
           highlightedType,
+          highlightedMedia,
           mediaListItemsOnScreen } = this.props;
     let currentDate = '';
     let itemDate = '';
@@ -70,6 +71,7 @@ export default class YearPlot extends React.Component {
 
         // this same as previous date?
         itemDate = item.date;
+        // console.log("highlightMedia",highlightMedia);
 
         return (
           <ul key={itemDate} className={rowClass+' daily-items'}>
@@ -81,7 +83,7 @@ export default class YearPlot extends React.Component {
               let credit = d.credit.toString().toLowerCase();
 
               if (highlightedType==="title"){
-                if (title===highlightedItem) {
+                if ( (title===highlightedItem) && (type == highlightedMedia) ) {
                   itemClass+="highlight ";
                 }
               }
@@ -118,7 +120,7 @@ export default class YearPlot extends React.Component {
           <ul className={rowClass+onScreenClass+" daily-items"}><li className="empty-date"></li></ul>
         )
       }
-    }, this)
+    }, this);
 
     return (
       <div className={"year-plot "+selectedYearClass}>

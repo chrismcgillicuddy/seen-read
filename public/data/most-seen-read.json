@@ -1,2279 +1,772 @@
 [
   {
-    "key": "Haywire",
-    "value": {
-      "type": "movie",
-      "count": 19
-    }
-  },
-  {
-    "key": "Logan Lucky",
-    "value": {
-      "type": "movie",
-      "count": 15
-    }
-  },
-  {
-    "key": "Side Effects",
-    "value": {
-      "type": "movie",
-      "count": 17
-    }
-  },
-  {
-    "key": "1941",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "2001: A Space Odyssey",
-    "value": {
-      "type": "movie",
-      "count": 8
-    }
-  },
-  {
-    "key": "2001: A SPACE ODYSSEY",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "47 Ronin",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "A Walk Among the Tombstones",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "Advise & Consent",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Agatha",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Alien",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "All About Eve",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "ALL ABOUT EVE",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "All the President's Men",
-    "value": {
-      "type": "movie",
-      "count": 14
-    }
-  },
-  {
-    "key": "Altered States",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "American Graffiti",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Anatomy of a Murder",
-    "value": {
-      "type": "movie",
-      "count": 6
-    }
-  },
-  {
-    "key": "And Then There Were None",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Apocalypse Now",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "Barry Lyndon",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "Behind the Candelabra",
-    "value": {
-      "type": "movie",
-      "count": 14
-    }
-  },
-  {
-    "key": "Being There",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Bitter Pill",
-    "value": {
-      "type": "movie",
-      "count": 9
-    }
-  },
-  {
-    "key": "CALIFORNIA SUITE",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Carnal Knowledge",
-    "value": {
-      "type": "movie",
-      "count": 6
-    }
-  },
-  {
-    "key": "Casablanca",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Catch-22",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "Caught",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Cedar Rapids",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Chimes at Midnight",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Chinatown",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "Citizen Kane",
-    "value": {
-      "type": "movie",
-      "count": 8
-    }
-  },
-  {
-    "key": "Citizenfour",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Close Encounters of the Third Kind",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Contagion",
-    "value": {
-      "type": "movie",
-      "count": 13
-    }
-  },
-  {
-    "key": "Double Indemnity",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Duel",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Eraserhead",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Ex Machina",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Fatal Attraction",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "Five Easy Pieces",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Foreign Correspondent",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Frenzy",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "From Russia with Love",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Funeral in Berlin",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Goldfinger",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Gone Girl",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Gosford Park",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Grand Prix",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Gravity",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Heat",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Help!",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "High and Low",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "HIGH FLYING BIRD",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "His Girl Friday",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "House of Games",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "In the Loop",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Jaws",
-    "value": {
-      "type": "movie",
-      "count": 12
-    }
-  },
-  {
-    "key": "JAWS",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Klute",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "LAST YEAR AT MARIENBAD",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "LAWRENCE OF ARABIA",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Mad Max: Fury Road",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Magic Mike",
-    "value": {
-      "type": "movie",
-      "count": 12
-    }
-  },
-  {
-    "key": "Magic Mike XXL",
-    "value": {
-      "type": "movie",
-      "count": 8
-    }
-  },
-  {
-    "key": "Manhattan",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Margin Call",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Matango",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Michael Clayton",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "MINORITY REPORT",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Mission: Impossible",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Murder on the Orient Express",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Ocean's 8",
-    "value": {
-      "type": "movie",
-      "count": 9
-    }
-  },
-  {
-    "key": "OCEAN'S EIGHT",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "On Her Majesty's Secret Service",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "OUR MAN IN HAVANA",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "OUT OF THE PAST",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Pale Flower",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Panic Room",
-    "value": {
-      "type": "movie",
-      "count": 8
-    }
-  },
-  {
-    "key": "PANIC ROOM",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Paper Moon",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "PETULIA",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Point Blank",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Presumed Innocent",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Promised Land",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "PSYCHO",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Raiders of the Lost Ark",
-    "value": {
-      "type": "movie",
-      "count": 7
-    }
-  },
-  {
-    "key": "READY PLAYER ONE",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Rebecca",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Reds",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Repulsion",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Rififi",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Ryan's Daughter",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Se7en",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "SEANCE ON A WET AFTERNOON",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "SEVEN DAYS IN MAY",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Sexy Beast",
-    "value": {
-      "type": "movie",
-      "count": 7
-    }
-  },
-  {
-    "key": "Shadow of a Doubt",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "SHAME",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Sisters",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Skyfall",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Sleuth",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Solitary Man",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Sorcerer",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "State and Main",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Sunset Boulevard",
-    "value": {
-      "type": "movie",
-      "count": 9
-    }
-  },
-  {
-    "key": "Sweet Smell of Success",
-    "value": {
-      "type": "movie",
-      "count": 6
-    }
-  },
-  {
-    "key": "THE _______ REPORT",
-    "value": {
-      "type": "movie",
-      "count": 7
-    }
-  },
-  {
-    "key": "The Andromeda Strain",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE APARTMENT",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Asphalt Jungle",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Big Sleep",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Birds",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Boy Friend",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE CANDIDATE",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Comeback",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Conformist",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Conversation",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Day of the Jackal",
-    "value": {
-      "type": "movie",
-      "count": 9
-    }
-  },
-  {
-    "key": "THE DAY OF THE JACKAL",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Elephant Man",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Fortune",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The French Connection",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "The French Lieutenant's Woman",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Game",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Girl with the Dragon Tattoo",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Girlfriend Experience",
-    "value": {
-      "type": "movie",
-      "count": 6
-    }
-  },
-  {
-    "key": "The Godfather",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Godfather Part II",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "THE GOODBYE GIRL",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Graduate",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Hateful Eight",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Haunting",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Hot Rock",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "The Hunt for Red October",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE HUSTLER",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Ides of March",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Informant!",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Ipcress File",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Killing",
-    "value": {
-      "type": "movie",
-      "count": 40
-    }
-  },
-  {
-    "key": "The King of Marvin Gardens",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Knack ...and How to Get It",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE LAUNDROMAT",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Lavender Hill Mob",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE LONG VOYAGE HOME",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Paper Chase",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Parallax View",
-    "value": {
-      "type": "movie",
-      "count": 8
-    }
-  },
-  {
-    "key": "The Return of W. de Rijk",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE RIGHT STUFF",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE SEDUCTION OF MIMI",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Servent",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Shining",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Social Network",
-    "value": {
-      "type": "movie",
-      "count": 12
-    }
-  },
-  {
-    "key": "THE SOCIAL NETWORK",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE SPY WHO CAME IN FROM THE COLD",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Sugarland Express",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Third Man",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Thomas Crown Affair",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Train",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Trial",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Verdict",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Three Days of the Condor",
-    "value": {
-      "type": "movie",
-      "count": 8
-    }
-  },
-  {
-    "key": "To Catch a Thief",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Tokyo Drifter",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Tokyo Olympiad",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Touch of Evil",
-    "value": {
-      "type": "movie",
-      "count": 3
-    }
-  },
-  {
-    "key": "Unsane",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "Visitors",
-    "value": {
-      "type": "movie",
-      "count": 4
-    }
-  },
-  {
-    "key": "Westworld",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Who's Afraid of Virginia Woolf?",
-    "value": {
-      "type": "movie",
-      "count": 2
-    }
-  },
-  {
-    "key": "Zodiac",
-    "value": {
-      "type": "movie",
-      "count": 5
-    }
-  },
-  {
-    "key": "1864",
+    "key": "dateline",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 77
     }
   },
   {
-    "key": "ABSOLUTELY FABULOUS",
-    "value": {
-      "type": "tv",
-      "count": 12
-    }
-  },
-  {
-    "key": "Arvingerne",
-    "value": {
-      "type": "tv",
-      "count": 11
-    }
-  },
-  {
-    "key": "Atlanta",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "ATLANTA",
-    "value": {
-      "type": "tv",
-      "count": 16
-    }
-  },
-  {
-    "key": "Baskets",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "BELOW DECK",
+    "key": "below deck",
     "value": {
       "type": "tv",
       "count": 67
     }
   },
   {
-    "key": "beyond the walls",
+    "key": "breaking bad",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 62
     }
   },
   {
-    "key": "Billions",
+    "key": "the americans",
     "value": {
       "type": "tv",
-      "count": 24
+      "count": 62
     }
   },
   {
-    "key": "Black Mirror",
-    "value": {
-      "type": "tv",
-      "count": 18
-    }
-  },
-  {
-    "key": "Boardwalk Empire",
+    "key": "boardwalk empire",
     "value": {
       "type": "tv",
       "count": 54
     }
   },
   {
-    "key": "Borgen",
-    "value": {
-      "type": "tv",
-      "count": 30
-    }
-  },
-  {
-    "key": "Boss",
-    "value": {
-      "type": "tv",
-      "count": 16
-    }
-  },
-  {
-    "key": "Breaking Bad",
-    "value": {
-      "type": "tv",
-      "count": 62
-    }
-  },
-  {
-    "key": "CIVILIZATIONS",
-    "value": {
-      "type": "tv",
-      "count": 8
-    }
-  },
-  {
-    "key": "DOLL & EM",
-    "value": {
-      "type": "tv",
-      "count": 6
-    }
-  },
-  {
-    "key": "EIGHT HOURS DON'T MAKE A DAY",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "Fleabag",
-    "value": {
-      "type": "tv",
-      "count": 6
-    }
-  },
-  {
-    "key": "FOREVER",
-    "value": {
-      "type": "tv",
-      "count": 6
-    }
-  },
-  {
-    "key": "Getting On",
-    "value": {
-      "type": "tv",
-      "count": 17
-    }
-  },
-  {
-    "key": "Girls",
-    "value": {
-      "type": "tv",
-      "count": 46
-    }
-  },
-  {
-    "key": "Glow",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Homeland",
-    "value": {
-      "type": "tv",
-      "count": 35
-    }
-  },
-  {
-    "key": "Horace and Pete",
-    "value": {
-      "type": "tv",
-      "count": 10
-    }
-  },
-  {
-    "key": "House of Cards",
-    "value": {
-      "type": "tv",
-      "count": 36
-    }
-  },
-  {
-    "key": "I'M ALAN PARTRDIGE",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Inside Amy Schumer",
-    "value": {
-      "type": "tv",
-      "count": 25
-    }
-  },
-  {
-    "key": "KIM PHILBY: HIS MOST INTIMATE BETRAYAL",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Louie",
-    "value": {
-      "type": "tv",
-      "count": 21
-    }
-  },
-  {
-    "key": "Mad Men",
+    "key": "mad men",
     "value": {
       "type": "tv",
       "count": 52
     }
   },
   {
-    "key": "MANIAC",
-    "value": {
-      "type": "tv",
-      "count": 10
-    }
-  },
-  {
-    "key": "Master of None",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "Mindhunter",
-    "value": {
-      "type": "tv",
-      "count": 17
-    }
-  },
-  {
-    "key": "Mr. Robot",
-    "value": {
-      "type": "tv",
-      "count": 14
-    }
-  },
-  {
-    "key": "O.J.: Made in America",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "ORANGE IS THE NEW BLACK",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "PORTLANDIA",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "SALLY4EVER",
-    "value": {
-      "type": "tv",
-      "count": 7
-    }
-  },
-  {
-    "key": "Silicon Valley",
-    "value": {
-      "type": "tv",
-      "count": 37
-    }
-  },
-  {
-    "key": "Smash",
-    "value": {
-      "type": "tv",
-      "count": 30
-    }
-  },
-  {
-    "key": "SMILF",
-    "value": {
-      "type": "tv",
-      "count": 7
-    }
-  },
-  {
-    "key": "The Americans",
-    "value": {
-      "type": "tv",
-      "count": 62
-    }
-  },
-  {
-    "key": "The Crown",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE FALL AND RISE OF REGINALD PERRIN",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Keepers",
-    "value": {
-      "type": "tv",
-      "count": 7
-    }
-  },
-  {
-    "key": "THE KINGDOM",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "THE ROMANOFFS",
-    "value": {
-      "type": "tv",
-      "count": 8
-    }
-  },
-  {
-    "key": "The Slap",
-    "value": {
-      "type": "tv",
-      "count": 8
-    }
-  },
-  {
-    "key": "The Staircase",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Thick of It",
-    "value": {
-      "type": "tv",
-      "count": 46
-    }
-  },
-  {
-    "key": "THE THICK OF IT",
-    "value": {
-      "type": "tv",
-      "count": 5
-    }
-  },
-  {
-    "key": "The Trap",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Vietnam War",
-    "value": {
-      "type": "tv",
-      "count": 9
-    }
-  },
-  {
-    "key": "TIGER VS PHIL",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Tracey Ullman's Show",
-    "value": {
-      "type": "tv",
-      "count": 10
-    }
-  },
-  {
-    "key": "Transparent",
-    "value": {
-      "type": "tv",
-      "count": 28
-    }
-  },
-  {
-    "key": "True Detective",
-    "value": {
-      "type": "tv",
-      "count": 5
-    }
-  },
-  {
-    "key": "Twenty Twelve",
-    "value": {
-      "type": "tv",
-      "count": 7
-    }
-  },
-  {
-    "key": "Twin Peaks",
-    "value": {
-      "type": "tv",
-      "count": 19
-    }
-  },
-  {
-    "key": "Utopia",
-    "value": {
-      "type": "tv",
-      "count": 8
-    }
-  },
-  {
-    "key": "Veep",
+    "key": "veep",
     "value": {
       "type": "tv",
       "count": 51
     }
   },
   {
-    "key": "W1A",
+    "key": "the thick of it",
     "value": {
       "type": "tv",
-      "count": 19
+      "count": 51
     }
   },
   {
-    "key": "Wormwood",
+    "key": "girls",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 46
     }
   },
   {
-    "key": "A VERY ENGLISH SCANDAL",
+    "key": "silicon valley",
     "value": {
       "type": "tv",
-      "count": 3
+      "count": 43
     }
   },
   {
-    "key": "ALL WATCHED OVER BY MACHINES OF LOVING GRACE",
+    "key": "the killing",
     "value": {
       "type": "tv",
-      "count": 3
+      "count": 36
     }
   },
   {
-    "key": "KEY & PEELE",
+    "key": "house of cards",
     "value": {
       "type": "tv",
-      "count": 4
+      "count": 36
     }
   },
   {
-    "key": "Killing Richard Glossip",
+    "key": "better call saul",
     "value": {
       "type": "tv",
-      "count": 4
+      "count": 35
     }
   },
   {
-    "key": "Masterminds",
+    "key": "homeland",
     "value": {
       "type": "tv",
-      "count": 25
+      "count": 35
     }
   },
   {
-    "key": "The Knick",
+    "key": "billions",
     "value": {
       "type": "tv",
-      "count": 15
+      "count": 32
     }
   },
   {
-    "key": "The Power of Nightmares",
+    "key": "borgen",
     "value": {
       "type": "tv",
-      "count": 3
+      "count": 30
     }
   },
   {
-    "key": "Top of the Lake",
+    "key": "smash",
     "value": {
       "type": "tv",
-      "count": 6
+      "count": 30
     }
   },
   {
-    "key": "TRACEY ULLMAN'S SHOW",
+    "key": "transparent",
     "value": {
       "type": "tv",
-      "count": 5
+      "count": 28
     }
   },
   {
-    "key": "Vinyl",
-    "value": {
-      "type": "tv",
-      "count": 10
-    }
-  },
-  {
-    "key": "WILD",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "American Greed",
-    "value": {
-      "type": "tv",
-      "count": 16
-    }
-  },
-  {
-    "key": "EVIL GENIUS",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "Inside Men",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "OLIVE KITTERIDGE",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Last Panthers",
-    "value": {
-      "type": "tv",
-      "count": 5
-    }
-  },
-  {
-    "key": "White Horse",
-    "value": {
-      "type": "tv",
-      "count": 6
-    }
-  },
-  {
-    "key": "20/20",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "2016 Olympic Games",
-    "value": {
-      "type": "tv",
-      "count": 15
-    }
-  },
-  {
-    "key": "2018 WINTER OLYMPICS",
-    "value": {
-      "type": "tv",
-      "count": 8
-    }
-  },
-  {
-    "key": "30 for 30",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "48 Hours",
-    "value": {
-      "type": "tv",
-      "count": 10
-    }
-  },
-  {
-    "key": "48 Hours Mystery",
-    "value": {
-      "type": "tv",
-      "count": 26
-    }
-  },
-  {
-    "key": "48 Hours on ID",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "48 HRS",
-    "value": {
-      "type": "tv",
-      "count": 6
-    }
-  },
-  {
-    "key": "American Experience: JFK",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Better Call Saul",
-    "value": {
-      "type": "tv",
-      "count": 26
-    }
-  },
-  {
-    "key": "BETTER CALL SAUL",
-    "value": {
-      "type": "tv",
-      "count": 9
-    }
-  },
-  {
-    "key": "BILLIONS",
-    "value": {
-      "type": "tv",
-      "count": 8
-    }
-  },
-  {
-    "key": "Come to Papa (Largo)",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Curb Your Enthusiasm",
-    "value": {
-      "type": "tv",
-      "count": 9
-    }
-  },
-  {
-    "key": "Dateline",
-    "value": {
-      "type": "tv",
-      "count": 65
-    }
-  },
-  {
-    "key": "DATELINE",
-    "value": {
-      "type": "tv",
-      "count": 12
-    }
-  },
-  {
-    "key": "Dateline on ID",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "Dateline: Saturday Night Mystery",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "Dateline: Thursday Night Mystery",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Deutschland '83",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Disappeared",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "Ed.",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "Hello Ladies",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Hoover Dam",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Hunting Hitler",
-    "value": {
-      "type": "tv",
-      "count": 3
-    }
-  },
-  {
-    "key": "I'M ALAN PARTRIDGE",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Madoff",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Magic City",
-    "value": {
-      "type": "tv",
-      "count": 7
-    }
-  },
-  {
-    "key": "Making a Murderer",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Million Dollar Listing",
-    "value": {
-      "type": "tv",
-      "count": 7
-    }
-  },
-  {
-    "key": "Mob Wives",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "Red Oaks",
-    "value": {
-      "type": "tv",
-      "count": 6
-    }
-  },
-  {
-    "key": "SILICON VALLEY",
-    "value": {
-      "type": "tv",
-      "count": 6
-    }
-  },
-  {
-    "key": "THE CENTURY OF THE SELF",
-    "value": {
-      "type": "tv",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Jinx",
-    "value": {
-      "type": "tv",
-      "count": 4
-    }
-  },
-  {
-    "key": "The Man From U.N.C.L.E.",
+    "key": "the man from u.n.c.l.e.",
     "value": {
       "type": "tv",
       "count": 27
     }
   },
   {
-    "key": "The Newsroom",
+    "key": "48 hours mystery",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 26
     }
   },
   {
-    "key": "The Secret",
+    "key": "inside amy schumer",
     "value": {
       "type": "tv",
-      "count": 3
+      "count": 25
     }
   },
   {
-    "key": "Tom Papa: Freaking Out",
+    "key": "masterminds",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 25
     }
   },
   {
-    "key": "Vanity Fair Confidential",
+    "key": "louie",
+    "value": {
+      "type": "tv",
+      "count": 21
+    }
+  },
+  {
+    "key": "vanity fair confidential",
+    "value": {
+      "type": "tv",
+      "count": 21
+    }
+  },
+  {
+    "key": "haywire",
+    "value": {
+      "type": "movie",
+      "count": 19
+    }
+  },
+  {
+    "key": "twin peaks",
     "value": {
       "type": "tv",
       "count": 19
     }
   },
   {
-    "key": "VANITY FAIR CONFIDENTIAL",
+    "key": "w1a",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 19
     }
   },
   {
-    "key": "Vicious",
+    "key": "black mirror",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 18
     }
   },
   {
-    "key": "Videosyncracy",
+    "key": "side effects",
+    "value": {
+      "type": "movie",
+      "count": 17
+    }
+  },
+  {
+    "key": "getting on",
     "value": {
       "type": "tv",
-      "count": 2
+      "count": 17
     }
   },
   {
-    "key": "ZEN AND THE ART OF MOTORCYCLE MAINTENANCE",
+    "key": "mindhunter",
     "value": {
-      "type": "book",
-      "count": 2
+      "type": "tv",
+      "count": 17
     }
   },
   {
-    "key": "In Cold Blood",
+    "key": "atlanta",
     "value": {
-      "type": "book",
-      "count": 4
+      "type": "tv",
+      "count": 16
     }
   },
   {
-    "key": "Inherent Vice",
+    "key": "boss",
     "value": {
-      "type": "book",
-      "count": 2
+      "type": "tv",
+      "count": 16
     }
   },
   {
-    "key": "Moneyball",
+    "key": "american greed",
     "value": {
-      "type": "book",
-      "count": 3
+      "type": "tv",
+      "count": 16
     }
   },
   {
-    "key": "Seconds",
-    "value": {
-      "type": "book",
-      "count": 2
-    }
-  },
-  {
-    "key": "Steve Jobs",
-    "value": {
-      "type": "book",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Big Short",
-    "value": {
-      "type": "book",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Hunger Games",
-    "value": {
-      "type": "book",
-      "count": 3
-    }
-  },
-  {
-    "key": "The Loved One",
-    "value": {
-      "type": "book",
-      "count": 2
-    }
-  },
-  {
-    "key": "The Library",
+    "key": "the library",
     "value": {
       "type": "play",
       "count": 16
     }
   },
   {
-    "key": "By The Way, Meet Vera Stark",
+    "key": "logan lucky",
     "value": {
-      "type": "play",
-      "count": 2
+      "type": "movie",
+      "count": 15
     }
   },
   {
-    "key": "The Mousetrap",
+    "key": "the knick",
     "value": {
-      "type": "play",
-      "count": 2
-    }
-  },
-
-
-  {
-    "key": "Arthur Nersesian",
-    "value": {
-      "type": "author",
-      "count": 6
+      "type": "tv",
+      "count": 15
     }
   },
   {
-    "key": "Ben Macintyre",
+    "key": "2016 olympic games",
     "value": {
-      "type": "author",
-      "count": 3
+      "type": "tv",
+      "count": 15
     }
   },
   {
-    "key": "Bill Bryson",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Bill James",
+    "key": "bill james",
     "value": {
       "type": "author",
       "count": 15
     }
   },
   {
-    "key": "Bret Easton Ellis",
+    "key": "scott z. burns",
+    "value": {
+      "type": "author",
+      "count": 15
+    }
+  },
+  {
+    "key": "all the president's men",
+    "value": {
+      "type": "movie",
+      "count": 14
+    }
+  },
+  {
+    "key": "behind the candelabra",
+    "value": {
+      "type": "movie",
+      "count": 14
+    }
+  },
+  {
+    "key": "mr. robot",
+    "value": {
+      "type": "tv",
+      "count": 14
+    }
+  },
+  {
+    "key": "jaws",
+    "value": {
+      "type": "movie",
+      "count": 14
+    }
+  },
+  {
+    "key": "contagion",
+    "value": {
+      "type": "movie",
+      "count": 13
+    }
+  },
+  {
+    "key": "magic mike",
+    "value": {
+      "type": "movie",
+      "count": 12
+    }
+  },
+  {
+    "key": "ocean's 8",
+    "value": {
+      "type": "movie",
+      "count": 12
+    }
+  },
+  {
+    "key": "the social network",
+    "value": {
+      "type": "movie",
+      "count": 12
+    }
+  },
+  {
+    "key": "absolutely fabulous",
+    "value": {
+      "type": "tv",
+      "count": 12
+    }
+  },
+  {
+    "key": "2001: a space odyssey",
+    "value": {
+      "type": "movie",
+      "count": 11
+    }
+  },
+  {
+    "key": "arvingerne",
+    "value": {
+      "type": "tv",
+      "count": 11
+    }
+  },
+  {
+    "key": "the day of the jackal",
+    "value": {
+      "type": "movie",
+      "count": 11
+    }
+  },
+  {
+    "key": "horace and pete",
+    "value": {
+      "type": "tv",
+      "count": 10
+    }
+  },
+  {
+    "key": "maniac",
+    "value": {
+      "type": "tv",
+      "count": 10
+    }
+  },
+  {
+    "key": "panic room",
+    "value": {
+      "type": "movie",
+      "count": 10
+    }
+  },
+  {
+    "key": "tracey ullman's show",
+    "value": {
+      "type": "tv",
+      "count": 10
+    }
+  },
+  {
+    "key": "vinyl",
+    "value": {
+      "type": "tv",
+      "count": 10
+    }
+  },
+  {
+    "key": "48 hours",
+    "value": {
+      "type": "tv",
+      "count": 10
+    }
+  },
+  {
+    "key": "bitter pill",
+    "value": {
+      "type": "movie",
+      "count": 9
+    }
+  },
+  {
+    "key": "sunset boulevard",
+    "value": {
+      "type": "movie",
+      "count": 9
+    }
+  },
+  {
+    "key": "the vietnam war",
+    "value": {
+      "type": "tv",
+      "count": 9
+    }
+  },
+  {
+    "key": "curb your enthusiasm",
+    "value": {
+      "type": "tv",
+      "count": 9
+    }
+  },
+  {
+    "key": "citizen kane",
+    "value": {
+      "type": "movie",
+      "count": 8
+    }
+  },
+  {
+    "key": "magic mike xxl",
+    "value": {
+      "type": "movie",
+      "count": 8
+    }
+  },
+  {
+    "key": "the parallax view",
+    "value": {
+      "type": "movie",
+      "count": 8
+    }
+  },
+  {
+    "key": "three days of the condor",
+    "value": {
+      "type": "movie",
+      "count": 8
+    }
+  },
+  {
+    "key": "civilizations",
+    "value": {
+      "type": "tv",
+      "count": 8
+    }
+  },
+  {
+    "key": "the romanoffs",
+    "value": {
+      "type": "tv",
+      "count": 8
+    }
+  },
+  {
+    "key": "the slap",
+    "value": {
+      "type": "tv",
+      "count": 8
+    }
+  },
+  {
+    "key": "utopia",
+    "value": {
+      "type": "tv",
+      "count": 8
+    }
+  },
+  {
+    "key": "2018 winter olympics",
+    "value": {
+      "type": "tv",
+      "count": 8
+    }
+  },
+  {
+    "key": "karl ove gnausgaard",
+    "value": {
+      "type": "author",
+      "count": 8
+    }
+  },
+  {
+    "key": "all about eve",
+    "value": {
+      "type": "movie",
+      "count": 7
+    }
+  },
+  {
+    "key": "raiders of the lost ark",
+    "value": {
+      "type": "movie",
+      "count": 7
+    }
+  },
+  {
+    "key": "sexy beast",
+    "value": {
+      "type": "movie",
+      "count": 7
+    }
+  },
+  {
+    "key": "the _______ report",
+    "value": {
+      "type": "movie",
+      "count": 7
+    }
+  },
+  {
+    "key": "sally4ever",
+    "value": {
+      "type": "tv",
+      "count": 7
+    }
+  },
+  {
+    "key": "smilf",
+    "value": {
+      "type": "tv",
+      "count": 7
+    }
+  },
+  {
+    "key": "the keepers",
+    "value": {
+      "type": "tv",
+      "count": 7
+    }
+  },
+  {
+    "key": "twenty twelve",
+    "value": {
+      "type": "tv",
+      "count": 7
+    }
+  },
+  {
+    "key": "magic city",
+    "value": {
+      "type": "tv",
+      "count": 7
+    }
+  },
+  {
+    "key": "million dollar listing",
+    "value": {
+      "type": "tv",
+      "count": 7
+    }
+  },
+  {
+    "key": "anatomy of a murder",
+    "value": {
+      "type": "movie",
+      "count": 6
+    }
+  },
+  {
+    "key": "carnal knowledge",
+    "value": {
+      "type": "movie",
+      "count": 6
+    }
+  },
+  {
+    "key": "sweet smell of success",
+    "value": {
+      "type": "movie",
+      "count": 6
+    }
+  },
+  {
+    "key": "the girlfriend experience",
+    "value": {
+      "type": "movie",
+      "count": 6
+    }
+  },
+  {
+    "key": "doll & em",
+    "value": {
+      "type": "tv",
+      "count": 6
+    }
+  },
+  {
+    "key": "fleabag",
+    "value": {
+      "type": "tv",
+      "count": 6
+    }
+  },
+  {
+    "key": "forever",
+    "value": {
+      "type": "tv",
+      "count": 6
+    }
+  },
+  {
+    "key": "top of the lake",
+    "value": {
+      "type": "tv",
+      "count": 6
+    }
+  },
+  {
+    "key": "white horse",
+    "value": {
+      "type": "tv",
+      "count": 6
+    }
+  },
+  {
+    "key": "48 hrs",
+    "value": {
+      "type": "tv",
+      "count": 6
+    }
+  },
+  {
+    "key": "red oaks",
+    "value": {
+      "type": "tv",
+      "count": 6
+    }
+  },
+  {
+    "key": "arthur nersesian",
+    "value": {
+      "type": "author",
+      "count": 6
+    }
+  },
+  {
+    "key": "michael lewis",
+    "value": {
+      "type": "author",
+      "count": 6
+    }
+  },
+  {
+    "key": "a walk among the tombstones",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "apocalypse now",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "barry lyndon",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "catch-22",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "chinatown",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "fatal attraction",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "the hot rock",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "unsane",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "zodiac",
+    "value": {
+      "type": "movie",
+      "count": 5
+    }
+  },
+  {
+    "key": "true detective",
+    "value": {
+      "type": "tv",
+      "count": 5
+    }
+  },
+  {
+    "key": "tracey ullman's show",
+    "value": {
+      "type": "tv",
+      "count": 5
+    }
+  },
+  {
+    "key": "the last panthers",
+    "value": {
+      "type": "tv",
+      "count": 5
+    }
+  },
+  {
+    "key": "bret easton ellis",
     "value": {
       "type": "author",
       "count": 5
     }
   },
   {
-    "key": "Bruce Wagner",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Chuck Palahniuk",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Dave Eggers",
+    "key": "dave eggers",
     "value": {
       "type": "author",
       "count": 5
     }
   },
   {
-    "key": "Dave Hickey",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "David Foster Wallace",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "David Levien",
-    "value": {
-      "type": "author",
-      "count": 4
-    }
-  },
-  {
-    "key": "Donna Tartt",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Edward St. Aubyn",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Elena Ferrante",
-    "value": {
-      "type": "author",
-      "count": 4
-    }
-  },
-  {
-    "key": "Errol Morris",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Gary Shteyngart",
+    "key": "gary shteyngart",
     "value": {
       "type": "author",
       "count": 5
-    }
-  },
-  {
-    "key": "Harold Pinter",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Haruki Murakami",
-    "value": {
-      "type": "author",
-      "count": 2
     }
   },
   {
@@ -2284,220 +777,1704 @@
     }
   },
   {
-    "key": "Herman Koch",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Hilary Mantel",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Horatio Castellanos Moya",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "James Baldwin",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Jeffery Eugenides",
+    "key": "jeffery eugenides",
     "value": {
       "type": "author",
       "count": 5
     }
   },
   {
-    "key": "Jeffrey Moussaieff Masson",
+    "key": "zadie smith",
     "value": {
       "type": "author",
-      "count": 2
+      "count": 5
     }
   },
   {
-    "key": "Jess Walter",
+    "key": "alien",
     "value": {
-      "type": "author",
-      "count": 3
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "Jim Holt",
+    "key": "american graffiti",
     "value": {
-      "type": "author",
-      "count": 2
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "John Barth",
+    "key": "double indemnity",
     "value": {
-      "type": "author",
-      "count": 2
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "John Gray",
+    "key": "dr. strangelove or: how i learned to stop worrying and love the bomb",
     "value": {
-      "type": "author",
-      "count": 2
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "Jonathan Franzen",
+    "key": "funeral in berlin",
     "value": {
-      "type": "author",
-      "count": 2
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "Jonathan Lethem",
+    "key": "high flying bird",
     "value": {
-      "type": "author",
-      "count": 3
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "Joshua Ferris",
+    "key": "the killing",
     "value": {
-      "type": "author",
-      "count": 2
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "Junot Diaz",
+    "key": "klute",
     "value": {
-      "type": "author",
-      "count": 2
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "Karl Ove Gnausgaard",
+    "key": "mad max: fury road",
     "value": {
-      "type": "author",
-      "count": 8
+      "type": "movie",
+      "count": 4
     }
   },
   {
-    "key": "Kingsley Amis",
+    "key": "repulsion",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "ryan's daughter",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "se7en",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "sorcerer",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the conformist",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the french connection",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the game",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the godfather",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the graduate",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the informant!",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the third man",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "the verdict",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "visitors",
+    "value": {
+      "type": "movie",
+      "count": 4
+    }
+  },
+  {
+    "key": "atlanta",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "eight hours don't make a day",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "master of none",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "o.j.: made in america",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "key & peele",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "killing richard glossip",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "evil genius",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "inside men",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "olive kitteridge",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "20/20",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "i'm alan partridge",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "the jinx",
+    "value": {
+      "type": "tv",
+      "count": 4
+    }
+  },
+  {
+    "key": "david levien",
     "value": {
       "type": "author",
       "count": 4
     }
   },
   {
-    "key": "Kurt Andersen",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Lawrence Grobel",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Leonard Mlodinow",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Lin-Manuel Miranda",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Lynn Nottage",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Mark Harris",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Martin Amis",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Michael Chabon",
-    "value": {
-      "type": "author",
-      "count": 2
-    }
-  },
-  {
-    "key": "Michael Lewis",
-    "value": {
-      "type": "author",
-      "count": 6
-    }
-  },
-  {
-    "key": "Michel Houllebecq",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Nicholson Baker",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Orhan Pamuk",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Ottessa Moshfegh",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "P.D. JAMES",
+    "key": "elena ferrante",
     "value": {
       "type": "author",
       "count": 4
     }
   },
   {
-    "key": "Patricia Highsmith",
+    "key": "kingsley amis",
     "value": {
       "type": "author",
       "count": 4
+    }
+  },
+  {
+    "key": "p.d. james",
+    "value": {
+      "type": "author",
+      "count": 4
+    }
+  },
+  {
+    "key": "patricia highsmith",
+    "value": {
+      "type": "author",
+      "count": 4
+    }
+  },
+  {
+    "key": "1941",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "and then there were none",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "being there",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "ex machina",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "five easy pieces",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "help!",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "in cold blood",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "murder on the orient express",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "on her majesty's secret service",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "presumed innocent",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "rebecca",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "state and main",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the conversation",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the girl with the dragon tattoo",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the godfather part ii",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the goodbye girl",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the haunting",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the ipcress file",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the paper chase",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the sugarland express",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the train",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the trial",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "touch of evil",
+    "value": {
+      "type": "movie",
+      "count": 3
+    }
+  },
+  {
+    "key": "the trap",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "a very english scandal",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "all watched over by machines of loving grace",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "the power of nightmares",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "wild",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "48 hours on id",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "dateline on id",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "dateline: saturday night mystery",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "disappeared",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "ed.",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "hunting hitler",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "the secret",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "wild, wild country",
+    "value": {
+      "type": "tv",
+      "count": 3
+    }
+  },
+  {
+    "key": "moneyball",
+    "value": {
+      "type": "book",
+      "count": 3
+    }
+  },
+  {
+    "key": "ben macintyre",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "bill bryson",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "bruce wagner",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "edward st. aubyn",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "herman koch",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "hilary mantel",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "jess walter",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "jonathan lethem",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "kurt andersen",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "martin amis",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "michel houllebecq",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "nicholson baker",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "orhan pamuk",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "ottessa moshfegh",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "rachel cusk",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "rachel kushner",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "ralph wiley",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "raymond chandler",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "sam lipsyte",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "theresa rebeck",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "tom mccarthy",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "tom rachman",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "tom wolfe",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "yuval noah harari",
+    "value": {
+      "type": "author",
+      "count": 3
+    }
+  },
+  {
+    "key": "47 ronin",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "advise & consent",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "agatha",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "altered states",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "california suite",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "casablanca",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "caught",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "cedar rapids",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "chimes at midnight",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "citizenfour",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "close encounters of the third kind",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "duel",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "eraserhead",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "foreign correspondent",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "forbidden planet",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "frenzy",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "from russia with love",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "goldfinger",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "gone girl",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "gosford park",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "grand prix",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "gravity",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "heat",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "high and low",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "his girl friday",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "house of games",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "in the loop",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "last year at marienbad",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "lawrence of arabia",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "manhattan",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "margin call",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "matango",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "michael clayton",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "minority report",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "mission: impossible",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "our man in havana",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "out of the past",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "pale flower",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "paper moon",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "petulia",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "point blank",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "promised land",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "psycho",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "ready player one",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "reds",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "rififi",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "seance on a wet afternoon",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "seven days in may",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "shadow of a doubt",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "shame",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "sisters",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "skyfall",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "sleuth",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "solitary man",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the andromeda strain",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the apartment",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the asphalt jungle",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the big sleep",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the birds",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the boy friend",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the candidate",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the comeback",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the elephant man",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the fortune",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the french lieutenant's woman",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the hateful eight",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the hunger games",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the hunt for red october",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the hustler",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the ides of march",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the king of marvin gardens",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the knack ...and how to get it",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the laundromat",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the lavender hill mob",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the long voyage home",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the return of w. de rijk",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the right stuff",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the seduction of mimi",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the servent",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the shining",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the social network",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the spy who came in from the cold",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "the thomas crown affair",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "to catch a thief",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "tokyo drifter",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "tokyo olympiad",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "westworld",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "who's afraid of virginia woolf?",
+    "value": {
+      "type": "movie",
+      "count": 2
+    }
+  },
+  {
+    "key": "1864",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "baskets",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "beyond the walls",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "glow",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "kim philby: his most intimate betrayal",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "orange is the new black",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "portlandia",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "the crown",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "the fall and rise of reginald perrin",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "the kingdom",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "the staircase",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "tiger vs phil",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "wormwood",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "30 for 30",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "american experience: jfk",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "come to papa (largo)",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "dateline: thursday night mystery",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "deutschland '83",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "hello ladies",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "hoover dam",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "madoff",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "making a murderer",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "mob wives",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "the century of the self",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "the newsroom",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "tom papa: freaking out",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "vicious",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "videosyncracy",
+    "value": {
+      "type": "tv",
+      "count": 2
+    }
+  },
+  {
+    "key": "zen and the art of motorcycle maintenance",
+    "value": {
+      "type": "book",
+      "count": 2
+    }
+  },
+  {
+    "key": "by the way, meet vera stark",
+    "value": {
+      "type": "play",
+      "count": 2
+    }
+  },
+  {
+    "key": "the mousetrap",
+    "value": {
+      "type": "play",
+      "count": 2
+    }
+  },
+  {
+    "key": "chuck palahniuk",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "dave hickey",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "david foster wallace",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "donna tartt",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "errol morris",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "harold pinter",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "haruki murakami",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "horatio castellanos moya",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "james baldwin",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "jeffrey moussaieff masson",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "jim holt",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "john barth",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "john gray",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "jonathan franzen",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "joshua ferris",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "junot diaz",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "lawrence grobel",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "leonard mlodinow",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "lin-manuel miranda",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "lynn nottage",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "mark harris",
+    "value": {
+      "type": "author",
+      "count": 2
+    }
+  },
+  {
+    "key": "michael chabon",
+    "value": {
+      "type": "author",
+      "count": 2
     }
   },
   {
@@ -2508,87 +2485,45 @@
     }
   },
   {
-    "key": "Patti Smith",
+    "key": "patti smith",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Paul Murray",
+    "key": "paul murray",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Rachel Cusk",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Rachel Kushner",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Ralph Wiley",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Raymond Chandler",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Robert Hughes",
+    "key": "robert hughes",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Robert K. Massie",
+    "key": "robert k. massie",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Roberto Bolano",
+    "key": "roberto bolano",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Sam Harris",
+    "key": "sam harris",
     "value": {
       "type": "author",
       "count": 2
-    }
-  },
-  {
-    "key": "Sam Lipsyte",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Scott Z. Burns",
-    "value": {
-      "type": "author",
-      "count": 15
     }
   },
   {
@@ -2599,70 +2534,28 @@
     }
   },
   {
-    "key": "Steven D. Levitt and Stephen J. Dubner",
+    "key": "steven d. levitt and stephen j. dubner",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Ta-Nehisi Coates",
+    "key": "ta-nehisi coates",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Theresa Rebeck",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Tom McCarthy",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Tom Rachman",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Tom Wolfe",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "William Trevor",
+    "key": "william trevor",
     "value": {
       "type": "author",
       "count": 2
     }
   },
   {
-    "key": "Yuval Noah Harari",
-    "value": {
-      "type": "author",
-      "count": 3
-    }
-  },
-  {
-    "key": "Zadie Smith",
-    "value": {
-      "type": "author",
-      "count": 5
-    }
-  },
-  {
-    "key": "Robert M. Pirsig",
+    "key": "robert m. pirsig",
     "value": {
       "type": "author",
       "count": 2

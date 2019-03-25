@@ -72,7 +72,8 @@ export const soderberghProjects = [
   "the report",
   "magic mike xxl",
   "the library",
-  "the _______ report"
+  "the _______ report",
+  "bitter pill"
 ];
 
 export default {

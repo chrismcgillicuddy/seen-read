@@ -8,8 +8,8 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:300,400,500');
 
 // animation
-$animation-rate: 0.75s;
-$animation-rate-fast: 0.3s;
+$animation-rate: 0.1s;
+$animation-rate-fast: 0.1s;
 
 // core palette
 $base-dark: #111010;
@@ -17,7 +17,7 @@ $base-dark-lighter: #232221;
 $base-light: #F6F5F1;
 $base-light-dimmed: #E8E3E0;
 $base-highlight: #E0B628; //#ECC971;//#D4A26C;
-$media-highlight-color: #129DC6;  // media highlight color
+$media-highlight-color: $base-light; //#129DC6;  // media highlight color
 
 // media colors
 $play-color: #D54731;
@@ -33,7 +33,7 @@ $monospace-fonts: "IBM Plex Mono", monospace;
 
 // screen size break points
 $break-large: 1300px;
-$break-medium: 1000px;
+$break-medium: 960px;
 $break-small: 400px;
 
 ////////////////////
@@ -46,6 +46,15 @@ $break-small: 400px;
     20%{
         opacity:0
     }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+ }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInUp {
@@ -117,7 +126,6 @@ body {
 
 ////////////////////
 // LOADER . . .
-
 .loader {
   position: absolute;
   top: 48%;
@@ -149,10 +157,13 @@ body {
 // LAYOUT
 .app {
   position: relative;
+  min-width: 960px !important;
 }
 .seen-read-chart-and-list {
-  height: 40000px;
-  // padding-top: 20px;
+  height: 40000px; // initial height
+  .view-most-seen-read & {
+    height: 3100px;
+  }
 }
 .multi-year-comparison {
   position: sticky;
@@ -170,10 +181,6 @@ body {
   width: 60%;
 }
 .view-most-seen-read {
-  // .seen-read-chart-and-list {
-  //   height: auto;
-  //   overflow: auto;
-  // }
   .multi-year-comparison {
     // position: fixed;
     // top: 77px;
@@ -241,14 +248,23 @@ body {
 }
 .expand-reduce-chart,
 .expand-reduce-chart:active {
+  position: absolute;
+  top: 0;
+  left: 0;
   background: none;
-  color: #8B8887;
+  color: #625F5E;
   border: 1px solid $base-dark;
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+  animation-timing-function: ease;
+  opacity: 1;
+  visibility: visible;
   em {
     font-size: 18px;
   }
   .title-highlight & {
     display: none;
+    visibility: hidden;
   }
 }
 
@@ -388,7 +404,6 @@ body {
 ////////////////////
 // radial progress
 // appears behind the selected year in the year list navigation
-
 .progress-circle-container {
   position: absolute;
   left: 573px; // default position for 2018
@@ -425,187 +440,7 @@ body {
   }
 }
 
-// TO DELETE .explore
-.explore {
-  padding: 0 15px;
-  display: flex;
-  flex-direction: row;
-  // flex-basis: 70% 30%;
-  height: 100%;
-  & .controls,
-  & .chart {
-    transition: all 0.6s ease;
-  }
-  & .controls {
-    flex: 1;
-  }
-  &.view-most-seen-read .chart {
-    flex: 0 55%;
-  }
-  &.browse-single-year .chart {
-    flex: 0 40%;
-    // background-color: red !important;
-  }
-
-  position: relative;
-  height: calc(100vh-93px);
-  overflow: hidden;
-  margin-top: 20px;
-  transition: all $animation-rate ease;
-
-  &.browse-single-year {
-    // default, for larger screens
-    // grid-auto-columns: 30% 70%;
-
-    transition:all $animation-rate ease;
-    transition: margin 1200ms;
-  }
-  .view-most-seen-read & {
-    // margin-top: 80px;
-
-    // grid-auto-columns: 55% 45%;
-    // flex-basis: 55% 45%;
-    transition: all $animation-rate ease;
-    // transition: margin 1200ms;
-    .most-seen-read {
-      opacity: 1;
-      display: block;
-      animation-name: fadeIn;
-      animation-duration: 0.4s;
-      animation-fill-mode: both;
-      animation-timing-function: ease;
-      animation-delay: 0.7s;
-      transition:all $animation-rate ease;
-    }
-  }
-
-  // medium screens
-  @media screen and (max-width: $break-medium) {
-    grid-auto-columns: 20% 80%;
-  }
-  // small screens
-  @media screen and (max-width: $break-small) {
-    padding: 100px 0 0 10px;
-    &.browse-single-year {
-      grid-auto-columns: 0 auto;
-      grid-gap: 0px;
-    }
-  }
-
-}
-
-// .chart {
-//   // background: #aaa; //testing
-//   position: sticky;
-//   top: 300px;
-//   // width: 430px; // 10 column max with in browse modes (default)
-//   // left: 40px;
-//   justify-items: end;
-//   opacity: 1;
-//   overflow: hidden;
-//   // overflow-y: auto;
-//
-// }
-// .controls {
-//   overflow: auto;
-//   position: relative;
-// }
-// .year-plot-container {
-//   // position: sticky;
-//   // top: 0;
-//   float: right;
-//   margin-right: 40px;
-//   max-width: 430px;
-//   margin-left: 40px;
-// }
-.year-plots {
-  margin-left: 30px;
-  display: grid;
-  grid-template-areas: ". . . . . . . . . ."
-  "footer footer footer footer footer footer footer footer footer footer";
-  grid-auto-columns: minmax(40px, 90px);
-  grid-template-rows: 765px auto;
-  transition: width 0.5s ease;
-  @include fadeInUpAnimation;
-  opacity: 0;
-  transition: all 0.5s ease;
-  // height: 765px;
-  .browse-single-year & {
-    grid-auto-columns: minmax(30px, 40px);
-    transition: all 0.5s ease;
-  }
-
-  // large screens
-  @media screen and (min-width: $break-large) {
-    // .year-plot.selected-year {
-    //   width: 100px;
-    // }
-    // .year-plot:not(.selected-year) .daily-items li {
-    //   transition: width 0.3s ease 0.8s;
-    //   &.short-title,
-    //   &.medium-title,
-    //   &.long-title {
-    //     width: 2px;
-    //     height: 1px;
-    //     margin-right: 1px;
-    //     transition: width 0.5s ease;
-    //   }
-    // }
-    // .year-plot .daily-items li {
-    //   transition: width 0.3s ease;
-    //   &.short-title,
-    //   &.medium-title,
-    //   &.long-title {
-    //     width: 2px;
-    //     height: 1px;
-    //     margin-right: 1px;
-    //     transition: width 0.5s ease;
-    //   }
-    // }
-  }
-
-  @media screen and (max-width: 1200px) {
-    // view-most-seen-read, below 1200
-    // reduce the width of the daily items chart entries
-    // .multi-year-charts {
-    //   width: 730px;
-    // }
-    // .year-plot {
-    //   width: 40px;
-    // }
-    // .year-plot .daily-items li {
-    //   transition: width 0.3s ease 0.8s;
-    //   &.short-title,
-    //   &.medium-title,
-    //   &.long-title {
-    //     width: 2px;
-    //     height: 1px;
-    //     margin-right: 1px;
-    //     transition: width 0.5s ease;
-    //   }
-    // }
-  }
-
-  // large screens
-  @media screen and (max-width: $break-large) {
-    // background: pink;
-  }
-
-  // small screens
-  @media screen and (max-width: $break-small) {
-    background: white;
-  }
-
-  // medium screens
-  @media screen and (max-width: $break-medium) {
-    grid-auto-columns: 10% 90%;
-    background: gold;
-    .year-plot:not(.selected-year) {
-      display: none;
-    }
-  }
-}
-
+// MEDIA LIST - Main title presentation
 // horizontal offset for types of list items
 $bookOffset: 20;
 $playOffset: 15;
@@ -617,7 +452,7 @@ $defaultOffset: 45;
 
 // scrollable media list
 .media-list {
-  margin: 5px 0 20px 40px;
+  margin: 5px 0 20px 50px;
   @include fadeInUpAnimation();
   .view-most-seen-read & {
     opacity: 0;
@@ -677,12 +512,17 @@ $defaultOffset: 45;
         opacity: 1;
         transition:all 0.2 ease;
       }
+      .type,
+      .date,
+      .note {
+        font-weight: 500;
+      }
       .favorite {
         // color: $base-highlight;
       }
     }
     // shrink for smaller screens
-    @media screen and (max-width: $break-medium) {
+    @media screen and (max-width: 1100px) {
       font-size: 18px;
     }
     @media screen and (max-width: $break-small) {
@@ -754,7 +594,6 @@ $defaultOffset: 45;
     padding-bottom: 18px;
     display: flex;
     background-color: $movie-color;
-
     .title,
     .year {
       color: #fff;
@@ -872,7 +711,7 @@ $defaultOffset: 45;
   .favorite {
     display: block;
     position: absolute;
-    top: 5px;
+    top: 2px;
     right: 100%;
     font-family: $monospace-fonts;
     font-size: 15px;
@@ -880,7 +719,7 @@ $defaultOffset: 45;
     text-align: right;
     color: $base-light-dimmed;
     padding-right: 6px;
-    opacity: 0.4;
+    opacity: 0.35;
   }
 
   // offset the item favorite column
@@ -931,8 +770,105 @@ $defaultOffset: 45;
 
 ////////////////////
 // YEARLY CHARTS
+// year chart group
+.year-plots {
+  margin-left: 30px;
+  display: grid;
+  grid-template-areas: ". . . . . . . . . ."
+  "footer footer footer footer footer footer footer footer footer footer";
+  grid-auto-columns: minmax(40px, 90px);
+  grid-template-rows: 765px auto;
+  transition: width 0.5s ease;
+  @include fadeInUpAnimation;
+  opacity: 0;
+  transition: all 0.5s ease;
+  .browse-single-year & {
+    grid-auto-columns: minmax(30px, 40px);
+    transition: all 0.5s ease;
+  }
 
-// year plots
+  // large screens
+  @media screen and (min-width: $break-large) {
+    // .year-plot.selected-year {
+    //   width: 100px;
+    // }
+    // .year-plot:not(.selected-year) .daily-items li {
+    //   transition: width 0.3s ease 0.8s;
+    //   &.short-title,
+    //   &.medium-title,
+    //   &.long-title {
+    //     width: 2px;
+    //     height: 1px;
+    //     margin-right: 1px;
+    //     transition: width 0.5s ease;
+    //   }
+    // }
+    // .year-plot .daily-items li {
+    //   transition: width 0.3s ease;
+    //   &.short-title,
+    //   &.medium-title,
+    //   &.long-title {
+    //     width: 2px;
+    //     height: 1px;
+    //     margin-right: 1px;
+    //     transition: width 0.5s ease;
+    //   }
+    // }
+  }
+
+  @media screen and (min-width: 1200px) {
+    // view-most-seen-read, below 1200
+    // reduce the width of the daily items chart entries
+    // .multi-year-charts {
+    //   // width: 730px;
+    // }
+    // .year-plot {
+    //   // width: 40px;
+    // }
+    // .view-most-seen-read {
+    //   .year-plot .daily-items li {
+    //     // transition: width 0.3s ease 0.8s;
+    //     &.short-title,
+    //     &.medium-title,
+    //     &.long-title {
+    //       margin-right: 1px;
+    //       transition: all 0.4s ease;
+    //     }
+    //     &.short-title {
+    //       transform: scale(2.5, 1);
+    //       transform-origin: left;
+    //     }
+    //     &.medium-title {
+    //       transform: scale(3.5, 1);
+    //       transform-origin: left;
+    //     }
+    //     &.long-title {
+    //       transform: scale(4.5, 1);
+    //       transform-origin: left;
+    //     }
+    //   }
+    // }
+  }
+
+  // large screens
+  @media screen and (max-width: $break-large) {
+    // background: pink;
+  }
+
+  // small screens
+  @media screen and (max-width: $break-small) {
+    background: white;
+  }
+
+  // medium screens
+  @media screen and (max-width: $break-medium) {
+    grid-auto-columns: 10% 90%;
+    .year-plot:not(.selected-year) {
+      // display: none;
+    }
+  }
+}
+// individual year chart
 .year-plot {
   display: inline-block;
   vertical-align: top;
@@ -1032,9 +968,10 @@ $defaultOffset: 45;
 
 // display the selected title under the charts with a clear button
 .chart-selection-container {
+  position: relative;
   grid-area: footer;
-  text-align: right; // orient non-full with items to the right (expand button)
-  // max-width: 430px; // default max-width, change max-width if expanded
+  // text-align: right; // orient non-full with items to the right (expand button)
+  max-width: 430px; // default max-width, change max-width if expanded
   .view-most-seen-read & {
     max-width: none;
   }
@@ -1065,6 +1002,7 @@ $defaultOffset: 45;
     color: $base-highlight;
   }
   .title-highlight & { // show / hide based on parent state
+    z-index: 100;
     display: grid;
     .right-col {
       padding-right: 0;
@@ -1103,7 +1041,6 @@ $defaultOffset: 45;
 }
 
 // a row of watched/read media from a day within a year plot
-
 $chart-item-background: #888584;
 .daily-items {
   list-style: none;
@@ -1113,7 +1050,7 @@ $chart-item-background: #888584;
   margin: 0;
   padding-left: 8px;
   position: relative;
-  transition: background-color 0.4s ease;
+  transition: background-color 0.3s ease;
   &.odd-month,
   .view-most-seen-read .selected-year &.odd-month {
     background-color: lighten($base-dark, 4%);
@@ -1140,7 +1077,6 @@ $chart-item-background: #888584;
     background-color: $chart-item-background;
     border-radius: 0px;
     text-indent: -99999px;
-    // transition: all 0.1s ease;
     z-index: 10;
     .view-most-seen-read &,
     .selected-year & {
@@ -1161,13 +1097,13 @@ $chart-item-background: #888584;
       transition: width 0.1s ease;
     }
     &.short-title {
-      width: 5px;
+      width: 2px;
     }
     &.medium-title {
-      width: 7px;
+      width: 2px;
     }
     &.long-title {
-      width: 9px;
+      width: 2px;
     }
     .highlight-movies &.highlight,
     .highlight-tv &.highlight,
@@ -1198,6 +1134,29 @@ $chart-item-background: #888584;
       left: -7px;
     }
     .view-most-seen-read & {
+      // increase entry widths
+      &.short-title,
+      &.medium-title,
+      &.long-title {
+        margin-right: 1px;
+        transition: transform 0.1s ease;
+      }
+      &.short-title {
+        width: 5px;
+        // transform: scaleX(2.5);
+        // transform-origin: left;
+      }
+      &.medium-title {
+        width: 7px;
+        // transform: scaleX(3.5);
+        // transform-origin: left;
+      }
+      &.long-title {
+        width: 9px;
+        // transform: scaleX(4.5);
+        // transform-origin: left;
+      }
+      // offset highlights compensating for wider entry widths
       &.short-title.highlight::before {
         left: -6px;
       }
@@ -1222,7 +1181,7 @@ $chart-item-background: #888584;
       &.item-movie {
         opacity: 1;
         // background-color: $media-highlight-color;
-        background-color: $movie-color;
+        background-color: lighten($movie-color, 25%);
         transition: all 0.3s ease;
       }
     }
@@ -1231,7 +1190,7 @@ $chart-item-background: #888584;
       &.item-book {
         opacity: 1;
         // background-color: $media-highlight-color;
-        background-color: $book-color;
+        background-color: saturate(lighten($book-color, 25%), 60%);
         transition: all 0.3s ease;
       }
     }
@@ -1240,7 +1199,7 @@ $chart-item-background: #888584;
       &.item-play {
         opacity: 1;
         // background-color: $media-highlight-color;
-        background-color: $play-color;
+        background-color: lighten($play-color, 10%);
         transition: all 0.3s ease;
       }
     }
@@ -1249,8 +1208,7 @@ $chart-item-background: #888584;
       &.item-tv {
         opacity: 1;
         // background-color: $media-highlight-color;
-        background-color: $tv-color;
-
+        background-color: lighten($tv-color, 20%);
         transition: all 0.3s ease;
       }
     }
@@ -1309,7 +1267,7 @@ $chart-item-background: #888584;
   transition: all 0.5s ease;
   .year-plot {
     // width: 40px;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
   }
   .plot-year-label {
     font-family: $monospace-fonts;
@@ -1327,7 +1285,7 @@ $chart-item-background: #888584;
       width: 2px;
       height: 1px;
       margin-right: 1px;
-      transition: width 0.5s ease;
+      transition: width 0.2s ease;
     }
   }
 }
@@ -1338,12 +1296,28 @@ $chart-item-background: #888584;
 
 }
 .most-seen-read {
+  .top-titles-header {
+    margin-bottom : 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #555;
+  }
   h2 {
     color: $base-light;
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: 400;
+    font-size: 28px;
     font-style: italic;
-    margin: 0 0 20px;
+    margin: 0 0 7px 0;
+    span {
+      font-style: normal;
+      font-weight: 700;
+    }
+  }
+  p {
+    font-family: $serif-fonts;
+    color: $base-light;
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 0;
   }
   text-align: left;
   display: none;
@@ -1380,34 +1354,58 @@ $chart-item-background: #888584;
   .top-title-type {
     width: 100%;
     display: inline-block;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 12px;
     color: $base-light;
-    margin-bottom: 3px;
-    a {
+    margin-bottom: 7px;
+    .media-type-filter {
       text-decoration: none;
-      font-size: 10px;
+      font-size: 12px;
       display: inline-block;
-      span {
-        background-color: rgba($base-dark-lighter, 0.7);
-        border: 1px solid transparent;
-        padding: 4px 6px;
-        margin-right: 3px;
-        margin-bottom: 0px;
-        border-radius: 2px;
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 500;
-        color: $media-highlight-color;
-        &.selected {
-          background-color: $media-highlight-color;
-          color: $base-dark;
-          border: 1px solid $media-highlight-color;
+      background-color: rgba($base-light-dimmed, 0.9);
+      color: $base-dark;
+      padding: 5px 10px;
+      // border: 1px solid $base-light-dimmed;
+      font-weight: 500;
+      border-radius: 3px;
+      &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        // color: $base-light;
+      }
+      .remove-filter {
+        display: none;
+      }
+      &.selected {
+        background-color: $media-highlight-color;
+        color: $base-dark;
+        .remove-filter {
+         display: inline-block;
+         margin-left: 5px;
+        }
+        &:hover {
+         color: $base-dark;
         }
       }
-      &:hover {
-        text-decoration: underline;
-        color: $base-light-dimmed;
+      &.selected.movies {
+        background-color: $movie-color;
+        border-color: $movie-color;
+        color: $base-light;
+      }
+      &.selected.tv {
+        background-color: $tv-color;
+        border-color: $tv-color;
+        color: $base-light;
+      }
+      &.selected.books {
+        background-color: $book-color;
+        border-color: $book-color;
+        color: $base-dark;
+      }
+      &.selected.plays {
+        background-color: $play-color;
+        border-color: $play-color;
+        color: $base-dark;
       }
     }
   }

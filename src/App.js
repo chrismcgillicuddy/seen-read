@@ -22,20 +22,21 @@ export default class App extends Component {
     super(props);
     this.state = {
       highlighted: null,
-      highlightedItem: "",
+      highlightedItem: "", // the title to highlight
       highlightedType: "title", // is the highlightedItem a titles or credit
       highlightMedia: "", // what is the highlightedItem? A book, film...
       highlightMediaType: "", // highlight all items matching type: books, movies...
       loading: true,
       mediaLists: {},
-      titleCounts: {},
+      mostSeenReadItems: {},
       browseYearLists: true,
       displayYear: '2018',
       radialProgress: 0,
       mediaListItemsOnScreen: [],
       scrollState: 0,
       isDesktop: true,
-      stickHeader: false
+      stickHeader: false,
+      contentHeight: 40000
     }
     this.grid = React.createRef();
   }
@@ -49,7 +50,7 @@ export default class App extends Component {
           }
         }
       ),
-      fetch('./data/titles-with-count.json',
+      fetch('./data/most-seen-read.json',
         {headers:
           {'Accept': 'text/json',
           'Content-Type': 'application/json'
@@ -57,7 +58,7 @@ export default class App extends Component {
         }
       )
     ]).then(responses => Promise.all(responses.map(resp => resp.json())))
-    .then(([list, titleCounts]) => {
+    .then(([list, mostSeenReadItems]) => {
       const list2018 = this.getYear(list, 2018);
       const list2017 = this.getYear(list, 2017);
       const list2016 = this.getYear(list, 2016);
@@ -71,71 +72,14 @@ export default class App extends Component {
 
       this.setState({ mediaLists: {list2018, list2017, list2016, list2015, list2014, list2013, list2012, list2011, list2010, list2009} });
       this.setState({ loading: false });
-      this.setState({ titleCounts: titleCounts });
-      // console.log("titleCounts",titleCounts);
+      this.setState({ mostSeenReadItems: mostSeenReadItems });
       this.isUsingDesktop();
+      this.setMediaListContentHeight()
+
     }).catch(function(e) {
       console.log('err',e);
     });
-    //
-    // d3.csv('./data/2009-2018-titles-w-counts.csv').then(function(data){
-    //
-    //         //-------------------------------------------
-    //         // get title totals by type
-    //         // console.log("MAIN LIST", list);
-    //
-    //         // var expensesAvgAmount = d3.nest()
-    //         //   .key(function(d) { return d.name; })
-    //         //   .rollup(function(v) { return d3.mean(v, function(d) { return d.amount; }); })
-    //         //   .entries(expenses);
-    //         // console.log(JSON.stringify(expensesAvgAmount));
-    //
-    //         // var expenseMetrics = d3.nest()
-    //         //   .key(function(d) { return d.name; })
-    //         //   .rollup(function(v) { return {
-    //         //     count: v.length,
-    //         //     total: d3.sum(v, function(d) { return d.amount; }),
-    //         //     avg: d3.mean(v, function(d) { return d.amount; })
-    //         //   }; })
-    //         //   .entries(expenses);
-    //         // console.log(JSON.stringify(expenseMetrics));
-    //
-    //         // var mediaByTitle = d3.nest()
-    //         //   .key(function(d) { return d.values.title; })
-    //         //   .entries(list);
-    //         //
-    //         // console.log("mediaByTitle",mediaByTitle);
-    //
-    //
-    //         // https://stackoverflow.com/questions/42448647/sum-of-nested-json-array-using-d3-rollup
-    //         // var data = [
-    //         //     {department:'Electro',quant:{M:30, T:20, W:51, R:22, F:35 }},
-    //         //     {department:'Beauty',quant:{M:50, T:32, W:75, R:61, F: 45}},
-    //         //     {department:'Apparel',quant:{M:62, T:42, W:135, R: 82, F:89}},
-    //         //     {department:'Misc',quant:{M:89, T:54, W:103, T:94, F:90}}
-    //         // ];
-    //         //
-    //         // var deptSum = d3.nest()
-    //         // .key(function(d) { return d.department; })
-    //         // .rollup(function(v) { return {
-    //         //     count: v.length,
-    //         //     total: d3.sum(d3.values(v[0].quant)),
-    //         //     avg: d3.mean(d3.values(v[0].quant))
-    //         // }; })
-    //         // .entries(data)
-    //         //
-    //         // console.log(deptSum)
-    //
-    //         var result = d3.nest()
-    //                        .key(function(d) { return d.title.toLowerCase(); })
-    //                        .rollup(function(v) { return {
-    //                          total: d3.sum(v, function(d) { return d.count; }),
-    //                          type: v[0].type
-    //                          }; })
-    //                        .entries(data);
-    //
-    //         console.log(result)
-    // })
+
 
     // ESC key clears title highlight
     document.addEventListener("keydown", this.escKey, false);
@@ -260,13 +204,13 @@ export default class App extends Component {
   }
 
   setDisplayYear = (displayYear) => {
+    this.setContentHeight();
     this.setProgressCirclePosition(displayYear);
     this.setState({highlightMediaType: ''}); // reset mediaType highlight
     this.setState({displayYear});
   }
 
   setMediaHighlightType = (highlightMediaType) => {
-    console.log("setMediaHighlightType MEDIA",highlightMediaType);
     // this.setState({'displayYear': ''});// reset selected year
     this.setState({highlightMediaType}); // reset mediaType highlight
   }
@@ -279,16 +223,39 @@ export default class App extends Component {
     this.setState({ isDesktop: window.innerWidth > desktopSize });
   }
 
+  getMediaListContentHeight = () => {
+    const mediaListHeight = document.getElementsByClassName('media-list')[0].clientHeight;
+    const adjustedHeight = mediaListHeight+350; // add offset
+    return adjustedHeight;
+  }
+
+  setMediaListContentHeight = () => {
+    const newHeight = this.getMediaListContentHeight();
+    this.setState({ contentHeight: newHeight });
+  }
+
+  getMostSeenReadContentHeight = () => {
+    const mostSeenReadHeight = document.getElementsByClassName('most-seen-read')[0].clientHeight;
+    const adjustedHeight = mostSeenReadHeight+350; // add offset
+    return adjustedHeight;
+  }
+
+  // setMostSeenReadContentHeight = () => {
+  //   const newHeight = this.getMostSeenReadContentHeight();
+  //   this.setState({ contentHeight: newHeight });
+  // }
+
+  setMostSeenReadContentHeight = () => {
+    const newHeight = this.getMostSeenReadContentHeight();
+    this.setState({ contentHeight: 2500 });
+  }
+
   // toggle YearPlot size
   toggleExpanded() {
-    const height = document.getElementsByClassName('scrolling-list')[0].clientHeight;
-
-    console.log(".scrolling-list HEIGHT:",height);
-    // scrolling-list
+    this.setHighlight("", "title", ""); // reset title selection
 
     // about to show most seen, read
     if (this.state.browseYearLists){
-      this.setHighlight("", "title", ""); // reset title selection
       this.setState({ stickHeader: false });
       window.scrollTo(0,0); // orient the most-seen-read content to the top
       const currentState = this.state.browseYearLists;
@@ -309,12 +276,14 @@ export default class App extends Component {
             highlighted,
             highlightedItem,
             highlightedType,
+            highlightedMedia,
             highlightMediaType,
             browseYearLists,
             displayYear,
             radialProgress,
             mediaListItemsOnScreen,
-            titleCounts } = this.state;
+            mostSeenReadItems,
+            contentHeight } = this.state;
 
     if (error) {
       return(
@@ -381,7 +350,7 @@ export default class App extends Component {
               seen or read for the past 10 years.</p>
               <p className="intro">Scroll down to explore individual years of Stephen's media diet
               or check out his <span className="inline-button" onClick={() => this.toggleExpanded()}>
-              most frequently seen and read titles</span> from the last decade to learn his prominent tastes and influences.</p>
+              most frequently seen and read titles</span> from the last decade – an inventory of his tastes and influences.</p>
             </div>
           </div>
 
@@ -414,7 +383,7 @@ export default class App extends Component {
             </div>
           </div>
 
-          <div className="seen-read-chart-and-list">
+          <div className="seen-read-chart-and-list" style={{height: contentHeight}}>
 
             <div className="multi-year-comparison">
               <div className="multi-year-charts">
@@ -428,6 +397,7 @@ export default class App extends Component {
                         isSelectedYear={isSelectedYear}
                         highlighted={highlighted}
                         highlightedItem={highlightedItem}
+                        highlightedMedia={highlightedMedia}
                         highlightedType={highlightedType}
                         setHighlight={this.setHighlight}
                         setDisplayYear={this.setDisplayYear}
@@ -438,12 +408,12 @@ export default class App extends Component {
                   }
                 </div>
                 <div className="chart-selection-container">
-                <button className="button expand-reduce-chart" onClick={() => this.toggleExpanded()} >
-                {browseYearLists
-                  ? <span>Expand <em>→</em></span>
-                  : <span><em>←</em> Reduce</span>
-                }
-                </button>
+                  <button className="button expand-reduce-chart" onClick={() => this.toggleExpanded()} >
+                  {browseYearLists
+                    ? <span>Expand <em>→</em></span>
+                    : <span><em>←</em> Reduce</span>
+                  }
+                  </button>
                   <div className={chartTitleHighlightClasses}>
                     <div className="left-col">
                       <span id="selected-title-type" className="type"></span>
@@ -454,26 +424,35 @@ export default class App extends Component {
                     <span title="Clear" className="clear-highlight" onClick={() => this.setHighlight("", "title", "")}>✕</span>
                   </div>
                 </div>
+
               </div>
             </div>
 
             <div className="scrolling-list" id="list-panel">
               <MediaList
                 data={mediaLists['list'+displayYear]}
+                compactMode={browseYearLists}
+                mostSeenReadItems={mostSeenReadItems}
                 highlighted={highlighted}
                 highlightedItem={highlightedItem}
                 setHighlight={this.setHighlight}
                 mediaListVisibility={this.mediaListVisibility}
                 setRadialProgress={this.setRadialProgress}
                 setMediaListHighlight={this.setMediaListHighlight}
+                contentHeight={contentHeight}
+                getMediaListContentHeight={this.getMediaListContentHeight}
+                setMediaListContentHeight={this.setMediaListContentHeight}
               />
               <MostSeenRead
-                titleCounts={titleCounts}
+                mostSeenReadItems={mostSeenReadItems}
                 compactMode={browseYearLists}
                 highlightedItem={highlightedItem}
                 highlightMediaType={highlightMediaType}
                 setMediaHighlightType={this.setMediaHighlightType}
                 setHighlight={this.setHighlight}
+                contentHeight={contentHeight}
+                getMostSeenReadContentHeight={this.getMostSeenReadContentHeight}
+                setMostSeenReadContentHeight={this.setMostSeenReadContentHeight}
               />
             </div>
 

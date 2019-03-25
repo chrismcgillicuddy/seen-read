@@ -23,6 +23,18 @@ export default class MediaList extends React.Component {
     // window.addEventListener('scroll', this.updateRadialProgress);
 
     this.props.mediaListVisibility();
+    // this.setState({ listHeight: contentHeight });
+  }
+
+  componentDidUpdate() {
+    const isMostSeenReadMode = this.props.compactMode;
+
+    // refresh the height of the list container after measuring the new list content
+    const newContentHeight = this.props.getMediaListContentHeight();
+
+    if(isMostSeenReadMode && this.props.contentHeight !== newContentHeight) {
+      this.props.setMediaListContentHeight();
+    }
   }
 
   componentWillUnmount(){
@@ -45,6 +57,8 @@ export default class MediaList extends React.Component {
   render() {
     const {
       data,
+      compactMode,
+      mostSeenReadItems,
       highlighted,
       highlightedItem,
       setHighlight,
@@ -104,21 +118,23 @@ export default class MediaList extends React.Component {
           const shortDate = <span className="date short-date">{Moment(item.key).format("M/D")}</span>; // 1/1
           const time = new Date().getTime();
           const key = currentDate+"_"+time;
-          const notes = d.notes ? <span className="note">{d.notes}</span> : null;
-          const mediaType = isSoderberghProject ? <span className="type">{d.type} (Soderbergh project)</span> : <span className="type">{d.type}</span>;
+          const notes = d.notes ? <span className="note">"{d.notes}"</span> : null;
+          const mediaType = (d.type==="Special") ? "Soderbergh project event" : d.type;
+          const mediaTypeLabel = isSoderberghProject ? <span className="type">{d.type} (Soderbergh project)</span> : <span className="type">{mediaType}</span>;
           const detailsClasses = classNames({
             'details': true,
             'repeatedDate': !(newDate || d.notes)
           });
 
-          // const isThisAFavorite = 
-          const favorite = (title == "the social network") ? <div className="favorite" title="A most watched movie">★</div> : null;
+          // is this one of the most read titles (repeat viewing/reading)
+          const isFavorite = typeof(_.find(mostSeenReadItems, {'key': title})); // look for title in most seen,read list
+          const favorite = (isFavorite === "object") ? <div className="favorite" title="Favorite title, seen or read more than once">★</div> : null;
 
           // create notes element if there are any notes or the date differs from the last entry
           const notesNode = <span className={detailsClasses}>
                               {longDate}{shortDate}
                               {notes}
-                              {mediaType}
+                              {mediaTypeLabel}
                             </span>;
 
           let element = <div
@@ -142,7 +158,8 @@ export default class MediaList extends React.Component {
         });
         return dailyItems;
       }
-    }, this)
+    }, this);
+
     return (
       <div>
         <div className={mediaListClasses} id="test-element">

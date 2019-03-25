@@ -5921,14 +5921,6 @@
         "year": 2010,
         "type": "Movie",
         "notes": ""
-      },
-      {
-        "date": "12/22/2010",
-        "title": "Painting \"? No, 1\" completed",
-        "credit": "",
-        "year": "",
-        "type": "Special",
-        "notes": ""
       }
     ]
   },
@@ -6003,14 +5995,6 @@
         "credit": "",
         "year": 1950,
         "type": "Movie",
-        "notes": ""
-      },
-      {
-        "date": "12/30/2010",
-        "title": "Painting \"? No, 2\" completed",
-        "credit": "",
-        "year": "",
-        "type": "Special",
         "notes": ""
       },
       {
@@ -10483,14 +10467,6 @@
         "year": "",
         "type": "Movie",
         "notes": ""
-      },
-      {
-        "date": "01/11/2012",
-        "title": "Painting \"? No, 3\" completed",
-        "credit": "",
-        "year": "",
-        "type": "Special",
-        "notes": ""
       }
     ]
   },
@@ -11579,19 +11555,6 @@
     ]
   },
   {
-    "key": "03/27/2012",
-    "values": [
-      {
-        "date": "03/27/2012",
-        "title": "Finished painting \"Myrtle",
-        "credit": "",
-        "year": "",
-        "type": "Special",
-        "notes": ""
-      }
-    ]
-  },
-  {
     "key": "03/28/2012",
     "values": [
       {
@@ -11626,14 +11589,6 @@
         "credit": "",
         "year": 1977,
         "type": "Movie",
-        "notes": ""
-      },
-      {
-        "date": "03/30/2012",
-        "title": "Finished painting \"Beckett No. 1\"",
-        "credit": "",
-        "year": "",
-        "type": "Special",
         "notes": ""
       }
     ]
@@ -41887,7 +41842,7 @@
         "date": "02/12/2018",
         "title": "THE SPY WHO CAME IN FROM THE COLD",
         "credit": "",
-        "year": "",
+        "year": "1965",
         "type": "Movie",
         "notes": ""
       },
@@ -42083,7 +42038,7 @@
     "values": [
       {
         "date": "02/23/2018",
-        "title": "I'M ALAN PARTRDIGE",
+        "title": "I'M ALAN PARTRIDGE",
         "credit": "",
         "year": "",
         "type": "TV",
@@ -42091,7 +42046,7 @@
       },
       {
         "date": "02/23/2018",
-        "title": "I'M ALAN PARTRDIGE",
+        "title": "I'M ALAN PARTRIDGE",
         "credit": "",
         "year": "",
         "type": "TV",

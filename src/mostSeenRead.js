@@ -1,21 +1,16 @@
 import React from 'react';
 import { nest as d3nest } from 'd3-collection';
 import { sum as d3sum } from 'd3-array';
+import * as _ from 'lodash';
 import * as toTitleCase from 'to-title-case';
+import * as classNames from 'classnames';
+import { soderberghProjects } from './soderberghProjects';
 
 export default class MostSeenRead extends React.Component {
 
-  sortTitles = (a,b) => {
-    a = a.toLowerCase();
-    b = b.toLowerCase();
-
-    if (a > b) {
-      return 1;
-    } else if (a < b) {
-      return -1;
-    } else if (a === b) {
-      return 0;
-    }
+  componentDidMount() {
+    // set container height
+    this.props.setMostSeenReadContentHeight();
   }
 
   // toggle YearPlot size
@@ -24,208 +19,140 @@ export default class MostSeenRead extends React.Component {
     (mediaType===currentState) ? this.props.setMediaHighlightType("") : this.props.setMediaHighlightType(mediaType);
   }
 
-
-
   render() {
     const {
-          titleCounts,
-          compactMode,
-          setHighlight,
-          highlightMediaType,
-          setMediaHighlightType,
-          highlightedItem,
-          listType} = this.props;
+      mostSeenReadItems,
+      compactMode,
+      setHighlight,
+      highlightMediaType,
+      setMediaHighlightType,
+      highlightedItem,
+      listType,
+      contentHeight,
+      getMostSeenReadContentHeight,
+      setMostSeenReadContentHeight} = this.props;
 
-      // highlight class
-      let itemClass = "";
-      const authors = ["bill james","john barth","arthur nersesian","robert m. pirsig","david mitchell","michel houllebecq","edward st. aubyn","patricia highsmith","raymond chandler","kingsley amis","scott z. burns","karl ove gnausgaard","elena ferrante","john gray","patrick marber","simon callow","rachel cusk","jeffrey moussaieff masson","p. d. james"]
-      const soderberghFilms = ["Haywire","Side Effects","Logan Lucky","Behind the Candelabra","Contagion","Magic Mike","Bitter Pill","Ocean's 8","Magic Mike XXL","Unsane","The Informant!", "High Flying Bird","The Laundromat"];
-      // const movieData = ['Haywire', 'Side Effects', 'Logan Lucky', 'All the President\'s Men', 'Behind the Candelabra', 'Jaws', 'The Social Network', 'Magic Mike', 'Sunset Boulevard'];
-      const movieData= ["All the President's Men","Jaws","The Social Network","Sunset Boulevard","The Day of the Jackal","Panic Room","The Parallax View","2001: A Space Odyssey","Three Days of the Condor","Citizen Kane","Sexy Beast","Raiders of the Lost Ark","Sweet Smell of Success","Carnal Knowledge","Anatomy of a Murder","The Hot Rock","Barry Lyndon","Zodiac","Chinatown","Apocalypse Now","All About Eve","Catch-22","Fatal Attraction","A Walk Among the Tombstones","The Godfather","The Verdict","American Graffiti","The Graduate","Repulsion","Alien","The French Connection","Funeral in Berlin","The Killing","Se7en","The Conformist","Klute","Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb","Double Indemnity","The Game","Ryan's Daughter","Sorcerer","Visitors","The Third Man","Mad Max: Fury Road"];
-      const tvData = ["Dateline","Breaking Bad","The Americans","Boardwalk Empire","Mad Men","Veep","Girls","The Thick of It","Silicon Valley","The Killing","House of Cards","Homeland","Smash","Borgen","Transparent","The Man From U.N.C.L.E.","48 Hours Mystery","Better Call Saul","Masterminds","Inside Amy Schumer","Billions","Louie","W1A","Vanity Fair Confidential","Twin Peaks","Black Mirror","Getting On","Mindhunter","Boss","American Greed","The Knick","2016 Olympic Games"];
-      const bookPlayData = ["Moneyball","Zen and the Art of Motorcycle Maintenance","The Library","By The Way, Meet Vera Stark","The Mousetrap"];
+    // highlight class
+    let itemClass = "";
 
-      movieData.sort(this.sortTitles);
-      tvData.sort(this.sortTitles);
+    // most seen, read titles that are also Soderbergh projects
+    const soderberghWorkOnly = _.filter(mostSeenReadItems, function(item) {
+      return soderberghProjects.includes(item.key);
+    });
 
-      // frequent authors
-      const authorList = authors.map((item, i) => {
-        let title = item.toString().toLowerCase();
+    // most seen, read titles without Soderbergh projects inlcuded
+    const soderberghWorkRemoved = _.filter(mostSeenReadItems, function(item) {
+      return !soderberghProjects.includes(item.key);
+    });
 
-        let itemClass = "";
+    const buildMostSeenReadList = (data, media, type) => {
+      let list = "";
+        list = _.map(data, function(item){
+          if(item.value.type == media){
+            const title = item.key;
+            const itemHighlighted = (title===highlightedItem);
+            const itemClasses = classNames({
+              'highlight': itemHighlighted
+            });
 
-        if (title===highlightedItem) {
-          itemClass+="highlight ";
-        }
+            let element = <li
+                            // key={i}
+                            className={itemClasses}
+                            onClick={() => setHighlight(title, type, media)}>
+                            {toTitleCase(title)}
+                          </li>;
+            return element;
+          }
+        }, this);
+      return list;
+    }
 
-        let element = <li key={i}
-                          className={itemClass}
-                          onClick={() => setHighlight(title, "credit", "Author")}>{toTitleCase(item)}</li>;
-        return element;
-      }, this);
+    // TODO: order Soderbergh projects correctly by view count,
+    const soderberghMovieList = buildMostSeenReadList(soderberghWorkOnly, "movie", "title");
+    const soderberghTVList = buildMostSeenReadList(soderberghWorkOnly, "tv", "title");
+    const soderberghPlayList = buildMostSeenReadList(soderberghWorkOnly, "play", "title");
 
-      // frequent books, plays
-      const bookPlayList = bookPlayData.map((item, i) => {
-        let title = item.toString().toLowerCase();
-        let itemClass = "";
-        const itemHighlighted = (title===highlightedItem);
+    const movieList = buildMostSeenReadList(soderberghWorkRemoved, "movie", "title");
+    const tvList = buildMostSeenReadList(soderberghWorkRemoved, "tv", "title");
+    const bookList = buildMostSeenReadList(soderberghWorkRemoved, "book", "title");
+    const playList = buildMostSeenReadList(soderberghWorkRemoved, "play", "title");
+    const authorList = buildMostSeenReadList(soderberghWorkRemoved, "author", "credit");
 
-        if (title===highlightedItem) {
-          itemClass+="highlight ";
-        }
+    const movieFilterClasses = classNames({
+      'media-type-filter': true,
+      'movies': true,
+      'selected': highlightMediaType==="movie"
+    });
 
-        let element = <li key={i}
-                          className={itemClass}
-                          onClick={() => setHighlight(title, "title", "book")}>
-                        {toTitleCase(item)}
-                        {/* (itemHighlighted) ? <a href="#" onClick={() => setHighlight(" ", "title", " ")}>✕</a> : null */}
-                      </li>;
-        return element;
-      }, this);
+    const tvFilterClasses = classNames({
+      'media-type-filter': true,
+      'tv': true,
+      'selected': highlightMediaType==="tv"
+    });
 
-      // Soderbergh buttons
-      const soderberghList = soderberghFilms.map((item, i) => {
-        let title = item.toString().toLowerCase();
-        let itemClass = "";
-        const itemHighlighted = (title===highlightedItem);
-
-        if (itemHighlighted) {
-          itemClass+="highlight ";
-        }
-
-        let element = <li key={i}
-                          className={itemClass}
-                          onClick={() => setHighlight(title, "title", "movie")}>
-                          {toTitleCase(item)}
-                          {/* (itemHighlighted) ? <a href="#" onClick={() => setHighlight("", "title", "")}>✕</a> : null */}
-                      </li>;
-        return element;
-      }, this);
-
-      // movie buttons
-      const movieList = movieData.map((item, i) => {
-        const title = item.toString().toLowerCase();
-        let itemClass = "";
-        const itemHighlighted = (title===highlightedItem);
-
-        if (itemHighlighted) {
-          itemClass+="highlight ";
-        }
-
-        let element = <li key={i}
-                          className={itemClass}
-                          onClick={() => setHighlight(title, "title", "movie")}>
-                        {toTitleCase(item)}
-                        {/*(itemHighlighted) ? <a href="#" onClick={() => this.props.setHighlight("", "title", "")}>✕</a> : null */}
-                      </li>;
-        return element;
-      }, this);
-
-      // tv buttons
-      const tvList = tvData.map((item, i) => {
-        const title = item.toString().toLowerCase();
-        let itemClass = "";
-        const itemHighlighted = (title===highlightedItem);
-
-        if (itemHighlighted){
-          itemClass+="highlight ";
-        }
-
-        let element = <li key={i}
-                        className={itemClass}
-                        onClick={() => setHighlight(title, "title", "tv")}
-                      >
-                        {toTitleCase(item)}
-                        {/* (itemHighlighted) ? <span onClick={() => setHighlight("", "title", "")}>✕</span> : null */}
-                      </li>;
-        return element;
-      }, this);
-
-
-
-
-      ///////////////////////////////////////////////////////////////////////////
-      //
-
-      var titleScounted = d3nest()
-                  .key(function(d){
-                    return d.title;
-                  })
-                  .rollup(function(d){
-                    const type = d[0].type;
-                    return {
-                      type: type,
-                      count: d3sum(d, function(d) { return (d.count) })
-                    };
-                  })
-                  .entries(titleCounts);
-
-      const getMostFrequentTitles = (data, mediaType) => {
-        const mostFrequentTitles = data.filter(d => {
-          return ( (d.value.count > 1) && (d.value.type == mediaType) );
-        });
-        return mostFrequentTitles;
-      }
-
-      // get most frequently watched and read
-      const frequentMovies = getMostFrequentTitles(titleScounted, "movie");
-      const frequentTV = getMostFrequentTitles(titleScounted, "tv");
-      const frequentBooks = getMostFrequentTitles(titleScounted, "book");
-      const frequentPlays = getMostFrequentTitles(titleScounted, "play");
-
-      console.log("Movies",frequentMovies);
-      console.log("TV",frequentTV);
-      console.log("Books",frequentBooks);
-      console.log("Plays",frequentPlays);
-
-      ///////////////////////////////////////////////////////////
+    const bookFilterClasses = classNames({
+      'media-type-filter': true,
+      'books': true,
+      'selected': highlightMediaType==="book"
+    });
+    const playFilterClasses = classNames({
+      'media-type-filter': true,
+      'plays': true,
+      'selected': highlightMediaType==="play"
+    });
 
     return (
       <div className={compactMode ? 'hide-buttons most-seen-read' : 'show-buttons most-seen-read'}>
-        {/* <span className='top-title-type'>Highlight </span>
-        <ul>
-          <li>Film</li>
-          <li>TV</li>
-          <li>Books</li>
-          <li>Plays</li>
-          <li>Principal photography</li>
-          <li>Other</li>
-        </ul> */}
-        <h2>Most frequently seen, read</h2>
-
-        <span className='top-title-type'>Soderbergh projects</span>
-        <ul className={''}>
-          {soderberghList}
+        <div className="top-titles-header">
+          <h2><span>★</span><br/>Most seen, read</h2>
+          <p>Every title Stephen Soderbergh read or watched more than once over the ten years.
+          Titles are ordered from the most seen and read to the least in each group.</p>
+        </div>
+        <span className='top-title-type'>Stephen Soderbergh projects</span>
+        <ul className="">
+          {soderberghMovieList}
+          {soderberghTVList}
+          {soderberghPlayList}
         </ul>
 
         <span className='top-title-type'>
-          <a href="#" onClick={() => this.toggleMediaHighlight("movie")}>{highlightMediaType==="movie" ? <span className="selected">Movies ✕</span> : <span>Movies</span>}
-          </a>
+          <span className={movieFilterClasses} onClick={() => this.toggleMediaHighlight("movie")}>
+            Movies <span className="remove-filter">✕</span>
+          </span>
         </span>
-        <ul className={''}>
+        <ul className="most-watched-movies">
           {movieList}
         </ul>
+
         <span className='top-title-type'>
-          <a href="#" onClick={() => this.toggleMediaHighlight("tv")}>
-          {highlightMediaType==="tv" ? <span className="selected">TV ✕</span> : <span>TV</span>}
-          </a>
+          <span className={tvFilterClasses} onClick={() => this.toggleMediaHighlight("tv")}>
+            TV <span className="remove-filter">✕</span>
+          </span>
         </span>
-        <ul className={''}>
+        <ul className="most-watched-tv">
           {tvList}
         </ul>
+
         <span className='top-title-type'>
-          <a href="#" onClick={() => this.toggleMediaHighlight("book")}>
-          {highlightMediaType==="book" ? <span className="selected">Books  ✕</span> : <span>Books</span>}
-          </a>
-          <a href="#" onClick={() => this.toggleMediaHighlight("play")}>
-            {highlightMediaType==="play" ? <span className="selected">Plays  ✕</span> : <span>Plays</span>}
-          </a>
+          <span className={bookFilterClasses} onClick={() => this.toggleMediaHighlight("book")}>
+            Books <span className="remove-filter">✕</span>
+          </span>
         </span>
-        <ul className={''}>
-          {bookPlayList}
+        <ul className="most-read-books">
+          {bookList}
         </ul>
+
+        <span className='top-title-type'>
+          <span className={playFilterClasses} onClick={() => this.toggleMediaHighlight("play")}>
+            Plays <span className="remove-filter">✕</span>
+          </span>
+        </span>
+        <ul className="most-read-plays">
+          {playList}
+        </ul>
+
         <span className='top-title-type'>Authors</span>
-        <ul className={''}>
+        <ul className="most-read-authors">
           {authorList}
         </ul>
       </div>
