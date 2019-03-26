@@ -204,7 +204,7 @@ export default class App extends Component {
   }
 
   setDisplayYear = (displayYear) => {
-    this.setContentHeight();
+    this.setMediaListContentHeight();
     this.setProgressCirclePosition(displayYear);
     this.setState({highlightMediaType: ''}); // reset mediaType highlight
     this.setState({displayYear});

@@ -862,7 +862,7 @@ $defaultOffset: 45;
 
   // medium screens
   @media screen and (max-width: $break-medium) {
-    grid-auto-columns: 10% 90%;
+    // grid-auto-columns: 10% 90%;
     .year-plot:not(.selected-year) {
       // display: none;
     }
@@ -1297,9 +1297,13 @@ $chart-item-background: #888584;
 }
 .most-seen-read {
   .top-titles-header {
+    // position: absolute;
+    // top: 77px;
+    // z-index: 1000;
     margin-bottom : 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #555;
+    background: $base-dark;
   }
   h2 {
     color: $base-light;
